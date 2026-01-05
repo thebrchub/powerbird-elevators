@@ -1,7 +1,9 @@
 import Reveal from './Reveal'
+import { useNavigate } from 'react-router-dom'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 
 export default function AboutUs({ darkPreview }) {
+const navigate = useNavigate()
   return (
     <section 
       /* 🔥 FIX: Added 'shadow-xl' to match the depth of the Why Us section */
@@ -16,7 +18,7 @@ export default function AboutUs({ darkPreview }) {
           <div className="relative">
             <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1579412690850-bd41cd0af397?q=80&w=1000&auto=format&fit=crop" 
+                src="/core/4.png"  
                 alt="Elevator Engineering" 
                 className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               />
@@ -75,16 +77,22 @@ export default function AboutUs({ darkPreview }) {
           </Reveal>
 
           <Reveal delay={0.3}>
-            <button className={`
-              group flex items-center gap-2 px-6 py-3 rounded-lg font-bold border transition-all
-              ${darkPreview 
-                ? 'border-gray-600 hover:bg-white hover:text-black text-white' 
-                : 'border-gray-300 hover:bg-gray-900 hover:text-white text-gray-900'
-              }
-            `}>
-              More About Us <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            <button 
+                onClick={() => {
+                navigate('/about')
+                window.scrollTo(0, 0) // Ensures the new page starts at the top
+                }}
+                className={`
+                group flex items-center gap-2 px-6 py-3 rounded-lg font-bold border transition-all
+                ${darkPreview 
+                    ? 'border-gray-600 hover:bg-white hover:text-black text-white' 
+                    : 'border-gray-300 hover:bg-gray-900 hover:text-white text-gray-900'
+                }
+                `}
+            >
+                More About Us <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
-          </Reveal>
+            </Reveal>
         </div>
 
       </div>

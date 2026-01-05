@@ -1,12 +1,32 @@
 @import "tailwindcss";
 
-/* 🔥 FIX: Set global background to Dark Theme. 
-   Now, when we add padding-top to the layout, the gap will be black, not white. 
+/* =========================================
+   GLOBAL THEME STYLES
+   ========================================= */
+
+/* 1. Default (Light Mode) 
+   The body background fills the "gap" at the top.
 */
 body {
-  background-color: #030303;
-  color: white;
+  background-color: #f9fafb; /* Matches bg-gray-50 */
+  color: #111827;            /* Matches text-gray-900 */
   margin: 0;
+  /* Smoothly transition background colors when theme changes */
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  html {
+  /* This forces the browser to always keep space for the scrollbar, 
+     so removing it doesn't cause a layout shift. */
+  scrollbar-gutter: stable;
+}
+}
+
+/* 2. Dark Mode Override 
+   This applies when the 'dark' class is present on the <html> tag
+*/
+.dark body {
+  background-color: #030303; /* Deep black for Dark Theme */
+  color: white;
 }
 
 .input {
@@ -51,4 +71,72 @@ body {
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background-color: #4b5563; /* Lighter on hover (gray-600) */
+}
+/* Animation for the "Signal" passing through the lines */
+@keyframes drawLine {
+  0% {
+    stroke-dasharray: 20, 1000;
+    stroke-dashoffset: 200;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dasharray: 20, 1000;
+    stroke-dashoffset: -400; /* Moves the dash along the path */
+    opacity: 0;
+  }
+}
+
+.animate-draw-line {
+  animation: drawLine linear infinite;
+}
+
+/* Flash effect for cities when signal reaches them */
+@keyframes signalImpact {
+  0%, 100% { r: 4; fill-opacity: 0.5; }
+  50% { r: 9; fill-opacity: 1; fill: #60a5fa; } /* Expands and turns bright blue */
+}
+
+.animate-impact {
+  animation: signalImpact 3s infinite linear; /* Matches the 3s signal duration */
+}
+
+/* Assuming you are using an SVG or an Icon font for the hamburger */
+.navbar-toggle, 
+.hamburger-icon {
+    color: #0ba3e0 !important; /* Powerbird Blue */
+    /* If using SVGs, you might need 'fill' or 'stroke' */
+    fill: #0ba3e0 !important; 
+    stroke: #0ba3e0 !important;
+}
+
+/* If the button has a background */
+.mobile-menu-btn {
+    background-color: transparent; /* Ensure no white background interferes */
+}
+
+/* The main container wrapping your Left and Right doors */
+.lift-intro-container {
+    position: fixed; /* CRITICAL: Must be fixed, not absolute */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* CRITICAL: Most Navbars have a z-index of 100 or 1000. 
+       Set this to a massive number to force it to the very front. */
+    z-index: 99999; 
+    
+    display: flex; /* Keeps doors side-by-side */
+}
+/* Add this to your index.css or App.css */
+
+/* In your index.css */
+body.modal-open header {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  /* This transition makes the navbar fade out simultaneously with the modal fading in */
+  transition: opacity 0.2s ease-in-out;
 }

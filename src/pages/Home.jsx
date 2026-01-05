@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom' // 1. Import useNavigate
+
+// Components
 import LiftIntro from '../components/LiftIntro'
 import GoogleReviews from '../components/GoogleReviews'
 import Reveal from '../components/Reveal'
@@ -9,22 +12,22 @@ import WhyUs from '../components/WhyUs'
 import CoreCapabilities from '../components/Core'
 import ClientFeedback from '../components/ClientFeedback'
 import TrustBand from '../components/TrustBand'
+import GetInTouchModal from '../components/GetInTouchModal' // 2. Import Modal
 
 import { 
-  CheckCircle2, 
-  Settings, 
-  TrendingUp, 
-  MousePointer2,
-  Quote,
-  Moon,
   Sun,
-  ArrowRight
+  Moon
 } from 'lucide-react'
 
-// 🔥 UPDATE: Now accepting darkPreview and setDarkPreview as props from App.js
 export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
 
   const [showIntro, setShowIntro] = useState(false)
+  
+  // 3. State for the Contact Modal
+  const [getInTouchOpen, setGetInTouchOpen] = useState(false)
+  
+  // 4. Navigation Hook
+  const navigate = useNavigate()
 
   // ▶️ Run lift ONLY once per session
   useEffect(() => {
@@ -34,14 +37,11 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
     }
   }, [])
 
-  // 🔥 FIX 1: Force the Body Background to change. 
-  useEffect(() => {
-    if (darkPreview) {
-      document.body.style.backgroundColor = '#030712'; // gray-950
-    } else {
-      document.body.style.backgroundColor = '#f9fafb'; // gray-50
-    }
-  }, [darkPreview])
+  // 5. Handler for Services Button
+  const handleServicesClick = () => {
+    navigate('/services')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
     <>
@@ -67,9 +67,15 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
         />
       )}
 
+      {/* ================= MODAL (Rendered here) ================= */}
+      <GetInTouchModal 
+        open={getInTouchOpen} 
+        onClose={() => setGetInTouchOpen(false)} 
+      />
+
       {/* ================= MAIN CONTENT ================= */}
       <motion.div
-        className={darkPreview ? 'bg-gray-950 text-white' : 'bg-gray-50 text-gray-900'}
+        className={`pt-6 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-gray-50 text-gray-900'}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: showIntro ? 0 : 1 }}
         transition={{ duration: 1.0, ease: 'easeOut', delay: 0.5 }}
@@ -77,7 +83,6 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
 
        {/* ================= HERO SECTION ================= */}
         <section 
-          // 🔥 FIX: Added 'rounded-b-3xl' to round the bottom corners of the white background
           className={`relative overflow-hidden transition-colors duration-300 rounded-b-3xl ${
             darkPreview 
               ? 'bg-gray-950 text-white' 
@@ -87,7 +92,7 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
           
           {/* BACKGROUND ANIMATION */}
           <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-             <div className="absolute inset-0 flex justify-around">
+              <div className="absolute inset-0 flex justify-around">
                 {[...Array(6)].map((_, i) => (
                   <div 
                     key={i} 
@@ -96,23 +101,31 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
                     }`} 
                   />
                 ))}
-             </div>
-             <motion.div 
-               className="absolute inset-0 w-full h-[200%]"
-               animate={{ y: [0, "50%"] }} 
-               transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-               style={{ 
-                 background: `repeating-linear-gradient(0deg, transparent 0px, transparent 100px, ${
-                   darkPreview ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'
-                 } 101px)`
-               }}
-             />
+              </div>
+              <motion.div 
+                className="absolute inset-0 w-full h-[200%]"
+                animate={{ y: [0, "50%"] }} 
+                transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
+                style={{ 
+                  background: `repeating-linear-gradient(0deg, transparent 0px, transparent 100px, ${
+                    darkPreview ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'
+                  } 101px)`
+                }}
+              />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-14 items-center">
             {/* LEFT CONTENT */}
             <div>
               <Reveal>
+                {/* Eyebrow Header */}
+                <div className={`flex items-center gap-2 mb-6 ${darkPreview ? 'text-blue-400' : 'text-blue-600'}`}>
+                   <span className="h-px w-8 bg-current"></span> 
+                   <span className="text-sm font-bold tracking-[0.2em] uppercase">
+                     Way to Safety and Quality
+                   </span>
+                </div>
+
                 <h1 className="text-4xl md:text-5xl font-bold leading-tight">
                   Elevating Buildings.<br />
                   <span className="text-blue-500">Empowering Movement.</span>
@@ -133,10 +146,17 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
 
               <Reveal delay={0.2}>
                 <div className="mt-8 flex gap-4">
-                  <button className="bg-red-600 px-6 py-3 rounded-md font-semibold text-white hover:bg-red-700 transition shadow-lg shadow-red-600/20">
-                    Get a Quote
-                  </button>
+                  {/* BUTTON 1: Open Modal */}
                   <button 
+                    onClick={() => setGetInTouchOpen(true)}
+                    className="bg-red-600 px-6 py-3 rounded-md font-semibold text-white hover:bg-red-700 transition shadow-lg shadow-red-600/20"
+                  >
+                    Get in Touch
+                  </button>
+
+                  {/* BUTTON 2: Navigate to Services */}
+                  <button 
+                    onClick={handleServicesClick}
                     className={`border px-6 py-3 rounded-md transition ${
                       darkPreview 
                         ? 'border-gray-600 hover:bg-gray-800 text-white' 
@@ -158,7 +178,6 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
                     : 'bg-white border-gray-200'
                 }`}
               >
-                {/* 🔥 UPDATE: Using local image */}
                 <img 
                   src="/lifts/hero_lift.png" 
                   alt="PowerBird Elevator System" 
@@ -170,7 +189,6 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
         </section>
 
         {/* ================= TRUST BAND ================= */}
-       
         <TrustBand darkPreview={darkPreview} />
 
         {/* ================= ABOUT US ================= */}
@@ -179,10 +197,8 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
         {/* ================= WHY US ================= */}
         <WhyUs darkPreview={darkPreview} />
 
-
         {/* ================= GOOGLE REVIEWS ================= */}
         <GoogleReviews darkPreview={darkPreview} />
-
 
         {/* ================= CORE CAPABILITIES ================= */}
         <CoreCapabilities darkPreview={darkPreview} />
@@ -191,7 +207,6 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
         <ClientFeedback darkPreview={darkPreview} />
 
         <ClientLogos darkPreview={darkPreview} />
-
 
         {/* ================= CTA ================= */}
         <section className={`py-24 ${darkPreview ? 'bg-gray-950' : 'bg-gray-50'}`}>
@@ -209,7 +224,11 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
             </Reveal>
 
             <Reveal delay={0.2}>
-              <button className="mt-10 bg-red-600 text-white px-8 py-4 rounded font-bold hover:bg-red-700 transition shadow-lg shadow-red-600/20">
+              {/* BUTTON 3: Also Open Modal */}
+              <button 
+                onClick={() => setGetInTouchOpen(true)}
+                className="mt-10 bg-red-600 text-white px-8 py-4 rounded font-bold hover:bg-red-700 transition shadow-lg shadow-red-600/20"
+              >
                 Request Consultation
               </button>
             </Reveal>

@@ -1,5 +1,6 @@
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom' // IMPORTED: Necessary for the fix
 import BrandLogo from './BrandLogo'
 
 const FLOOR_MAX = 3
@@ -13,6 +14,12 @@ export default function LiftIntro({ onFinish }) {
   const [floor, setFloor] = useState(1)
   const [doorsOpened, setDoorsOpened] = useState(false)
   const prefersReducedMotion = useReducedMotion()
+  const [mounted, setMounted] = useState(false)
+
+  // Ensure code only runs on client-side to find document.body
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   /* ================= FLOOR COUNTER ================= */
   useEffect(() => {
@@ -58,11 +65,16 @@ export default function LiftIntro({ onFinish }) {
     return () => clearTimeout(timer)
   }, [visible])
 
-  return (
+  // If not mounted yet, return null
+  if (!mounted) return null
+
+  // FIXED: Using createPortal to force this component to the very top of the DOM (body)
+  // This ignores all parent styling/z-index issues.
+  return createPortal(
     <AnimatePresence onExitComplete={onFinish}>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900"
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-gray-900"
           initial={{ opacity: 1 }}
           exit={{ opacity: 1 }}
         >
@@ -136,6 +148,7 @@ export default function LiftIntro({ onFinish }) {
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body // This renders the component directly into the body tag
   )
 }

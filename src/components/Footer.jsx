@@ -80,13 +80,13 @@ export default function Footer() {
             <li className="flex items-start gap-3">
               <MapPin className="text-blue-500 mt-1 shrink-0" size={18} />
               <span className="leading-relaxed">
-                123, Industrial Layout,<br />
-                Sirsi, Karnataka - 581401
+                Near New KSRTC Bus Stand,<br />
+                Ganesh Nagar, Sirsi (U.K), Karnataka - 581401
               </span>
             </li>
             <li className="flex items-center gap-3">
               <Phone className="text-blue-500 shrink-0" size={18} />
-              <span>+91 98765 43210</span>
+              <span>+91 90196 66919, +91 87623 73939</span>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="text-blue-500 shrink-0" size={18} />

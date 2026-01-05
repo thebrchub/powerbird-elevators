@@ -51,30 +51,26 @@ export default function Navbar({ showLogo, darkPreview = true }) {
 
   return (
     <>
-      {/* ================= HEADER WRAPPER (Invisible) ================= */}
+      {/* ================= HEADER WRAPPER ================= */}
       <header 
         className={`
-          fixed top-0 left-0 w-full z-50 
+          fixed top-0 left-0 w-full z-40 
           py-6 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
           ${isVisible ? 'translate-y-0' : '-translate-y-full'}
         `}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative">
 
-          {/* LOGO (Adapts to theme) */}
+          {/* LOGO */}
           <div
             className="flex-shrink-0 flex items-center h-10 cursor-pointer relative z-50"
             onClick={handleLogoClick}
           >
-            {showLogo && <BrandLogo size="sm" className={darkPreview ? "text-white" : "text-black"} />}
+            {/* FIXED: Passing 'dark={darkPreview}' so the logo switches image files */}
+            {showLogo && <BrandLogo size="sm" dark={darkPreview} />}
           </div>
 
-          {/* 🔥 DESKTOP NAV - PREMIUM FROSTED GLASS ISLAND
-              - bg-white/50: Semi-transparent white
-              - backdrop-blur-2xl: Heavy blur for the "premium glass" feel
-              - border-white/40: Subtle "cut glass" edge
-              - text-gray-900: High contrast black text
-          */}
+          {/* DESKTOP NAV */}
           <nav 
             className={`
               hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
@@ -100,7 +96,6 @@ export default function Navbar({ showLogo, darkPreview = true }) {
                 >
                   {item.name}
                   
-                  {/* HOVER PILL (Subtle White Highlight) */}
                   {hoveredIndex === index && (
                     <motion.span
                       layoutId="nav-pill"
@@ -109,7 +104,6 @@ export default function Navbar({ showLogo, darkPreview = true }) {
                     />
                   )}
 
-                  {/* ACTIVE DOT (Red) */}
                   {isActive && !hoveredIndex && (
                     <motion.span 
                       layoutId="active-dot"
@@ -145,8 +139,14 @@ export default function Navbar({ showLogo, darkPreview = true }) {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setOpen(true)}
+              /* FIXED: Switched colors explicitly.
+                 - If darkPreview (Dark Mode): Text is White.
+                 - If !darkPreview (Light Mode): Text is Black (text-black), BG is Light Gray (bg-gray-100).
+              */
               className={`md:hidden p-2 rounded-full transition backdrop-blur-md ${
-                darkPreview ? 'text-white bg-white/10 border border-white/10' : 'text-black bg-black/5 border border-black/5'
+                darkPreview 
+                  ? 'text-white bg-white/10 border border-white/10 hover:bg-white/20' 
+                  : 'text-black bg-gray-100 border border-gray-300 hover:bg-gray-200'
               }`}
             >
               <Menu size={24} />
@@ -156,19 +156,19 @@ export default function Navbar({ showLogo, darkPreview = true }) {
         </div>
       </header>
 
-      {/* ================= MOBILE DRAWER (Unchanged) ================= */}
+      {/* ================= MOBILE DRAWER ================= */}
       <AnimatePresence>
         {open && (
           <>
             <motion.div
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
             />
             <motion.aside
-              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-[#0a0a0a] border-l border-white/10 z-[60] shadow-2xl flex flex-col"
+              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-[#0a0a0a] border-l border-white/10 z-[70] shadow-2xl flex flex-col"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}

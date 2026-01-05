@@ -66,7 +66,7 @@ export default function WhyUs({ darkPreview }) {
             {/* Main Image */}
             <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl relative z-10">
               <img 
-                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1000&auto=format&fit=crop" 
+                src="/core/3.png" 
                 alt="Quality Testing" 
                 className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               />
