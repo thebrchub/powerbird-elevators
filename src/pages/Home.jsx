@@ -122,7 +122,7 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
                 <div className={`flex items-center gap-2 mb-6 ${darkPreview ? 'text-blue-400' : 'text-blue-600'}`}>
                    <span className="h-px w-8 bg-current"></span> 
                    <span className="text-sm font-bold tracking-[0.2em] uppercase">
-                     Way to Safety and Quality
+                     The Way to Safety and Quality
                    </span>
                 </div>
 
