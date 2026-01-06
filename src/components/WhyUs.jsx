@@ -34,7 +34,7 @@ export default function WhyUs({ darkPreview }) {
             </div>
             <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
               Why Leading Developers <br />
-              <span className="text-blue-600">Choose PowerBird</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Choose PowerBird</span>
             </h2>
             <p className={`text-lg leading-relaxed mb-8 ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
               We don't just sell elevators; we provide peace of mind. Our engineering-first approach combines cutting-edge German drive technology with local regulatory expertise to ensure your vertical transport is safe, silent, and compliant.

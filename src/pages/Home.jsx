@@ -21,17 +21,22 @@ import {
 
 export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
 
-  // 🔥 FIX 1: Initialize state LAZILY. 
-  // This checks sessionStorage *before* the first render, preventing the "flash".
   const [showIntro, setShowIntro] = useState(() => {
     const hasPlayed = sessionStorage.getItem('liftPlayed')
-    return !hasPlayed // If played, showIntro is false immediately
+    return !hasPlayed 
   })
   
   const [getInTouchOpen, setGetInTouchOpen] = useState(false)
   const navigate = useNavigate()
 
-  // (Removed the useEffect for sessionStorage since we handled it in useState above)
+  // 🔥 FIX 1: Sync Body Background to eliminate "edge gaps"
+  useEffect(() => {
+    if (darkPreview) {
+      document.body.style.backgroundColor = '#030712' // gray-950
+    } else {
+      document.body.style.backgroundColor = '#f9fafb' // gray-50
+    }
+  }, [darkPreview])
 
   const handleServicesClick = () => {
     navigate('/services')
@@ -70,19 +75,13 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
 
       {/* ================= MAIN CONTENT ================= */}
       <motion.div
-        className={`pt-6 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-gray-50 text-gray-900'}`}
-        
-        // 🔥 FIX 2: Conditional Initial State
-        // If intro is NOT showing, we start at opacity 1 (Instant Visible). 
-        // No more waiting for fade-in on return visits.
+        // 🔥 FIX 2: Added 'min-h-screen' to fill view
+        // 🔥 FIX 3: Added 'transition-colors duration-500' for smooth bg switch
+        className={`pt-6 min-h-screen transition-colors duration-500 ${
+            darkPreview ? 'bg-gray-950 text-white' : 'bg-gray-50 text-gray-900'
+        }`}
         initial={{ opacity: showIntro ? 0 : 1 }}
-        
-        // This handles the fade-in only when showIntro turns false
         animate={{ opacity: showIntro ? 0 : 1 }}
-        
-        // 🔥 FIX 3: Conditional Delay
-        // Only wait 0.5s if we are actually coming from the Intro. 
-        // Otherwise, 0s delay.
         transition={{ 
           duration: 1.0, 
           ease: 'easeOut', 
@@ -90,10 +89,10 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
         }}
       >
 
-       {/* ... (Rest of your code remains exactly the same) ... */}
        {/* ================= HERO SECTION ================= */}
         <section 
-          className={`relative overflow-hidden transition-colors duration-300 rounded-b-3xl ${
+          // Removed rounded-b-3xl as requested
+          className={`relative overflow-hidden transition-colors duration-500 ${
             darkPreview 
               ? 'bg-gray-950 text-white' 
               : 'bg-gray-50 text-gray-900'
@@ -102,34 +101,39 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
           
           {/* BACKGROUND ANIMATION */}
           <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+              
+              {/* VERTICAL LINES */}
               <div className="absolute inset-0 flex justify-around">
                 {[...Array(6)].map((_, i) => (
-                  <div 
-                    key={i} 
-                    className={`w-px h-full bg-gradient-to-b from-transparent to-transparent ${
-                      darkPreview ? 'via-white/10' : 'via-black/10'
-                    }`} 
-                  />
+                  <div key={i} className="relative w-px h-full">
+                    <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent transition-opacity duration-500 ${darkPreview ? 'opacity-100' : 'opacity-0'}`} />
+                    <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-transparent transition-opacity duration-500 ${darkPreview ? 'opacity-0' : 'opacity-100'}`} />
+                  </div>
                 ))}
               </div>
+
+              {/* HORIZONTAL MOVING GRID */}
               <motion.div 
                 className="absolute inset-0 w-full h-[200%]"
                 animate={{ y: [0, "50%"] }} 
                 transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-                style={{ 
-                  background: `repeating-linear-gradient(0deg, transparent 0px, transparent 100px, ${
-                    darkPreview ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'
-                  } 101px)`
-                }}
-              />
+              >
+                 <div 
+                   className={`absolute inset-0 transition-opacity duration-500 ${darkPreview ? 'opacity-100' : 'opacity-0'}`}
+                   style={{ background: 'repeating-linear-gradient(0deg, transparent 0px, transparent 100px, rgba(255,255,255,0.05) 101px)' }}
+                 />
+                 <div 
+                   className={`absolute inset-0 transition-opacity duration-500 ${darkPreview ? 'opacity-0' : 'opacity-100'}`}
+                   style={{ background: 'repeating-linear-gradient(0deg, transparent 0px, transparent 100px, rgba(0,0,0,0.05) 101px)' }}
+                 />
+              </motion.div>
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-14 items-center">
             {/* LEFT CONTENT */}
             <div>
               <Reveal>
-                {/* Eyebrow Header */}
-                <div className={`flex items-center gap-2 mb-6 ${darkPreview ? 'text-blue-400' : 'text-blue-600'}`}>
+                <div className={`flex items-center gap-2 mb-6 transition-colors duration-300 ${darkPreview ? 'text-blue-400' : 'text-blue-600'}`}>
                    <span className="h-px w-8 bg-current"></span> 
                    <span className="text-sm font-bold tracking-[0.2em] uppercase">
                      The Way to Safety and Quality
@@ -144,7 +148,7 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
 
               <Reveal delay={0.1}>
                 <p 
-                  className={`mt-6 max-w-lg text-lg ${
+                  className={`mt-6 max-w-lg text-lg transition-colors duration-300 ${
                     darkPreview ? 'text-gray-300' : 'text-gray-600'
                   }`}
                 >
@@ -156,7 +160,6 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
 
               <Reveal delay={0.2}>
                 <div className="mt-8 flex gap-4">
-                  {/* BUTTON 1: Open Modal */}
                   <button 
                     onClick={() => setGetInTouchOpen(true)}
                     className="bg-red-600 px-6 py-3 rounded-md font-semibold text-white hover:bg-red-700 transition shadow-lg shadow-red-600/20"
@@ -164,10 +167,9 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
                     Get in Touch
                   </button>
 
-                  {/* BUTTON 2: Navigate to Services */}
                   <button 
                     onClick={handleServicesClick}
-                    className={`border px-6 py-3 rounded-md transition ${
+                    className={`border px-6 py-3 rounded-md transition-all duration-300 ${
                       darkPreview 
                         ? 'border-gray-600 hover:bg-gray-800 text-white' 
                         : 'border-gray-300 hover:bg-gray-200 text-gray-800'
@@ -182,7 +184,7 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
             {/* RIGHT VISUAL */}
             <Reveal delay={0.4}>
               <div 
-                className={`h-80 rounded-2xl border flex items-center justify-center shadow-2xl relative z-10 overflow-hidden transition-colors duration-300 ${
+                className={`h-80 rounded-2xl border flex items-center justify-center shadow-2xl relative z-10 overflow-hidden transition-all duration-500 ${
                   darkPreview 
                     ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700' 
                     : 'bg-white border-gray-200'
@@ -219,22 +221,21 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
         <ClientLogos darkPreview={darkPreview} />
 
         {/* ================= CTA ================= */}
-        <section className={`py-24 ${darkPreview ? 'bg-gray-950' : 'bg-gray-50'}`}>
+        <section className={`py-24 transition-colors duration-500 ${darkPreview ? 'bg-gray-950' : 'bg-gray-50'}`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
             <Reveal>
-              <h2 className={`text-3xl md:text-4xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className={`text-3xl md:text-4xl font-bold transition-colors duration-300 ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
                 Ready to elevate your infrastructure?
               </h2>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <p className={`${darkPreview ? 'text-gray-400' : 'text-gray-600'} mt-6 text-lg`}>
+              <p className={`transition-colors duration-300 ${darkPreview ? 'text-gray-400' : 'text-gray-600'} mt-6 text-lg`}>
                 Partner with PowerBird for engineering-led vertical transportation solutions.
               </p>
             </Reveal>
 
             <Reveal delay={0.2}>
-              {/* BUTTON 3: Also Open Modal */}
               <button 
                 onClick={() => setGetInTouchOpen(true)}
                 className="mt-10 bg-red-600 text-white px-8 py-4 rounded font-bold hover:bg-red-700 transition shadow-lg shadow-red-600/20"
