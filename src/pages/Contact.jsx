@@ -24,7 +24,8 @@ export default function Contact({ darkPreview, setDarkPreview }) {
 
   return (
     // 🔥 STEP 2: Main Wrapper with pt-18 & Theme Classes
-    <div className={`pt-18 transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
+    // Added min-h-screen for full height on mobile
+    <div className={`pt-18 min-h-screen transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
 
       {/* ================= GLOBAL TOGGLE BUTTON ================= */}
       <div className="fixed bottom-6 right-6 z-40">
@@ -45,14 +46,14 @@ export default function Contact({ darkPreview, setDarkPreview }) {
             : 'bg-white text-gray-900 border-gray-200'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-20">
+        <div className="max-w-7xl mx-auto px-6 py-12 md:py-20">
           <Reveal>
-            <h1 className="text-4xl font-bold">
+            <h1 className="text-3xl md:text-4xl font-bold leading-tight">
               Contact <span className="text-blue-500">PowerBird Elevators</span>
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className={`mt-4 max-w-xl text-lg ${darkPreview ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className={`mt-4 max-w-xl text-base md:text-lg ${darkPreview ? 'text-gray-300' : 'text-gray-600'}`}>
               Reach out to our engineering team for consultations, quotations, 
               installations, or emergency maintenance support.
             </p>
@@ -61,8 +62,9 @@ export default function Contact({ darkPreview, setDarkPreview }) {
       </section>
 
       {/* ================= MAIN CONTENT ================= */}
-      <section className={`py-20 transition-colors duration-300 ${darkPreview ? 'bg-gray-950' : 'bg-gray-50'}`}>
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-3 gap-10">
+      <section className={`py-12 md:py-20 transition-colors duration-300 ${darkPreview ? 'bg-gray-950' : 'bg-gray-50'}`}>
+        {/* Grid: 1 col on mobile, 3 cols on desktop */}
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10">
 
           {/* ================= LEFT: TECHNICAL FORM ================= */}
           <div className="lg:col-span-2">
@@ -74,7 +76,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
                 
                 {/* Form Header */}
                 <div 
-                  className={`px-8 py-6 border-b flex justify-between items-center transition-colors duration-300
+                  className={`px-6 md:px-8 py-6 border-b flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-colors duration-300
                   ${darkPreview ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}
                 >
                   <div>
@@ -84,6 +86,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
                     </h2>
                     <p className="text-xs text-gray-500 font-mono mt-1">REF: WEB-FORM-01</p>
                   </div>
+                  {/* Hidden on very small mobile, shown on sm+ */}
                   <div className="hidden sm:block">
                     <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-xs font-bold text-green-700">
                       <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -93,10 +96,10 @@ export default function Contact({ darkPreview, setDarkPreview }) {
                 </div>
 
                 {/* Form Body */}
-                <form className="p-8 space-y-6">
+                <form className="p-6 md:p-8 space-y-6">
                   
-                  {/* Personal Details */}
-                  <div className="grid md:grid-cols-2 gap-6">
+                  {/* Personal Details - Stack on mobile, side-by-side on md+ */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className={`text-sm font-semibold ${darkPreview ? 'text-gray-300' : 'text-gray-700'}`}>Full Name</label>
                       <input 
@@ -133,8 +136,8 @@ export default function Contact({ darkPreview, setDarkPreview }) {
                     />
                   </div>
 
-                  {/* Technical Details */}
-                  <div className="grid md:grid-cols-2 gap-6">
+                  {/* Technical Details - Stack on mobile, side-by-side on md+ */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className={`text-sm font-semibold ${darkPreview ? 'text-gray-300' : 'text-gray-700'}`}>Requirement Type</label>
                       <div className="relative">
@@ -230,8 +233,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
           {/* ================= RIGHT: INFO PANEL ================= */}
           <div className="space-y-8">
 
-            {/* DARK CONTACT CARD (Always Dark for contrast, or switchable if preferred) */}
-            {/* I made this switchable to fit the theme nicely */}
+            {/* DARK CONTACT CARD */}
             <Reveal delay={0.3}>
               <div 
                 className={`rounded-xl p-8 shadow-xl relative overflow-hidden border transition-colors duration-300
@@ -273,8 +275,9 @@ export default function Contact({ darkPreview, setDarkPreview }) {
                     </div>
                     <div>
                       <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Email Inquiry</p>
-                      <p className="font-medium">info@powerbirdelevators.com</p>
-                      <p className="text-sm text-gray-500">support@powerbirdelevators.com</p>
+                      {/* Added break-all for long emails on mobile */}
+                      <p className="font-medium break-all">info@powerbirdelevators.com</p>
+                      <p className="text-sm text-gray-500 break-all">support@powerbirdelevators.com</p>
                     </div>
                   </div>
 
@@ -330,7 +333,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
              <div className={`inline-flex rounded-lg p-1 ${darkPreview ? 'bg-gray-800' : 'bg-gray-100'}`}>
                <button
                  onClick={() => setActiveMap('sirsi')}
-                 className={`px-5 py-2 text-sm font-semibold rounded-md transition ${
+                 className={`px-4 md:px-5 py-2 text-sm font-semibold rounded-md transition ${
                    activeMap === 'sirsi'
                      ? 'bg-blue-600 text-white'
                      : 'text-gray-500 hover:text-gray-900'
@@ -341,7 +344,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
 
                <button
                  onClick={() => setActiveMap('bangalore')}
-                 className={`px-5 py-2 text-sm font-semibold rounded-md transition ${
+                 className={`px-4 md:px-5 py-2 text-sm font-semibold rounded-md transition ${
                    activeMap === 'bangalore'
                      ? 'bg-blue-600 text-white'
                      : 'text-gray-500 hover:text-gray-900'
@@ -354,7 +357,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
          </Reveal>
 
          {/* MAP CONTAINER */}
-         <div className={`relative h-[420px] w-full rounded-xl overflow-hidden shadow-2xl border ${darkPreview ? 'border-gray-700' : 'border-gray-200'}`}>
+         <div className={`relative h-[300px] md:h-[420px] w-full rounded-xl overflow-hidden shadow-2xl border ${darkPreview ? 'border-gray-700' : 'border-gray-200'}`}>
 
            {/* SIRSI MAP */}
            {activeMap === 'sirsi' && (
@@ -381,8 +384,8 @@ export default function Contact({ darkPreview, setDarkPreview }) {
            {/* GRADIENT OVERLAY (Optional for style) */}
            <div className={`absolute inset-0 pointer-events-none ${darkPreview ? 'bg-gradient-to-t from-black/40 via-transparent to-transparent' : 'hidden'}`} />
 
-           {/* INFO CARD OVER MAP */}
-           <div className="absolute bottom-6 left-6 bg-white p-5 rounded-xl shadow-xl max-w-sm">
+           {/* INFO CARD OVER MAP: Hidden on mobile to avoid blocking map, shown on sm+ */}
+           <div className="absolute bottom-6 left-6 bg-white p-5 rounded-xl shadow-xl max-w-sm hidden sm:block">
              {activeMap === 'sirsi' ? (
                <>
                  <p className="text-xs text-gray-500 uppercase font-bold tracking-wide mb-1">
