@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom' // 1. Import useNavigate
+import { useNavigate } from 'react-router-dom'
 
 // Components
 import LiftIntro from '../components/LiftIntro'
@@ -12,7 +12,7 @@ import WhyUs from '../components/WhyUs'
 import CoreCapabilities from '../components/Core'
 import ClientFeedback from '../components/ClientFeedback'
 import TrustBand from '../components/TrustBand'
-import GetInTouchModal from '../components/GetInTouchModal' // 2. Import Modal
+import GetInTouchModal from '../components/GetInTouchModal'
 
 import { 
   Sun,
@@ -21,23 +21,18 @@ import {
 
 export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
 
-  const [showIntro, setShowIntro] = useState(false)
+  // 🔥 FIX 1: Initialize state LAZILY. 
+  // This checks sessionStorage *before* the first render, preventing the "flash".
+  const [showIntro, setShowIntro] = useState(() => {
+    const hasPlayed = sessionStorage.getItem('liftPlayed')
+    return !hasPlayed // If played, showIntro is false immediately
+  })
   
-  // 3. State for the Contact Modal
   const [getInTouchOpen, setGetInTouchOpen] = useState(false)
-  
-  // 4. Navigation Hook
   const navigate = useNavigate()
 
-  // ▶️ Run lift ONLY once per session
-  useEffect(() => {
-    const hasPlayed = sessionStorage.getItem('liftPlayed')
-    if (!hasPlayed) {
-      setShowIntro(true)
-    }
-  }, [])
+  // (Removed the useEffect for sessionStorage since we handled it in useState above)
 
-  // 5. Handler for Services Button
   const handleServicesClick = () => {
     navigate('/services')
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -67,7 +62,7 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
         />
       )}
 
-      {/* ================= MODAL (Rendered here) ================= */}
+      {/* ================= MODAL ================= */}
       <GetInTouchModal 
         open={getInTouchOpen} 
         onClose={() => setGetInTouchOpen(false)} 
@@ -76,11 +71,26 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
       {/* ================= MAIN CONTENT ================= */}
       <motion.div
         className={`pt-6 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-gray-50 text-gray-900'}`}
-        initial={{ opacity: 0 }}
+        
+        // 🔥 FIX 2: Conditional Initial State
+        // If intro is NOT showing, we start at opacity 1 (Instant Visible). 
+        // No more waiting for fade-in on return visits.
+        initial={{ opacity: showIntro ? 0 : 1 }}
+        
+        // This handles the fade-in only when showIntro turns false
         animate={{ opacity: showIntro ? 0 : 1 }}
-        transition={{ duration: 1.0, ease: 'easeOut', delay: 0.5 }}
+        
+        // 🔥 FIX 3: Conditional Delay
+        // Only wait 0.5s if we are actually coming from the Intro. 
+        // Otherwise, 0s delay.
+        transition={{ 
+          duration: 1.0, 
+          ease: 'easeOut', 
+          delay: showIntro ? 0.5 : 0 
+        }}
       >
 
+       {/* ... (Rest of your code remains exactly the same) ... */}
        {/* ================= HERO SECTION ================= */}
         <section 
           className={`relative overflow-hidden transition-colors duration-300 rounded-b-3xl ${
