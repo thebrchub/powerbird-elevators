@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 
 export default function BrandLogo({ size = 'lg', dark = false }) {
-  const sizeClasses = size === 'lg' ? 'h-14 md:h-16' : 'h-8 md:h-14'
+  const sizeClasses = size === 'lg' ? 'h-14 md:h-16' : 'h-12 md:h-14'
 
   return (
     <motion.div

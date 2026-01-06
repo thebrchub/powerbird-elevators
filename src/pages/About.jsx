@@ -14,7 +14,8 @@ import {
 
 export default function About({ darkPreview, setDarkPreview }) {
   return (
-    <div className={`pt-18 transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
+    // Added min-h-screen for full height
+    <div className={`pt-18 min-h-screen transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
 
       {/* ================= DARK MODE TOGGLE ================= */}
       <div className="fixed bottom-6 right-6 z-40">
@@ -35,6 +36,7 @@ export default function About({ darkPreview, setDarkPreview }) {
             : 'bg-white text-gray-900 border-gray-200'
         }`}
       >
+        {/* RESPONSIVE: px-6 (mobile) to px-6 (desktop) is fine, just ensuring container width */}
         <div className="max-w-7xl mx-auto px-6 py-20">
           <Reveal>
             <h1 className="text-4xl font-bold">
@@ -48,7 +50,6 @@ export default function About({ darkPreview, setDarkPreview }) {
                 The <span className="text-blue-400 font-semibold">MPWAY</span> to Safety and Quality. 
               </p>
               
-              {/* 🔥 NEW UPDATE: Added the North Canara Region Claim */}
               <p className={`my-4 text-xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
                 "We are the First and Best Elevator Company in the entire North Canara (Uttar Kannada) Region."
               </p>
@@ -64,7 +65,8 @@ export default function About({ darkPreview, setDarkPreview }) {
 
       {/* ================= CORPORATE PROFILE ================= */}
       <section className={`py-24 transition-colors duration-300 ${darkPreview ? 'bg-gray-950' : 'bg-white'}`}>
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-start">
+        {/* RESPONSIVE: grid-cols-1 on mobile, lg:grid-cols-2 on large screens */}
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           <Reveal>
             <div>
@@ -88,17 +90,23 @@ export default function About({ darkPreview, setDarkPreview }) {
                 measures for protecting the environment and ensuring a sustainable society for future generations."
               </p>
 
-              <div className="mt-8 flex gap-8">
+              {/* RESPONSIVE: flex-col on small screens, flex-row on desktop */}
+              <div className="mt-8 flex flex-col sm:flex-row gap-8 sm:items-center">
                  <div className="flex flex-col">
                     <span className={`text-4xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>25+</span>
                     <span className="text-xs uppercase tracking-wider text-gray-500 mt-1">Years Experience</span>
                  </div>
-                 <div className={`w-px h-12 ${darkPreview ? 'bg-gray-800' : 'bg-gray-300'}`}></div>
+                 
+                 {/* RESPONSIVE: Hidden on mobile, visible on sm+ */}
+                 <div className={`hidden sm:block w-px h-12 ${darkPreview ? 'bg-gray-800' : 'bg-gray-300'}`}></div>
+                 
                  <div className="flex flex-col">
                     <span className={`text-4xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>20+</span>
                     <span className="text-xs uppercase tracking-wider text-gray-500 mt-1">Cities Covered</span>
                  </div>
-                 <div className={`w-px h-12 ${darkPreview ? 'bg-gray-800' : 'bg-gray-300'}`}></div>
+                 
+                 <div className={`hidden sm:block w-px h-12 ${darkPreview ? 'bg-gray-800' : 'bg-gray-300'}`}></div>
+                 
                  <div className="flex flex-col">
                     <span className={`text-4xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>24/7</span>
                     <span className="text-xs uppercase tracking-wider text-gray-500 mt-1">Emergency Service</span>
@@ -148,7 +156,7 @@ export default function About({ darkPreview, setDarkPreview }) {
         </div>
       </section>
 
-      {/* ================= CERTIFICATIONS (Now Light Gray in Light Mode) ================= */}
+      {/* ================= CERTIFICATIONS ================= */}
       <section 
         className={`py-24 relative overflow-hidden transition-colors duration-300
         ${darkPreview ? 'bg-black text-white' : 'bg-gray-50 text-gray-900'}`} 
@@ -165,17 +173,18 @@ export default function About({ darkPreview, setDarkPreview }) {
             </div>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* RESPONSIVE: grid-cols-1 on mobile, md:grid-cols-2 on tablet+ */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
             {/* CARD 1 */}
             <Reveal delay={0.1}>
-              <div className={`border p-8 rounded-lg flex items-start gap-6 hover:border-blue-500 transition-colors duration-300
+              <div className={`border p-8 rounded-lg flex flex-col sm:flex-row items-start gap-6 hover:border-blue-500 transition-colors duration-300
                 ${darkPreview 
                   ? 'bg-gray-900 border-gray-800' 
                   : 'bg-white border-gray-200 shadow-sm'
                 }`}>
                 
-                <div className={`p-3 rounded-md border ${darkPreview ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-100'}`}>
+                <div className={`p-3 rounded-md border shrink-0 ${darkPreview ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-100'}`}>
                    <Award className="text-yellow-500" size={24} />
                 </div>
                 <div>
@@ -198,13 +207,13 @@ export default function About({ darkPreview, setDarkPreview }) {
 
             {/* CARD 2 */}
             <Reveal delay={0.2}>
-              <div className={`border p-8 rounded-lg flex items-start gap-6 hover:border-blue-500 transition-colors duration-300
+              <div className={`border p-8 rounded-lg flex flex-col sm:flex-row items-start gap-6 hover:border-blue-500 transition-colors duration-300
                 ${darkPreview 
                   ? 'bg-gray-900 border-gray-800' 
                   : 'bg-white border-gray-200 shadow-sm'
                 }`}>
                 
-                <div className={`p-3 rounded-md border ${darkPreview ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-100'}`}>
+                <div className={`p-3 rounded-md border shrink-0 ${darkPreview ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-100'}`}>
                    <FileText className="text-blue-400" size={24} />
                 </div>
                 <div>
@@ -230,7 +239,8 @@ export default function About({ darkPreview, setDarkPreview }) {
             </h2>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* RESPONSIVE: grid-cols-1 on mobile, md:grid-cols-3 on desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 title: 'Advanced Safety',
