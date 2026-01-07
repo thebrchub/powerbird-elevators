@@ -41,7 +41,7 @@ export default function Projects({ darkPreview, setDarkPreview }) {
   const allCities = [
     "Sirsi", "Kumta", "Bhatkal", "Honnavar", "Karwar",
     "Haveri", "Hubli", "Dharwad", "Belgaum",
-    "Bellari", "Hospet", "Davangere",
+    "Ballari", "Hospet", "Davangere",
     "Bangalore", "Shimoga", "Mangalore", "Udupi"
   ];
 
@@ -139,7 +139,7 @@ export default function Projects({ darkPreview, setDarkPreview }) {
             <div className="h-48 bg-gray-800 relative overflow-hidden">
                 {/* IMAGE */}
                 <img 
-                    src="/projects/1.png" 
+                    src="/projects/1.webp" 
                     alt="Stainless Steel Series" 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -163,7 +163,7 @@ export default function Projects({ darkPreview, setDarkPreview }) {
             <div className="h-48 bg-gray-800 relative overflow-hidden">
                 {/* IMAGE */}
                 <img 
-                    src="/projects/2.png" 
+                    src="/projects/2.webp" 
                     alt="Panoramic Glass Cabins" 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -187,7 +187,7 @@ export default function Projects({ darkPreview, setDarkPreview }) {
             <div className="h-48 bg-gray-800 relative overflow-hidden">
                 {/* IMAGE */}
                 <img 
-                    src="/projects/3.png" 
+                    src="/projects/3.webp" 
                     alt="Hospital & Care" 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -278,7 +278,7 @@ export default function Projects({ darkPreview, setDarkPreview }) {
 
                 {/* COORDINATES (Relative 600x750 Canvas)
                    Belgaum: 150, 80
-                   Bellari: 480, 250
+                   Ballari: 480, 250
                    Mangalore: 120, 600
                    Bangalore: 450, 620
                    Sirsi (HQ): 160, 320 
@@ -296,7 +296,7 @@ export default function Projects({ darkPreview, setDarkPreview }) {
                   {/* Path 2: Northern (Sirsi -> Hubli -> Belgaum) */}
                   <path d="M160 320 L220 200 L150 80" fill="none" />
                   
-                  {/* Path 3: Eastern (Hubli -> Davangere -> Bellari) */}
+                  {/* Path 3: Eastern (Hubli -> Davangere -> Ballari) */}
                   <path d="M220 200 L320 320 L480 250" fill="none" />
                   
                   {/* Path 4: Metro Link (Sirsi -> Shimoga -> Bangalore) */}
@@ -319,7 +319,7 @@ export default function Projects({ darkPreview, setDarkPreview }) {
                   {/* Signal 3: Coastal Sweep (Karwar -> Mangalore) */}
                   <path d="M160 320 L80 290 L120 600" className="animate-draw-line" fill="none" style={{animationDuration: '3.5s', animationDelay: '0.5s'}} />
                   
-                  {/* Signal 4: East Link (Hubli -> Bellari) */}
+                  {/* Signal 4: East Link (Hubli -> Ballari) */}
                   <path d="M220 200 L320 320 L480 250" className="animate-draw-line" fill="none" style={{animationDuration: '2.5s', animationDelay: '2s'}} />
                 </g>
 
@@ -329,7 +329,7 @@ export default function Projects({ darkPreview, setDarkPreview }) {
                   { x: 450, y: 620, name: "Bengaluru", main: true },
                   { x: 150, y: 80, name: "Belgaum" },
                   { x: 220, y: 200, name: "Hubli" },
-                  { x: 480, y: 250, name: "Bellari" },
+                  { x: 480, y: 250, name: "Ballari" },
                   { x: 80, y: 290, name: "Karwar" },
                   { x: 320, y: 320, name: "Davangere" },
                   { x: 240, y: 420, name: "Shimoga" },

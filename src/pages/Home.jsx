@@ -191,7 +191,7 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
                 }`}
               >
                 <img 
-                  src="/lifts/hero_lift.png" 
+                  src="/lifts/hero_lift.webp" 
                   alt="PowerBird Elevator System" 
                   className="w-full h-full object-cover"
                 />

@@ -94,12 +94,12 @@ export default function Services({ darkPreview, setDarkPreview }) {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: 'Passenger Lifts', desc: 'Advanced comfort and safety for residential and commercial buildings.', icon: <ArrowUpCircle />, image: '/lifts/1.png' },
-              { title: 'Capsule Lifts', desc: 'Panoramic glass cabins that enhance the architectural aesthetics of your building.', icon: <Settings />, image: '/lifts/2.png' },
-              { title: 'Hospital Lifts', desc: 'Stretcher-compliant designs ensuring jerk-free movement for patients.', icon: <ShieldCheck />, image: '/lifts/3.png' },
-              { title: 'Goods Lifts', desc: 'Heavy-duty solutions for transporting materials in industrial settings.', icon: <HardHat />, image: '/lifts/4.png' },
-              { title: 'Dumbwaiter Lifts', desc: 'Compact lifts for hotels and restaurants to transport food and small items.', icon: <Box />, image: '/lifts/5.png' },
-              { title: 'Stair Lifts', desc: 'Empowering the elderly and special needs individuals with safe home mobility.', icon: <Accessibility />, image: '/lifts/6.png' },
+              { title: 'Passenger Lifts', desc: 'Advanced comfort and safety for residential and commercial buildings.', icon: <ArrowUpCircle />, image: '/lifts/1.webp' },
+              { title: 'Capsule Lifts', desc: 'Panoramic glass cabins that enhance the architectural aesthetics of your building.', icon: <Settings />, image: '/lifts/2.webp' },
+              { title: 'Hospital Lifts', desc: 'Stretcher-compliant designs ensuring jerk-free movement for patients.', icon: <ShieldCheck />, image: '/lifts/3.webp' },
+              { title: 'Goods Lifts', desc: 'Heavy-duty solutions for transporting materials in industrial settings.', icon: <HardHat />, image: '/lifts/4.webp' },
+              { title: 'Dumbwaiter Lifts', desc: 'Compact lifts for hotels and restaurants to transport food and small items.', icon: <Box />, image: '/lifts/5.webp' },
+              { title: 'Stair Lifts', desc: 'Empowering the elderly and special needs individuals with safe home mobility.', icon: <Accessibility />, image: '/lifts/6.webp' },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <div

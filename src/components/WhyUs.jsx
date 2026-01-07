@@ -66,7 +66,7 @@ export default function WhyUs({ darkPreview }) {
             {/* Main Image */}
             <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl relative z-10">
               <img 
-                src="/core/3.png" 
+                src="/core/3.webp" 
                 alt="Quality Testing" 
                 className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               />
