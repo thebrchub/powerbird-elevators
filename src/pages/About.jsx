@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import Reveal from '../components/Reveal'
 import { 
   Building2, 
-  FileText, 
+  FileText, // 🔥 ADDED THIS BACK
   ShieldCheck, 
   Cpu, 
   CheckCircle2,
@@ -9,12 +10,25 @@ import {
   Leaf,
   Award,
   Sun,
-  Moon
+  Moon,
+  MapPin,
+  Play 
 } from 'lucide-react'
 
 export default function About({ darkPreview, setDarkPreview }) {
+  
+  // State to manage Video Playback
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+
+  // Locations extracted from PowerBird Brochure
+  const serviceLocations = [
+    "Sirsi", "Kumta", "Bhatkal", "Honnavar", 
+    "Karwar", "Haveri", "Hubli", "Dharwad", 
+    "Belgum", "Ballari", "Hosapete", "Davangere", 
+    "Bangalore", "Shimogga", "Mangalore", "Udupi"
+  ];
+
   return (
-    // Added min-h-screen for full height
     <div className={`pt-18 min-h-screen transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
 
       {/* ================= DARK MODE TOGGLE ================= */}
@@ -36,7 +50,6 @@ export default function About({ darkPreview, setDarkPreview }) {
             : 'bg-white text-gray-900 border-gray-200'
         }`}
       >
-        {/* RESPONSIVE: px-6 (mobile) to px-6 (desktop) is fine, just ensuring container width */}
         <div className="max-w-7xl mx-auto px-6 py-20">
           <Reveal>
             <h1 className="text-4xl font-bold">
@@ -65,7 +78,6 @@ export default function About({ darkPreview, setDarkPreview }) {
 
       {/* ================= CORPORATE PROFILE ================= */}
       <section className={`py-24 transition-colors duration-300 ${darkPreview ? 'bg-gray-950' : 'bg-white'}`}>
-        {/* RESPONSIVE: grid-cols-1 on mobile, lg:grid-cols-2 on large screens */}
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           <Reveal>
@@ -90,14 +102,12 @@ export default function About({ darkPreview, setDarkPreview }) {
                 measures for protecting the environment and ensuring a sustainable society for future generations."
               </p>
 
-              {/* RESPONSIVE: flex-col on small screens, flex-row on desktop */}
               <div className="mt-8 flex flex-col sm:flex-row gap-8 sm:items-center">
                  <div className="flex flex-col">
                     <span className={`text-4xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>25+</span>
                     <span className="text-xs uppercase tracking-wider text-gray-500 mt-1">Years Experience</span>
                  </div>
                  
-                 {/* RESPONSIVE: Hidden on mobile, visible on sm+ */}
                  <div className={`hidden sm:block w-px h-12 ${darkPreview ? 'bg-gray-800' : 'bg-gray-300'}`}></div>
                  
                  <div className="flex flex-col">
@@ -156,6 +166,54 @@ export default function About({ darkPreview, setDarkPreview }) {
         </div>
       </section>
 
+      {/* ================= 🔥 VIDEO SECTION ================= */}
+      <section className={`py-16 ${darkPreview ? 'bg-black' : 'bg-gray-100'}`}>
+        <div className="max-w-4xl mx-auto px-6">
+          <Reveal>
+            <div className={`relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 
+              ${darkPreview ? 'border-gray-800' : 'border-white'}`}>
+              
+              {!isVideoPlaying ? (
+                <div 
+                  className="absolute inset-0 cursor-pointer group"
+                  onClick={() => setIsVideoPlaying(true)}
+                >
+                  {/* Custom Thumbnail */}
+                  <img 
+                    src="/lifts/thumbnail.webp"  
+                    alt="PowerBird Corporate Story"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 shadow-xl group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white pl-1 shadow-lg">
+                        <Play size={28} fill="currentColor" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <iframe 
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/BKgzMNLxoGA?autoplay=1&rel=0&modestbranding=1" 
+                  title="PowerBird Elevators Corporate Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              )}
+
+            </div>
+            
+            <div className="mt-6 text-center">
+               <p className={`text-sm font-bold tracking-widest uppercase ${darkPreview ? 'text-gray-500' : 'text-gray-500'}`}>
+                 The PowerBird Story
+               </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ================= CERTIFICATIONS ================= */}
       <section 
         className={`py-24 relative overflow-hidden transition-colors duration-300
@@ -173,7 +231,6 @@ export default function About({ darkPreview, setDarkPreview }) {
             </div>
           </Reveal>
 
-          {/* RESPONSIVE: grid-cols-1 on mobile, md:grid-cols-2 on tablet+ */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
             {/* CARD 1 */}
@@ -239,7 +296,6 @@ export default function About({ darkPreview, setDarkPreview }) {
             </h2>
           </Reveal>
 
-          {/* RESPONSIVE: grid-cols-1 on mobile, md:grid-cols-3 on desktop */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -293,6 +349,42 @@ export default function About({ darkPreview, setDarkPreview }) {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ================= SERVICE REGIONS ================= */}
+      <section className={`py-20 border-t transition-colors duration-300 ${darkPreview ? 'bg-black border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center justify-center p-3 rounded-full bg-blue-100 text-blue-600 mb-4">
+                <MapPin size={24} />
+              </div>
+              <h2 className={`text-3xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
+                Serving Across Karnataka
+              </h2>
+              <p className={`mt-3 ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
+                Delivering excellence to major cities and districts.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {serviceLocations.map((city, index) => (
+                <div 
+                  key={index}
+                  className={`flex items-center justify-center p-4 rounded-lg border font-medium text-center transition-colors
+                  ${darkPreview 
+                    ? 'bg-gray-900 border-gray-800 text-gray-300 hover:border-blue-500 hover:text-white' 
+                    : 'bg-white border-gray-200 text-gray-700 hover:border-blue-500 hover:text-blue-600'
+                  }`}
+                >
+                  {city}
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 

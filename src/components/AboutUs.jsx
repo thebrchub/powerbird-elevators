@@ -18,7 +18,7 @@ const navigate = useNavigate()
           <div className="relative">
             <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
               <img 
-                src="/core/4.png"  
+                src="/core/4.webp"  
                 alt="Elevator Engineering" 
                 className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               />

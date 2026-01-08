@@ -11,21 +11,21 @@ export default function CoreCapabilities({ darkPreview }) {
       id: '01',
       title: 'Installation', 
       desc: 'Turnkey installation for residential & commercial towers.', 
-      img: '/core/5.png', 
+      img: '/core/5.webp', 
       icon: <MousePointer2 className="w-6 h-6" /> 
     },
     { 
       id: '02',
       title: 'Maintenance', 
       desc: 'Predictive AMC protocols to prevent breakdowns.', 
-      img: '/core/6.png', 
+      img: '/core/6.webp', 
       icon: <Settings className="w-6 h-6" /> 
     },
     { 
       id: '03',
       title: 'Modernization', 
       desc: 'Retrofitting aging systems with modern drive technology.', 
-      img: '/core/7.png',
+      img: '/core/7.webp',
       icon: <TrendingUp className="w-6 h-6" /> 
     },
   ]
