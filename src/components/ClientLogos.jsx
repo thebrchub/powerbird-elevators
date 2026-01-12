@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion'
+import Reveal from '../components/Reveal'
 
-const logos = Array.from({ length: 18 }, (_, i) => `/logos/${i + 1}.png`)
+// 1. Changed extension to .webp
+const logos = Array.from({ length: 18 }, (_, i) => `/logos/${i + 1}.webp`)
 
 /**
  * ClientLogos
@@ -9,73 +10,50 @@ const logos = Array.from({ length: 18 }, (_, i) => `/logos/${i + 1}.png`)
 export default function ClientLogos({ darkPreview = false }) {
   return (
     <section
-      className={`py-20 overflow-hidden ${
+      className={`py-20 ${
         darkPreview ? 'bg-gray-950' : 'bg-white'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
 
         {/* SECTION HEADING */}
-        <div className="text-center mb-12">
-          <h3
-            className={`text-sm uppercase tracking-widest ${
-              darkPreview ? 'text-gray-400' : 'text-gray-500'
-            }`}
-          >
-            Trusted By Clients Across Industries
-          </h3>
-        </div>
+        <Reveal>
+          <div className="text-center mb-16">
+            <h3
+              className={`text-sm uppercase tracking-widest font-bold ${
+                darkPreview ? 'text-gray-400' : 'text-gray-500'
+              }`}
+            >
+              Trusted By Clients Across Industries
+            </h3>
+            <div className={`mt-2 h-1 w-20 mx-auto rounded-full ${darkPreview ? 'bg-blue-500/30' : 'bg-blue-100'}`}></div>
+          </div>
+        </Reveal>
 
-        {/* LOGO MARQUEE */}
-        <div className="relative overflow-hidden py-4"> {/* Added py-4 to prevent hover clip */}
-          <motion.div
-            className="flex w-max gap-16 items-center" 
-            animate={{ x: ['0%', '-100%'] }}
-            transition={{
-              duration: 130, // Keeping original speed
-              ease: 'linear',
-              repeat: Infinity,
-            }}
-          >
-            {[...logos, ...logos].map((src, index) => (
-              <div
-                key={index}
-                // Increased min-width to accommodate larger logos
-                className="flex items-center justify-center min-w-[200px]"
+        {/* STATIC LOGO GRID */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-12 items-center justify-items-center">
+          {logos.map((src, index) => (
+            <Reveal key={index} delay={index * 0.05}> 
+              <div 
+                className={`group flex items-center justify-center p-4 rounded-xl transition-colors duration-300 w-full h-32
+                  ${darkPreview ? 'hover:bg-gray-900' : 'hover:bg-gray-50'}
+                `}
               >
                 <img
                   src={src}
-                  alt="Client Logo"
+                  alt={`Client ${index + 1}`}
                   draggable={false}
-                  // Changes: 
-                  // 1. h-24 (Increased size)
-                  // 2. hover:scale-110 (Pop out animation)
-                  // 3. Removed grayscale classes
+                  // 2. REMOVED 'grayscale' and 'invert' classes.
+                  // Now showing original colors with a nice hover pop effect.
                   className={`
-                    h-24 w-auto object-contain transition-all duration-300 ease-out cursor-pointer
-                    hover:scale-110 hover:drop-shadow-xl
+                    max-h-20 w-auto object-contain transition-transform duration-500 ease-out cursor-pointer
+                    hover:scale-110 drop-shadow-sm
                     ${darkPreview ? 'opacity-90 hover:opacity-100' : 'opacity-100'}
                   `}
                 />
               </div>
-            ))}
-          </motion.div>
-
-          {/* EDGE FADES */}
-          <div
-            className={`pointer-events-none absolute inset-y-0 left-0 w-24 ${
-              darkPreview
-                ? 'bg-gradient-to-r from-gray-950 to-transparent'
-                : 'bg-gradient-to-r from-white to-transparent'
-            }`}
-          />
-          <div
-            className={`pointer-events-none absolute inset-y-0 right-0 w-24 ${
-              darkPreview
-                ? 'bg-gradient-to-l from-gray-950 to-transparent'
-                : 'bg-gradient-to-l from-white to-transparent'
-            }`}
-          />
+            </Reveal>
+          ))}
         </div>
 
       </div>

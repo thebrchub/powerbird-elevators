@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Reveal from '../components/Reveal'
 import { 
   Wrench, 
@@ -15,11 +16,66 @@ import {
   Sun
 } from 'lucide-react'
 
-// 🔥 STEP 1: Accept global props
+// Import all 6 Modals
+import PassengerLiftModal from '../modals/PassengerLiftModal'
+import CapsuleLiftModal from '../modals/CapsuleLiftModal'
+import HospitalLiftModal from '../modals/HospitalLiftModal'
+import GoodsLiftModal from '../modals/GoodsLiftModal'
+import DumbwaiterModal from '../modals/DumbwaiterModal'
+import StairLiftModal from '../modals/StairLiftModal'
+
 export default function Services({ darkPreview, setDarkPreview }) {
 
+  // State to track which modal is currently open (null = none)
+  const [activeModal, setActiveModal] = useState(null)
+
+  // Data for the Installation Services Grid
+  const liftServices = [
+    { 
+      id: 'passenger', 
+      title: 'Passenger Lifts', 
+      desc: 'Advanced comfort and safety for residential and commercial buildings.', 
+      icon: <ArrowUpCircle />, 
+      image: '/lifts/1.webp' 
+    },
+    { 
+      id: 'capsule', 
+      title: 'Capsule Lifts', 
+      desc: 'Panoramic glass cabins that enhance the architectural aesthetics of your building.', 
+      icon: <Settings />, 
+      image: '/lifts/2.webp' 
+    },
+    { 
+      id: 'hospital', 
+      title: 'Hospital Lifts', 
+      desc: 'Stretcher-compliant designs ensuring jerk-free movement for patients.', 
+      icon: <ShieldCheck />, 
+      image: '/lifts/3.webp' 
+    },
+    { 
+      id: 'goods', 
+      title: 'Goods Lifts', 
+      desc: 'Heavy-duty solutions for transporting materials in industrial settings.', 
+      icon: <HardHat />, 
+      image: '/lifts/4.webp' 
+    },
+    { 
+      id: 'dumbwaiter', 
+      title: 'Dumbwaiter Lifts', 
+      desc: 'Compact lifts for hotels and restaurants to transport food and small items.', 
+      icon: <Box />, 
+      image: '/lifts/5.webp' 
+    },
+    { 
+      id: 'stair', 
+      title: 'Stair Lifts', 
+      desc: 'Empowering the elderly and special needs individuals with safe home mobility.', 
+      icon: <Accessibility />, 
+      image: '/lifts/6.webp' 
+    },
+  ]
+
   return (
-    // 🔥 STEP 2: Use global state for the main wrapper
     <div className={`pt-18 transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
 
       {/* ================= GLOBAL TOGGLE BUTTON ================= */}
@@ -43,16 +99,12 @@ export default function Services({ darkPreview, setDarkPreview }) {
       >
         <div className="max-w-7xl mx-auto px-6 py-20">
           <Reveal>
-            {/* 🔥 UPDATE: Added Blinking Dot Structure Here */}
+            {/* Blinking Emergency Badge */}
             <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-red-900/20 border border-red-800 text-red-500 text-xs font-mono mb-4">
-               
-               {/* The Blinking Dot */}
                <div className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
                </div>
-
-               {/* The Text & Icon */}
                <span className="flex items-center gap-2 font-bold tracking-wide">
                  <Zap size={12} /> 24/7 EMERGENCY SERVICE AVAILABLE
                </span>
@@ -72,14 +124,11 @@ export default function Services({ darkPreview, setDarkPreview }) {
         </div>
       </section>
 
-      {/* ================= INSTALLATION SERVICES ================= */}
+      {/* ================= INSTALLATION SERVICES GRID ================= */}
       <section className={`py-24 transition-colors duration-300 ${darkPreview ? 'bg-gray-950' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-6">
 
-          <div
-            className={`flex flex-col md:flex-row md:items-end justify-between mb-16 border-b pb-8
-            ${darkPreview ? 'border-gray-800' : 'border-gray-200'}`}
-          >
+          <div className={`flex flex-col md:flex-row md:items-end justify-between mb-16 border-b pb-8 ${darkPreview ? 'border-gray-800' : 'border-gray-200'}`}>
             <Reveal>
               <div>
                 <h2 className={`text-3xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
@@ -93,21 +142,15 @@ export default function Services({ darkPreview, setDarkPreview }) {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { title: 'Passenger Lifts', desc: 'Advanced comfort and safety for residential and commercial buildings.', icon: <ArrowUpCircle />, image: '/lifts/1.webp' },
-              { title: 'Capsule Lifts', desc: 'Panoramic glass cabins that enhance the architectural aesthetics of your building.', icon: <Settings />, image: '/lifts/2.webp' },
-              { title: 'Hospital Lifts', desc: 'Stretcher-compliant designs ensuring jerk-free movement for patients.', icon: <ShieldCheck />, image: '/lifts/3.webp' },
-              { title: 'Goods Lifts', desc: 'Heavy-duty solutions for transporting materials in industrial settings.', icon: <HardHat />, image: '/lifts/4.webp' },
-              { title: 'Dumbwaiter Lifts', desc: 'Compact lifts for hotels and restaurants to transport food and small items.', icon: <Box />, image: '/lifts/5.webp' },
-              { title: 'Stair Lifts', desc: 'Empowering the elderly and special needs individuals with safe home mobility.', icon: <Accessibility />, image: '/lifts/6.webp' },
-            ].map((item, i) => (
+            {liftServices.map((item, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <div
-                  className={`group border rounded-lg overflow-hidden transition-all duration-300
-                  ${
-                    darkPreview
-                      ? 'bg-gray-900 border-gray-800 hover:border-blue-500'
-                      : 'bg-gray-50 border-gray-200 hover:bg-white hover:border-blue-500'
+                  // 🔥 CLICK HANDLER: Opens the modal matching item.id
+                  onClick={() => setActiveModal(item.id)}
+                  className={`group border rounded-lg overflow-hidden transition-all duration-300 cursor-pointer
+                  ${darkPreview 
+                    ? 'bg-gray-900 border-gray-800 hover:border-blue-500' 
+                    : 'bg-gray-50 border-gray-200 hover:bg-white hover:border-blue-500'
                   }`}
                 >
                   {/* Image */}
@@ -133,7 +176,7 @@ export default function Services({ darkPreview, setDarkPreview }) {
                       {item.desc}
                     </p>
 
-                    <div className="mt-6 flex items-center text-xs font-bold uppercase tracking-wider text-gray-400">
+                    <div className="mt-6 flex items-center text-xs font-bold uppercase tracking-wider text-gray-400 group-hover:text-blue-500 transition-colors">
                       Details <ChevronRight className="w-3 h-3 ml-1" />
                     </div>
                   </div>
@@ -146,7 +189,6 @@ export default function Services({ darkPreview, setDarkPreview }) {
       </section>
 
       {/* ================= MAINTENANCE & SAFETY ================= */}
-      {/* Switches between Dark Gray (gray-900) and Light Gray (gray-50) */}
       <section 
         className={`py-24 transition-colors duration-300 ${
           darkPreview ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
@@ -271,6 +313,15 @@ export default function Services({ darkPreview, setDarkPreview }) {
           </Reveal>
         </div>
       </section>
+
+      {/* ================= 🔥 MODALS RENDERED HERE ================= */}
+      {/* These will only appear when activeModal matches their ID */}
+      <PassengerLiftModal isOpen={activeModal === 'passenger'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
+      <CapsuleLiftModal isOpen={activeModal === 'capsule'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
+      <HospitalLiftModal isOpen={activeModal === 'hospital'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
+      <GoodsLiftModal isOpen={activeModal === 'goods'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
+      <DumbwaiterModal isOpen={activeModal === 'dumbwaiter'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
+      <StairLiftModal isOpen={activeModal === 'stair'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
 
     </div>
   )
