@@ -20,7 +20,7 @@ export default function Navbar({ showLogo, darkPreview = true }) {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
-    { name: 'Projects', path: '/projects' },
+    { name: 'Network', path: '/network' },
     { name: 'Contact', path: '/contact' }
   ]
 

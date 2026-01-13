@@ -12,7 +12,7 @@ import {
   Sun
 } from 'lucide-react'
 
-export default function Projects({ darkPreview, setDarkPreview }) {
+export default function Network({ darkPreview, setDarkPreview }) {
   
   // Data from Brochure Page 19 (Client List)
   const clients = [
