@@ -46,7 +46,7 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
   return (
     <>
       {/* ================= DARK MODE TOGGLE ================= */}
-      <div className="fixed bottom-6 right-6 z-40">
+      {/* <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setDarkPreview(!darkPreview)}
           className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900 text-white shadow-lg hover:bg-gray-800 transition text-sm font-semibold"
@@ -54,7 +54,7 @@ export default function Home({ onIntroComplete, darkPreview, setDarkPreview }) {
           {darkPreview ? <Sun size={16} /> : <Moon size={16} />}
           {darkPreview ? 'Light View' : 'Dark View'}
         </button>
-      </div>
+      </div> */}
 
       {/* ================= LIFT INTRO ================= */}
       {showIntro && (

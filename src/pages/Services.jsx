@@ -78,49 +78,66 @@ export default function Services({ darkPreview, setDarkPreview }) {
   return (
     <div className={`pt-18 transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
 
-      {/* ================= GLOBAL TOGGLE BUTTON ================= */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <button
-          onClick={() => setDarkPreview(!darkPreview)} 
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900 text-white shadow-lg hover:bg-gray-800 transition text-sm font-semibold"
-        >
-          {darkPreview ? <Sun size={16} /> : <Moon size={16} />}
-          {darkPreview ? 'Light View' : 'Dark View'}
-        </button>
-      </div>
-
-      {/* ================= HERO ================= */}
+      {/* ================= HERO SECTION (FIXED BLEND + QUOTE) ================= */}
       <section 
-        className={`border-b transition-colors duration-300 ${
+        className={`border-b transition-colors duration-300 overflow-hidden relative ${
           darkPreview 
             ? 'bg-gray-950 text-white border-gray-800' 
             : 'bg-white text-gray-900 border-gray-200'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-20">
-          <Reveal>
-            {/* Blinking Emergency Badge */}
-            <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-red-900/20 border border-red-800 text-red-500 text-xs font-mono mb-4">
-               <div className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
-               </div>
-               <span className="flex items-center gap-2 font-bold tracking-wide">
-                 <Zap size={12} /> 24/7 EMERGENCY SERVICE AVAILABLE
-               </span>
-            </div>
+        <div className="max-w-7xl mx-auto px-6 py-12 lg:py-20 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            
+            {/* LEFT: CONTENT */}
+            <Reveal>
+              <div>
+                {/* Emergency Badge */}
+                <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-red-900/20 border border-red-800 text-red-500 text-xs font-mono mb-6">
+                   <div className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+                   </div>
+                   <span className="flex items-center gap-2 font-bold tracking-wide">
+                     <Zap size={12} /> 24/7 EMERGENCY SERVICE
+                   </span>
+                </div>
 
-            <h1 className="text-4xl font-bold">
-              Our <span className="text-blue-500">Elevator Services</span>
-            </h1>
-          </Reveal>
+                <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+                  Our <span className="text-blue-500">Elevator Services</span>
+                </h1>
+                
+                {/* 🔥 NEW: Quote with Blue Line (Non-Italic) */}
+                <div className="mt-8 mb-6">
+                  <p className={`text-xl font-bold border-l-4 border-blue-500 pl-4 leading-relaxed ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
+                    "Engineering vertical transportation with precision, safety, and uncompromising quality."
+                  </p>
+                </div>
+                
+                <p className={`text-lg leading-relaxed ${darkPreview ? 'text-gray-300' : 'text-gray-600'}`}>
+                  We don't just install elevators; we ensure they run safely for a lifetime. From precision engineering to round-the-clock maintenance, we are the partner you can rely on for vertical mobility.
+                </p>
+              </div>
+            </Reveal>
 
-          <Reveal delay={0.1}>
-            <p className={`mt-4 max-w-2xl text-lg ${darkPreview ? 'text-gray-300' : 'text-gray-600'}`}>
-              From preliminary lift installation to comprehensive maintenance. 
-              Authorized by the Government of Karnataka and ISO 9001:2015 Certified.
-            </p>
-          </Reveal>
+            {/* RIGHT: BLENDED IMAGE */}
+            <Reveal delay={0.2}>
+              <div className="relative w-full h-[300px] lg:h-[400px]">
+                <img 
+                  src="/lifts/2.webp" 
+                  alt="Elevator Services" 
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Gradient Masks */}
+                <div className={`absolute top-0 left-0 right-0 h-32 bg-gradient-to-b ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+                <div className={`absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+                <div className={`absolute top-0 right-0 bottom-0 w-32 bg-gradient-to-l ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+                <div className={`absolute top-0 left-0 bottom-0 w-12 bg-gradient-to-r ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+              </div>
+            </Reveal>
+
+          </div>
         </div>
       </section>
 
@@ -135,7 +152,7 @@ export default function Services({ darkPreview, setDarkPreview }) {
                   Installation Services
                 </h2>
                 <p className={`mt-2 ${darkPreview ? 'text-gray-400' : 'text-gray-500'}`}>
-                  We provide a complete range of vertical transportation solutions.
+                  Customized solutions for residential, commercial, and industrial needs.
                 </p>
               </div>
             </Reveal>
@@ -145,7 +162,6 @@ export default function Services({ darkPreview, setDarkPreview }) {
             {liftServices.map((item, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <div
-                  // 🔥 CLICK HANDLER: Opens the modal matching item.id
                   onClick={() => setActiveModal(item.id)}
                   className={`group border rounded-lg overflow-hidden transition-all duration-300 cursor-pointer
                   ${darkPreview 
@@ -206,7 +222,7 @@ export default function Services({ darkPreview, setDarkPreview }) {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: '24/7 Emergency Service', sub: 'Always Available', desc: 'Round-the-clock emergency support for entrapments and critical failures.' },
-              { title: 'Safety Gear Checks', sub: 'Govt Authorized', desc: 'Regular inspection of governors, buffers, and safety gears to meet statutory requirements.' },
+              { title: 'Safety Gear Checks', sub: 'Preventive Care', desc: 'Regular inspection of governors, buffers, and safety gears to meet statutory requirements.' },
               { title: 'ARD Testing', sub: 'Power Failure Safety', desc: 'Ensuring Automatic Rescue Devices function correctly during outages.' },
             ].map((service, i) => (
               <Reveal key={i} delay={i * 0.1}>
@@ -315,7 +331,6 @@ export default function Services({ darkPreview, setDarkPreview }) {
       </section>
 
       {/* ================= 🔥 MODALS RENDERED HERE ================= */}
-      {/* These will only appear when activeModal matches their ID */}
       <PassengerLiftModal isOpen={activeModal === 'passenger'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
       <CapsuleLiftModal isOpen={activeModal === 'capsule'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
       <HospitalLiftModal isOpen={activeModal === 'hospital'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />

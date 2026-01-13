@@ -1,64 +1,107 @@
-import Reveal from './Reveal'
+import { motion } from 'framer-motion'
+import Reveal from './Reveal' 
 import { Star, CheckCircle2 } from 'lucide-react'
 
 // ==========================================
-// 📝 UPDATE YOUR REVIEW DATA HERE
+// 📝 DATA CONFIGURATION
 // ==========================================
 const reviewData = {
   rating: 4.9,
   totalReviews: 400,
-  readMoreLink: "#",
-  writeReviewLink: "#",
+  // 🔥 UPDATED: Added the client's Google Maps link
+  readMoreLink: "https://share.google/ZsyyEHnuHC6ipNvJK",
+  writeReviewLink: "https://share.google/ZsyyEHnuHC6ipNvJK",
 
   reviews: [
     {
-      name: "Rajesh Kumar",
-      date: "2 months ago",
-      text: "PowerBird transformed our 15-year-old lift. It is silent and smooth now. The team was professional and finished on time.",
-      initial: "R"
+      name: "Vinayak",
+      date: "7 months ago",
+      text: "We had a great experience with Powerbird Elevators. The team was professional, punctual, and very knowledgeable. From the initial consultation to the final installation, everything was handled smoothly. The lift works perfectly.",
+      initial: "V"
     },
     {
-      name: "Dr. Anjali Desai",
-      date: "1 month ago",
-      text: "Safety was my priority for patients. Their stretcher lift installation was flawless and the AMC service is very responsive.",
+      name: "Nehal M",
+      date: "9 months ago",
+      text: "Excellent Service and Top-Quality Elevators. Power Bird Elevators provides outstanding service with the highest level of professionalism. Highly recommended!",
+      initial: "N"
+    },
+    {
+      name: "Arun Pavar",
+      date: "6 months ago",
+      text: "Best lift service in Sirsi city. They are professional and provide a timely response for any breakdown. The staff and owner are very humble. I am very satisfied with their service.",
       initial: "A"
     },
     {
-      name: "Venkatesh Builders",
-      date: "3 weeks ago",
-      text: "We have used PowerBird for 3 of our sites. Technically sound team and competitive pricing. Highly recommended.",
-      initial: "V"
+      name: "Lohit Sutakoti",
+      date: "9 months ago",
+      text: "We have been using their lifts for the last 5 years, and they still feel brand new. Easy access, low maintenance, and excellent team coordination.",
+      initial: "L"
+    },
+    {
+      name: "Manjunath Kamadally",
+      date: "9 months ago",
+      text: "Quality materials and excellent work finish completed within the promised timeframe. The maintenance team also does a great job.",
+      initial: "M"
+    },
+    {
+      name: "Sagar Ranebennur",
+      date: "9 months ago",
+      text: "Excellent service by Powerbird Elevators. One of the best service providers in the Uttara Kannada district. Everyone must try them.",
+      initial: "S"
+    },
+    {
+      name: "Nagaraj Naik",
+      date: "6 years ago",
+      text: "100% quality product, 24x7 services available, and total customer satisfaction.",
+      initial: "N"
+    },
+    {
+      name: "Ashok Yaddagirri",
+      date: "9 months ago",
+      text: "Popular and the best elevator company in Karwar, Uttara Kannada.",
+      initial: "A"
+    },
+    {
+      name: "Darshan Naik",
+      date: "9 months ago",
+      text: "Excellent working nature and very good service.",
+      initial: "D"
+    },
+    {
+      name: "Karthik Acharya",
+      date: "9 months ago",
+      text: "Smart Lifts for a Smarter Future. Great experience with Powerbird Elevator.",
+      initial: "K"
     }
   ]
 }
 
 export default function GoogleReviews({ darkPreview = true }) {
-  // 🔥 FIX: Using darkPreview prop to control theme colors
-  // If no prop is passed, it defaults to true (Dark Theme) to match your previous hardcoded style.
-  
   const bgColor = darkPreview ? 'bg-gray-950' : 'bg-gray-50';
   const textColor = darkPreview ? 'text-white' : 'text-gray-900';
   const cardBg = darkPreview ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200 shadow-sm';
   const mutedText = darkPreview ? 'text-gray-400' : 'text-gray-500';
   const reviewText = darkPreview ? 'text-gray-300' : 'text-gray-700';
 
+  // Create infinite loop array
+  const infiniteReviews = [...reviewData.reviews, ...reviewData.reviews];
+
   return (
-    // 🔥 FIX: Reduced padding to py-12 to minimize white space issues
-    <section className={`py-12 ${bgColor} ${textColor} transition-colors duration-300`}>
-      <div className="max-w-7xl mx-auto px-6">
+    <section className={`py-12 ${bgColor} ${textColor} transition-colors duration-300 overflow-hidden`}>
+      <div className="max-w-7xl mx-auto px-6 mb-12">
 
         {/* ================= HEADER / SUMMARY ================= */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <Reveal>
             <div className="flex items-center gap-4">
-              {/* Google Icon */}
-              <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm border border-gray-100">
-                <svg className="w-7 h-7" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.26.81-.58z" />
-                  <path fill="#EA4335" d="M12 4.6c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 1.09 14.97 0 12 0 7.7 0 3.99 2.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                </svg>
+              {/* Google Icon Container */}
+              <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm border border-gray-100 p-3">
+                 {/* 🔥 UPDATED: Using local image */}
+                 <img 
+                   src="/google/google.webp" 
+                   alt="Google" 
+                   className="w-full h-full object-contain"
+                 />
               </div>
 
               {/* Rating */}
@@ -76,8 +119,9 @@ export default function GoogleReviews({ darkPreview = true }) {
                     ))}
                   </div>
                 </div>
+                {/* 🔥 UPDATED: Text changed to 'across the Web' */}
                 <p className={`text-sm ${mutedText}`}>
-                  Excellent based on <span className={`font-semibold ${textColor}`}>{reviewData.totalReviews} Reviews</span>
+                  Excellent based on <span className={`font-semibold ${textColor}`}>{reviewData.totalReviews} Reviews across the Web</span>
                 </p>
               </div>
             </div>
@@ -108,13 +152,33 @@ export default function GoogleReviews({ darkPreview = true }) {
             </div>
           </Reveal>
         </div>
+      </div>
 
-        {/* ================= REVIEW CARDS ================= */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {reviewData.reviews.map((review, index) => (
-            <Reveal key={index} delay={index * 0.1}>
-              <div className={`${cardBg} p-6 rounded-xl border transition-all hover:border-blue-500 h-full flex flex-col`}>
+      {/* ================= INFINITE SCROLL TRACK ================= */}
+      <div className="relative w-full overflow-hidden mask-gradient">
+         {/* Fade edges */}
+         <div className={`absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r ${darkPreview ? 'from-gray-950 to-transparent' : 'from-gray-50 to-transparent'}`} />
+         <div className={`absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l ${darkPreview ? 'from-gray-950 to-transparent' : 'from-gray-50 to-transparent'}`} />
 
+        <motion.div 
+          className="flex gap-6 w-max"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ 
+            repeat: Infinity, 
+            ease: "linear", 
+            duration: 60, 
+          }}
+          whileHover={{ animationPlayState: 'paused' }} 
+          style={{ cursor: 'grab' }}
+        >
+          {infiniteReviews.map((review, index) => (
+            <div 
+              key={index} 
+              className={`
+                shrink-0 w-[350px] md:w-[400px] 
+                ${cardBg} p-6 rounded-xl border transition-all hover:border-blue-500 flex flex-col
+              `}
+            >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
@@ -126,10 +190,11 @@ export default function GoogleReviews({ darkPreview = true }) {
                       <p className={`text-xs ${mutedText}`}>{review.date}</p>
                     </div>
                   </div>
+                  {/* 🔥 UPDATED: Local Google Icon in Card */}
                   <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                    src="/google/google.webp"
                     alt="Google"
-                    className="w-5 h-5 opacity-50 grayscale hover:grayscale-0 transition-all"
+                    className="w-5 h-5 object-contain"
                   />
                 </div>
 
@@ -150,12 +215,9 @@ export default function GoogleReviews({ darkPreview = true }) {
                   <CheckCircle2 size={14} />
                   Verified Customer
                 </div>
-
-              </div>
-            </Reveal>
+            </div>
           ))}
-        </div>
-
+        </motion.div>
       </div>
     </section>
   )
