@@ -2,15 +2,13 @@ import { useState } from 'react'
 import Reveal from '../components/Reveal'
 import { 
   Building2, 
-  FileText, // 🔥 ADDED THIS BACK
+  FileText, 
   ShieldCheck, 
   Cpu, 
   CheckCircle2,
   Briefcase,
   Leaf,
   Award,
-  Sun,
-  Moon,
   MapPin,
   Play 
 } from 'lucide-react'
@@ -31,48 +29,60 @@ export default function About({ darkPreview, setDarkPreview }) {
   return (
     <div className={`pt-18 min-h-screen transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
 
-      {/* ================= DARK MODE TOGGLE ================= */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <button
-          onClick={() => setDarkPreview(!darkPreview)}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900 text-white shadow-lg hover:bg-gray-800 transition text-sm font-semibold"
-        >
-          {darkPreview ? <Sun size={16} /> : <Moon size={16} />}
-          {darkPreview ? 'Light View' : 'Dark View'}
-        </button>
-      </div>
-
-      {/* ================= HERO ================= */}
+      {/* ================= HERO SECTION (FIXED BLEND) ================= */}
       <section 
-        className={`border-b transition-colors duration-300 ${
+        className={`border-b transition-colors duration-300 overflow-hidden relative ${
           darkPreview 
             ? 'bg-gray-950 text-white border-gray-800' 
             : 'bg-white text-gray-900 border-gray-200'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-20">
-          <Reveal>
-            <h1 className="text-4xl font-bold">
-              About <span className="text-blue-500">PowerBird Elevators</span>
-            </h1>
-          </Reveal>
+        <div className="max-w-7xl mx-auto px-6 py-12 lg:py-20 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            
+            {/* LEFT: CONTENT (GOLD CONTENT - UNTOUCHED) */}
+            <Reveal>
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+                  About <span className="text-blue-500">PowerBird Elevators</span>
+                </h1>
+                
+                <div className={`mt-6 text-lg leading-relaxed space-y-6 ${darkPreview ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <p>
+                    The <span className="text-blue-400 font-semibold">MPWAY</span> to Safety and Quality. 
+                  </p>
+                  
+                  <p className={`text-xl font-bold border-l-4 border-blue-500 pl-4 ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
+                    "We are the First and Best Elevator Company in the entire North Canara (Uttar Kannada) Region."
+                  </p>
 
-          <Reveal delay={0.1}>
-            <div className={`mt-6 max-w-3xl text-lg leading-relaxed ${darkPreview ? 'text-gray-300' : 'text-gray-600'}`}>
-              <p>
-                The <span className="text-blue-400 font-semibold">MPWAY</span> to Safety and Quality. 
-              </p>
-              
-              <p className={`my-4 text-xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
-                "We are the First and Best Elevator Company in the entire North Canara (Uttar Kannada) Region."
-              </p>
+                  <p>
+                    Recognized by the <strong>Government of Karnataka</strong> for safety compliance, we combine decades of expertise with ISO-certified standards to deliver vertical transportation that you can trust.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
 
-              <p>
-                We are an ISO 9001:2015 Certified Company authorized by the Government of Karnataka, 
-                delivering advanced vertical transportation solutions.
-              </p>
-            </div>
-          </Reveal>
+            {/* RIGHT: BLENDED IMAGE (CORNER FIX) */}
+            <Reveal delay={0.2}>
+              {/* 🔥 FIX: Removed 'rounded-2xl' and 'overflow-hidden'. 
+                  This removes the sharp corner artifact. */}
+              <div className="relative w-full h-[300px] lg:h-[400px]">
+                <img 
+                  src="/lifts/1.webp" 
+                  alt="PowerBird Elevator Interior" 
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Gradient Masks - Increased sizes to h-32/w-32 for smoother blending */}
+                <div className={`absolute top-0 left-0 right-0 h-32 bg-gradient-to-b ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+                <div className={`absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+                <div className={`absolute top-0 right-0 bottom-0 w-32 bg-gradient-to-l ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+                <div className={`absolute top-0 left-0 bottom-0 w-12 bg-gradient-to-r ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+              </div>
+            </Reveal>
+
+          </div>
         </div>
       </section>
 

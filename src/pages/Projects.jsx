@@ -1,21 +1,18 @@
 import Reveal from '../components/Reveal'
 import { 
-  Building, 
-  MapPin, 
   Hotel, 
   Home, 
   Stethoscope, 
   ShoppingBag,
   Briefcase,
   Landmark,
-  CheckCircle2,
-  Box,
+  MapPin,
+  Zap,
   Moon,
   Sun
 } from 'lucide-react'
 
-// 🔥 STEP 1: Accept global theme props
-export default function Projects({ darkPreview, setDarkPreview }) {
+export default function Network({ darkPreview, setDarkPreview }) {
   
   // Data from Brochure Page 19 (Client List)
   const clients = [
@@ -46,11 +43,10 @@ export default function Projects({ darkPreview, setDarkPreview }) {
   ];
 
   return (
-    // 🔥 STEP 2: Main Wrapper with pt-18 & Theme Classes
     <div className={`pt-18 transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
 
-      {/* ================= GLOBAL TOGGLE BUTTON ================= */}
-      <div className="fixed bottom-6 right-6 z-40">
+      {/* ================= GLOBAL TOGGLE BUTTON (COMMENTED) ================= */}
+      {/* <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setDarkPreview(!darkPreview)} 
           className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900 text-white shadow-lg hover:bg-gray-800 transition text-sm font-semibold"
@@ -58,38 +54,68 @@ export default function Projects({ darkPreview, setDarkPreview }) {
           {darkPreview ? <Sun size={16} /> : <Moon size={16} />}
           {darkPreview ? 'Light View' : 'Dark View'}
         </button>
-      </div>
+      </div> */}
 
-      {/* ================= HERO ================= */}
+      {/* ================= HERO SECTION ================= */}
       <section 
-        className={`border-b transition-colors duration-300 ${
+        className={`border-b transition-colors duration-300 overflow-hidden relative ${
           darkPreview 
             ? 'bg-gray-950 text-white border-gray-800' 
             : 'bg-white text-gray-900 border-gray-200'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-20">
-          <Reveal>
-            <h1 className="text-4xl font-bold">
-              Our <span className="text-blue-500">Portfolio</span>
-            </h1>
-          </Reveal>
+        <div className="max-w-7xl mx-auto px-6 py-12 lg:py-16 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            
+            {/* LEFT: CONTENT */}
+            <Reveal>
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+                  Our <span className="text-blue-500">Reach & Portfolio</span>
+                </h1>
+                
+                {/* 🔥 NEW: Quote with Blue Line (Matches About Us) */}
+                <div className="mt-8 mb-6">
+                  <p className={`text-xl font-bold border-l-4 border-blue-500 pl-4  leading-relaxed ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
+                    "Trusted by over 400+ clients, delivering vertical reliability across the entire state."
+                  </p>
+                </div>
 
-          <Reveal delay={0.1}>
-            <p className={`mt-4 max-w-2xl text-lg ${darkPreview ? 'text-gray-300' : 'text-gray-600'}`}>
-              PowerBird elevators are currently operating in approximately 
-              <span className="font-bold text-blue-500"> 20 Cities</span> around the State. 
-              From luxury resorts to critical healthcare facilities, we deliver vertical reliability.
-            </p>
-          </Reveal>
+                <p className={`text-lg leading-relaxed ${darkPreview ? 'text-gray-300' : 'text-gray-600'}`}>
+                  PowerBird elevators are currently operating in approximately 
+                  <span className="font-bold text-blue-500"> 20 Cities</span> around Karnataka. 
+                  From luxury resorts to critical healthcare facilities, we are the backbone of vertical mobility.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* RIGHT: BLENDED IMAGE */}
+            <Reveal delay={0.2}>
+              <div className="relative w-full h-[300px] lg:h-[400px]">
+                <img 
+                  src="/projects/2.webp" 
+                  alt="PowerBird Portfolio" 
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Gradient Masks */}
+                <div className={`absolute top-0 left-0 right-0 h-32 bg-gradient-to-b ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+                <div className={`absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+                <div className={`absolute top-0 right-0 bottom-0 w-32 bg-gradient-to-l ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+                <div className={`absolute top-0 left-0 bottom-0 w-12 bg-gradient-to-r ${darkPreview ? 'from-gray-950' : 'from-white'} to-transparent`} />
+              </div>
+            </Reveal>
+
+          </div>
         </div>
       </section>
 
-      {/* ================= SECTORS (Page 3 of Brochure) ================= */}
-      <section className={`py-20 transition-colors duration-300 ${darkPreview ? 'bg-gray-950' : 'bg-white'}`}>
+      {/* ================= SECTORS ================= */}
+      {/* 🔥 TIGHTENED PADDING: py-12 */}
+      <section className={`py-12 transition-colors duration-300 ${darkPreview ? 'bg-gray-950' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
-            <h2 className={`text-3xl font-bold mb-12 text-center ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-3xl font-bold mb-8 text-center ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
               Sectors We Serve
             </h2>
           </Reveal>
@@ -123,100 +149,93 @@ export default function Projects({ darkPreview, setDarkPreview }) {
         </div>
       </section>
 
-      {/* ================= FEATURED DESIGNS (Brochure Pages 10-13) ================= */}
-      <section className={`py-24 transition-colors duration-300 ${darkPreview ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      {/* ================= FEATURED DESIGNS ================= */}
+      {/* 🔥 TIGHTENED PADDING: py-12 */}
+      <section className={`py-12 transition-colors duration-300 ${darkPreview ? 'bg-gray-900' : 'bg-gray-50'}`}>
          <div className="max-w-7xl mx-auto px-6">
             <Reveal>
-              <h2 className={`text-3xl font-bold mb-12 ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className={`text-3xl font-bold mb-10 ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
                 Project Gallery & Finishes
               </h2>
             </Reveal>
 
             <div className="grid md:grid-cols-3 gap-8">
-    {/* Card 1: S.S Cabins */}
-    <Reveal delay={0.1}>
-        <div className={`group rounded-xl overflow-hidden border ${darkPreview ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-200 shadow-sm'}`}>
-            <div className="h-48 bg-gray-800 relative overflow-hidden">
-                {/* IMAGE */}
-                <img 
-                    src="/projects/1.webp" 
-                    alt="Stainless Steel Series" 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                
-                {/* TEXT OVERLAY */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
-                    <p className="text-white font-bold">Stainless Steel Series</p>
-                </div>
-            </div>
-            <div className="p-6">
-                <p className={`text-sm ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Durable and elegant S.S. Hairline and Mirror finishes, ideal for commercial complexes and offices.
-                </p>
-            </div>
-        </div>
-    </Reveal>
+                {/* Card 1 */}
+                <Reveal delay={0.1}>
+                    <div className={`group rounded-xl overflow-hidden border ${darkPreview ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-200 shadow-sm'}`}>
+                        <div className="h-48 bg-gray-800 relative overflow-hidden">
+                            <img 
+                                src="/projects/1.webp" 
+                                alt="Stainless Steel Series" 
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                                <p className="text-white font-bold">Stainless Steel Series</p>
+                            </div>
+                        </div>
+                        <div className="p-6">
+                            <p className={`text-sm ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
+                                Durable and elegant S.S. Hairline and Mirror finishes, ideal for commercial complexes and offices.
+                            </p>
+                        </div>
+                    </div>
+                </Reveal>
 
-    {/* Card 2: Glass Cabins */}
-    <Reveal delay={0.2}>
-        <div className={`group rounded-xl overflow-hidden border ${darkPreview ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-200 shadow-sm'}`}>
-            <div className="h-48 bg-gray-800 relative overflow-hidden">
-                {/* IMAGE */}
-                <img 
-                    src="/projects/2.webp" 
-                    alt="Panoramic Glass Cabins" 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+                {/* Card 2 */}
+                <Reveal delay={0.2}>
+                    <div className={`group rounded-xl overflow-hidden border ${darkPreview ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-200 shadow-sm'}`}>
+                        <div className="h-48 bg-gray-800 relative overflow-hidden">
+                            <img 
+                                src="/projects/2.webp" 
+                                alt="Panoramic Glass Cabins" 
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                                <p className="text-white font-bold">Panoramic Glass Cabins</p>
+                            </div>
+                        </div>
+                        <div className="p-6">
+                            <p className={`text-sm ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
+                                Premium glass capsule lifts that enhance the architectural aesthetics of malls and hotels.
+                            </p>
+                        </div>
+                    </div>
+                </Reveal>
 
-                {/* TEXT OVERLAY */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
-                    <p className="text-white font-bold">Panoramic Glass Cabins</p>
-                </div>
+                {/* Card 3 */}
+                <Reveal delay={0.3}>
+                    <div className={`group rounded-xl overflow-hidden border ${darkPreview ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-200 shadow-sm'}`}>
+                        <div className="h-48 bg-gray-800 relative overflow-hidden">
+                            <img 
+                                src="/projects/3.webp" 
+                                alt="Hospital & Care" 
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                                <p className="text-white font-bold">Hospital & Care</p>
+                            </div>
+                        </div>
+                        <div className="p-6">
+                            <p className={`text-sm ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
+                                Spacious, jerk-free stretcher lifts designed for patient safety and medical efficiency.
+                            </p>
+                        </div>
+                    </div>
+                </Reveal>
             </div>
-            <div className="p-6">
-                <p className={`text-sm ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Premium glass capsule lifts that enhance the architectural aesthetics of malls and hotels.
-                </p>
-            </div>
-        </div>
-    </Reveal>
-
-    {/* Card 3: Hospital/Stretcher */}
-    <Reveal delay={0.3}>
-        <div className={`group rounded-xl overflow-hidden border ${darkPreview ? 'bg-gray-950 border-gray-800' : 'bg-white border-gray-200 shadow-sm'}`}>
-            <div className="h-48 bg-gray-800 relative overflow-hidden">
-                {/* IMAGE */}
-                <img 
-                    src="/projects/3.webp" 
-                    alt="Hospital & Care" 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-
-                {/* TEXT OVERLAY */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
-                    <p className="text-white font-bold">Hospital & Care</p>
-                </div>
-            </div>
-            <div className="p-6">
-                <p className={`text-sm ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Spacious, jerk-free stretcher lifts designed for patient safety and medical efficiency.
-                </p>
-            </div>
-        </div>
-    </Reveal>
-</div>
          </div>
       </section>
 
-      {/* ================= NETWORK VISUALIZATION (Geographically Accurate Karnataka) ================= */}
-      <section className={`py-24 relative overflow-hidden transition-colors duration-300 ${darkPreview ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      {/* ================= NETWORK VISUALIZATION ================= */}
+      {/* 🔥 TIGHTENED PADDING: py-12 */}
+      <section className={`py-12 relative overflow-hidden transition-colors duration-300 ${darkPreview ? 'bg-gray-900' : 'bg-gray-50'}`}>
         
         {/* Background Grid */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
              style={{ backgroundImage: `linear-gradient(${darkPreview ? '#ffffff' : '#000000'} 1px, transparent 1px), linear-gradient(90deg, ${darkPreview ? '#ffffff' : '#000000'} 1px, transparent 1px)`, backgroundSize: '50px 50px' }}>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-8 items-center">
           
           {/* Text Content */}
           <Reveal>
@@ -256,7 +275,7 @@ export default function Projects({ darkPreview, setDarkPreview }) {
 
           {/* ================= KARNATAKA CONSTELLATION MAP ================= */}
           <Reveal delay={0.2}>
-            <div className="relative w-full aspect-[3/4] max-w-lg mx-auto select-none">
+            <div className="relative w-full aspect-[3/4] max-w-3xl mx-auto select-none"> 
               
               {/* The SVG Container */}
               <svg className="w-full h-full filter drop-shadow-2xl" viewBox="0 0 600 750" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -276,50 +295,20 @@ export default function Projects({ darkPreview, setDarkPreview }) {
                   </filter>
                 </defs>
 
-                {/* COORDINATES (Relative 600x750 Canvas)
-                   Belgaum: 150, 80
-                   Ballari: 480, 250
-                   Mangalore: 120, 600
-                   Bangalore: 450, 620
-                   Sirsi (HQ): 160, 320 
-                   Karwar: 80, 290
-                   Hubli: 220, 200 
-                   Shimoga: 240, 420 
-                   Davangere: 320, 320 
-                */}
-
-                {/* === CONNECTING LINES (Static Infrastructure) === */}
+                {/* === CONNECTING LINES === */}
                 <g className={`stroke-2 ${darkPreview ? 'stroke-gray-800' : 'stroke-gray-300'}`} strokeLinecap="round" strokeLinejoin="round">
-                  {/* Path 1: Coastal (Sirsi -> Karwar -> Mangalore) */}
                   <path d="M160 320 L80 290 L120 600" fill="none" />
-                  
-                  {/* Path 2: Northern (Sirsi -> Hubli -> Belgaum) */}
                   <path d="M160 320 L220 200 L150 80" fill="none" />
-                  
-                  {/* Path 3: Eastern (Hubli -> Davangere -> Ballari) */}
                   <path d="M220 200 L320 320 L480 250" fill="none" />
-                  
-                  {/* Path 4: Metro Link (Sirsi -> Shimoga -> Bangalore) */}
                   <path d="M160 320 L240 420 L450 620" fill="none" />
-                  
-                  {/* Path 5: Southern Cross (Mangalore -> Bangalore) */}
                   <path d="M120 600 L450 620" fill="none" />
                 </g>
 
-                {/* === ANIMATED SIGNALS (Moving Lights) === */}
-                {/* 🔥 FIX: These paths MUST match the Static Lines exactly to track perfectly */}
+                {/* === ANIMATED SIGNALS === */}
                 <g stroke="url(#signalGradient)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" filter="url(#glowEffect)">
-                  
-                  {/* Signal 1: HQ to Metro (Sirsi -> Shimoga -> Bangalore) */}
                   <path d="M160 320 L240 420 L450 620" className="animate-draw-line" fill="none" style={{animationDuration: '3s'}} />
-                  
-                  {/* Signal 2: North to HQ (Belgaum -> Hubli -> Sirsi) */}
                   <path d="M150 80 L220 200 L160 320" className="animate-draw-line" fill="none" style={{animationDuration: '4s', animationDelay: '1s'}} />
-                  
-                  {/* Signal 3: Coastal Sweep (Karwar -> Mangalore) */}
                   <path d="M160 320 L80 290 L120 600" className="animate-draw-line" fill="none" style={{animationDuration: '3.5s', animationDelay: '0.5s'}} />
-                  
-                  {/* Signal 4: East Link (Hubli -> Ballari) */}
                   <path d="M220 200 L320 320 L480 250" className="animate-draw-line" fill="none" style={{animationDuration: '2.5s', animationDelay: '2s'}} />
                 </g>
 
@@ -336,7 +325,6 @@ export default function Projects({ darkPreview, setDarkPreview }) {
                   { x: 120, y: 600, name: "Mangalore" },
                 ].map((city, i) => (
                   <g key={i} className="group cursor-pointer">
-                    {/* Node Dot (Removed blue pulse circle) */}
                     <circle 
                       cx={city.x} 
                       cy={city.y} 
@@ -345,8 +333,6 @@ export default function Projects({ darkPreview, setDarkPreview }) {
                       stroke={darkPreview ? "#111827" : "#ffffff"}
                       strokeWidth="2"
                     />
-                    
-                    {/* Label Tag */}
                     <g className={`transition-all duration-300 ${city.main ? 'opacity-100' : 'opacity-60 group-hover:opacity-100'}`}>
                       <rect 
                         x={city.x + 12} 
@@ -354,8 +340,7 @@ export default function Projects({ darkPreview, setDarkPreview }) {
                         width={city.name.length * 7 + 12} 
                         height="24" 
                         rx="4" 
-                        fill={darkPreview ? "rgba(17, 24, 39, 0.8)" : "rgba(255, 255, 255, 0.8)"} 
-                        className="backdrop-blur-sm"
+                        fill={darkPreview ? "rgba(17, 24, 39, 0.95)" : "rgba(255, 255, 255, 0.95)"} 
                       />
                       <text 
                         x={city.x + 18} 
@@ -378,11 +363,12 @@ export default function Projects({ darkPreview, setDarkPreview }) {
       </section>
 
       {/* ================= NOTABLE CLIENTS (Page 19) ================= */}
-      <section className={`py-24 relative overflow-hidden transition-colors duration-300 ${darkPreview ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      {/* 🔥 TIGHTENED PADDING: py-12 */}
+      <section className={`py-12 relative overflow-hidden transition-colors duration-300 ${darkPreview ? 'bg-gray-900' : 'bg-gray-50'}`}>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <Reveal>
-            <div className="mb-12 border-l-4 border-blue-500 pl-6">
+            <div className="mb-8 border-l-4 border-blue-500 pl-6">
               <h2 className={`text-3xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>Trusted Clientele</h2>
               <p className={`mt-2 ${darkPreview ? 'text-gray-400' : 'text-gray-500'}`}>Selected projects from our diverse portfolio</p>
             </div>

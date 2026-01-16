@@ -9,7 +9,6 @@ export default function Navbar({ showLogo, darkPreview = true }) {
   const [open, setOpen] = useState(false)
   const [quoteOpen, setQuoteOpen] = useState(false)
   
-  // Smart Scroll State
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [hoveredIndex, setHoveredIndex] = useState(null)
@@ -21,7 +20,7 @@ export default function Navbar({ showLogo, darkPreview = true }) {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
-    { name: 'Projects', path: '/projects' },
+    { name: 'Network', path: '/network' },
     { name: 'Contact', path: '/contact' }
   ]
 
@@ -29,7 +28,6 @@ export default function Navbar({ showLogo, darkPreview = true }) {
   useEffect(() => {
     const controlNavbar = () => {
       const currentScrollY = window.scrollY
-
       if (currentScrollY === 0) {
         setIsVisible(true)
       } else if (currentScrollY > lastScrollY) {
@@ -39,7 +37,6 @@ export default function Navbar({ showLogo, darkPreview = true }) {
       }
       setLastScrollY(currentScrollY)
     }
-
     window.addEventListener('scroll', controlNavbar)
     return () => window.removeEventListener('scroll', controlNavbar)
   }, [lastScrollY, open])
@@ -51,7 +48,6 @@ export default function Navbar({ showLogo, darkPreview = true }) {
 
   return (
     <>
-      {/* ================= HEADER WRAPPER ================= */}
       <header 
         className={`
           fixed top-0 left-0 w-full z-40 
@@ -66,8 +62,15 @@ export default function Navbar({ showLogo, darkPreview = true }) {
             className="flex-shrink-0 flex items-center h-10 cursor-pointer relative z-50"
             onClick={handleLogoClick}
           >
-            {/* FIXED: Passing 'dark={darkPreview}' so the logo switches image files */}
-            {showLogo && <BrandLogo size="sm" dark={darkPreview} />}
+            {/* 🔥 FIX: Only animate on Home Page ('/'). 
+                On other pages, pass disableAnimation={true} so it stays static. */}
+            {showLogo && (
+              <BrandLogo 
+                size="sm" 
+                dark={darkPreview} 
+                disableAnimation={location.pathname !== '/'} 
+              />
+            )}
           </div>
 
           {/* DESKTOP NAV */}
@@ -82,7 +85,6 @@ export default function Navbar({ showLogo, darkPreview = true }) {
           >
             {navLinks.map((item, index) => {
               const isActive = location.pathname === item.path
-              
               const textColor = isActive 
                 ? 'text-black font-bold' 
                 : 'text-gray-800 font-medium hover:text-black'
@@ -95,18 +97,20 @@ export default function Navbar({ showLogo, darkPreview = true }) {
                   className={`relative px-5 py-2 text-sm transition-colors duration-200 z-10 ${textColor}`}
                 >
                   {item.name}
-                  
                   {hoveredIndex === index && (
                     <motion.span
-                      layoutId="nav-pill"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
                       className="absolute inset-0 rounded-full -z-10 bg-white/60 shadow-sm border border-white/50"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
-
                   {isActive && !hoveredIndex && (
                     <motion.span 
-                      layoutId="active-dot"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-600 rounded-full box-content border-2 border-white/20"
                     />
                   )}
@@ -129,20 +133,14 @@ export default function Navbar({ showLogo, darkPreview = true }) {
                 <span className="relative z-10 flex items-center gap-2 group-hover:gap-3 transition-all">
                   Get a Quote <ChevronRight size={14} />
                 </span>
-                
                 {darkPreview && (
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-gray-300 opacity-0 group-hover:opacity-100 transition-opacity" />
                 )}
               </button>
             </div>
 
-            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setOpen(true)}
-              /* FIXED: Switched colors explicitly.
-                 - If darkPreview (Dark Mode): Text is White.
-                 - If !darkPreview (Light Mode): Text is Black (text-black), BG is Light Gray (bg-gray-100).
-              */
               className={`md:hidden p-2 rounded-full transition backdrop-blur-md ${
                 darkPreview 
                   ? 'text-white bg-white/10 border border-white/10 hover:bg-white/20' 
@@ -156,7 +154,6 @@ export default function Navbar({ showLogo, darkPreview = true }) {
         </div>
       </header>
 
-      {/* ================= MOBILE DRAWER ================= */}
       <AnimatePresence>
         {open && (
           <>

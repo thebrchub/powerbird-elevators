@@ -5,7 +5,7 @@ import MainLayout from './layout/MainLayout'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
-import Projects from './pages/Projects'
+import Network from './pages/Projects'
 import Contact from './pages/Contact'
 import LiftIntro from './components/LiftIntro'
 
@@ -77,9 +77,9 @@ function App() {
             }
           />
           <Route
-            path="/projects"
+            path="/network"
             element={
-              <Projects
+              <Network
                 darkPreview={darkPreview}
                 setDarkPreview={setDarkPreview}
               />

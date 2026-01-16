@@ -1,10 +1,19 @@
+import { useState } from 'react' // Import useState
 import { useNavigate } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import { MousePointer2, Settings, TrendingUp, ArrowRight } from 'lucide-react'
 
+// Import the new Modals
+import InstallationModal from '../modals/InstallationModal'
+import MaintenanceModal from '../modals/MaintenanceModal'
+import ModernizationModal from '../modals/ModernizationModal'
+
 export default function CoreCapabilities({ darkPreview }) {
   
   const navigate = useNavigate()
+  
+  // State to track which modal is active (null means none)
+  const [activeModal, setActiveModal] = useState(null)
 
   const services = [
     { 
@@ -12,21 +21,24 @@ export default function CoreCapabilities({ darkPreview }) {
       title: 'Installation', 
       desc: 'Turnkey installation for residential & commercial towers.', 
       img: '/core/5.webp', 
-      icon: <MousePointer2 className="w-6 h-6" /> 
+      icon: <MousePointer2 className="w-6 h-6" />,
+      modalId: 'installation' // Mapping ID
     },
     { 
       id: '02',
       title: 'Maintenance', 
       desc: 'Predictive AMC protocols to prevent breakdowns.', 
       img: '/core/6.webp', 
-      icon: <Settings className="w-6 h-6" /> 
+      icon: <Settings className="w-6 h-6" />,
+      modalId: 'maintenance'
     },
     { 
       id: '03',
       title: 'Modernization', 
       desc: 'Retrofitting aging systems with modern drive technology.', 
       img: '/core/7.webp',
-      icon: <TrendingUp className="w-6 h-6" /> 
+      icon: <TrendingUp className="w-6 h-6" />,
+      modalId: 'modernization'
     },
   ]
 
@@ -60,11 +72,8 @@ export default function CoreCapabilities({ darkPreview }) {
           {services.map((service, i) => (
             <Reveal key={i} delay={i * 0.1}>
               <div
-                onClick={() => navigate('/services')}
-                /* 🔥 TWEAK 1: Outer Container
-                   - Changed 'p-2' to 'p-1' (This makes the border thinner: 4px)
-                   - Kept 'rounded-[2.5rem]'
-                */
+                // 🔥 UPDATE: Set active modal instead of navigating
+                onClick={() => setActiveModal(service.modalId)}
                 className={`
                   group relative cursor-pointer p-1 rounded-[2.5rem] transition-all duration-500
                   ${darkPreview 
@@ -73,10 +82,6 @@ export default function CoreCapabilities({ darkPreview }) {
                   }
                 `}
               >
-                {/* 🔥 TWEAK 2: Inner Container
-                   - Changed 'rounded-[2rem]' to 'rounded-[2.25rem]' 
-                   - This ensures the inner curve is parallel to the outer curve with the new thinner gap.
-                */ }
                 <div className="relative h-[400px] w-full rounded-[2.25rem] overflow-hidden">
                   
                   {/* BACKGROUND IMAGE */}
@@ -92,12 +97,10 @@ export default function CoreCapabilities({ darkPreview }) {
                   {/* CONTENT OVERLAY */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     
-                    {/* Floating Number */}
                     <div className="absolute top-6 right-6 text-6xl font-black text-white/10 select-none group-hover:text-white/20 transition-colors">
                       {service.id}
                     </div>
 
-                    {/* Icon Badge */}
                     <div className="mb-4 w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-600/30 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                       {service.icon}
                     </div>
@@ -110,7 +113,6 @@ export default function CoreCapabilities({ darkPreview }) {
                       {service.desc}
                     </p>
 
-                    {/* Arrow Link */}
                     <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-blue-400 group-hover:text-white transition-colors">
                       <span>View Details</span>
                       <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-2" />
@@ -140,6 +142,25 @@ export default function CoreCapabilities({ darkPreview }) {
                 </button>
             </div>
         </Reveal>
+
+        {/* ================= MODALS RENDERED HERE ================= */}
+        <InstallationModal 
+          isOpen={activeModal === 'installation'} 
+          onClose={() => setActiveModal(null)} 
+          darkPreview={darkPreview} 
+        />
+        
+        <MaintenanceModal 
+          isOpen={activeModal === 'maintenance'} 
+          onClose={() => setActiveModal(null)} 
+          darkPreview={darkPreview} 
+        />
+        
+        <ModernizationModal 
+          isOpen={activeModal === 'modernization'} 
+          onClose={() => setActiveModal(null)} 
+          darkPreview={darkPreview} 
+        />
 
       </div>
     </section>
