@@ -1,30 +1,21 @@
 import { X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useLayoutEffect, useState } from 'react' // CHANGE: Import useLayoutEffect
+import { useLayoutEffect } from 'react'
 
-export default function ModalShell({ open, onClose, title, children }) {
+export default function ModalShell({ open, onClose, title, children, darkPreview }) {
   
-  // We use useLayoutEffect so the padding is added BEFORE the screen updates.
-  // This eliminates the visual "jump" completely.
+  // ================= SCROLL LOCK LOGIC (UNTOUCHED) =================
   useLayoutEffect(() => {
     if (open) {
-      // 1. Calculate the real width of the scrollbar
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
-      
-      // 2. Add padding to body to fill the gap immediately
       document.body.style.paddingRight = `${scrollbarWidth}px`
-      
-      // 3. Lock the body
       document.body.style.overflow = 'hidden'
       document.body.classList.add('modal-open') 
     } else {
-      // RESET
       document.body.style.paddingRight = ''
       document.body.style.overflow = ''
       document.body.classList.remove('modal-open')
     }
-
-    // Cleanup ensures we don't leave the style if component unmounts
     return () => { 
       document.body.style.paddingRight = ''
       document.body.style.overflow = ''
@@ -32,25 +23,59 @@ export default function ModalShell({ open, onClose, title, children }) {
     }
   }, [open])
 
+  // ================= 🔥 STYLING LOGIC =================
+
+  // 1. Premium Custom Scrollbar Styles (Dynamic based on theme)
+  const scrollbarStyles = `
+    .premium-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .premium-scrollbar::-webkit-scrollbar-track {
+      background: ${darkPreview ? '#111827' : '#f3f4f6'};
+      border-radius: 8px;
+    }
+    .premium-scrollbar::-webkit-scrollbar-thumb {
+      background-color: ${darkPreview ? '#374151' : '#d1d5db'};
+      border-radius: 8px;
+      border: 2px solid ${darkPreview ? '#111827' : '#f3f4f6'};
+    }
+    .premium-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: ${darkPreview ? '#4b5563' : '#9ca3af'};
+    }
+  `
+
+  // 2. Global Input Styles (Fixes the "White Text on White Input" issue)
+  // This forces all child inputs/textareas to adapt to the modal theme automatically.
+  const darkFormStyles = "[&_input]:bg-gray-800 [&_input]:border-gray-700 [&_input]:text-white [&_input]:placeholder-gray-500 [&_textarea]:bg-gray-800 [&_textarea]:border-gray-700 [&_textarea]:text-white [&_textarea]:placeholder-gray-500 [&_select]:bg-gray-800 [&_select]:border-gray-700 [&_select]:text-white";
+  
+  const lightFormStyles = "[&_input]:bg-gray-50 [&_input]:border-gray-200 [&_input]:text-gray-900 [&_textarea]:bg-gray-50 [&_textarea]:border-gray-200 [&_textarea]:text-gray-900 [&_select]:bg-gray-50 [&_select]:border-gray-200 [&_select]:text-gray-900";
+
   return (
     <AnimatePresence>
       {open && (
         <motion.div
           className="fixed inset-0 z-[9999] flex items-center justify-center px-4"
-          initial={{ opacity: 0 }}     // Starts transparent
-          animate={{ opacity: 1 }}     // Fades into blur smoothly
-          exit={{ opacity: 0 }}        // Fades out
-          transition={{ duration: 0.2 }} // Fast but smooth transition
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
         >
-          {/* BACKDROP with Blur */}
+          {/* Inject Scrollbar Styles */}
+          <style>{scrollbarStyles}</style>
+
+          {/* BACKDROP - Darkened for Premium Feel */}
           <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             onClick={onClose}
           />
 
           {/* MODAL CONTENT */}
           <motion.div
-            className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+            className={`relative w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border
+              ${darkPreview 
+                ? `bg-gray-950 border-white/10 text-white ${darkFormStyles}` 
+                : `bg-white border-gray-100 text-gray-900 ${lightFormStyles}`
+              }`}
             initial={{ scale: 0.95, opacity: 0, y: 10 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 10 }}
@@ -58,18 +83,28 @@ export default function ModalShell({ open, onClose, title, children }) {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-gray-50/50">
-              <h3 className="text-lg font-bold text-gray-900">{title}</h3>
+            <div className={`flex items-center justify-between px-6 py-4 border-b 
+              ${darkPreview ? 'border-white/5 bg-white/5' : 'border-gray-100 bg-gray-50/50'}`}>
+              
+              <h3 className={`text-lg font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
+                {title}
+              </h3>
+              
               <button 
                 onClick={onClose}
-                className="p-2 rounded-full bg-gray-100 text-gray-500 hover:bg-red-100 hover:text-red-600 transition-colors"
+                className={`p-2 rounded-full transition-colors
+                  ${darkPreview 
+                    ? 'bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white' 
+                    : 'bg-gray-100 text-gray-500 hover:bg-red-100 hover:text-red-600'
+                  }`}
               >
                 <X size={20} />
               </button>
             </div>
 
             {/* Body */}
-            <div className="p-6 overflow-y-auto custom-scrollbar">
+            <div className={`p-6 overflow-y-auto premium-scrollbar leading-relaxed 
+              ${darkPreview ? 'text-gray-300' : 'text-gray-600'}`}>
               {children}
             </div>
           </motion.div>

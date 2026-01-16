@@ -245,7 +245,8 @@ export default function About({ darkPreview, setDarkPreview }) {
 
             {/* CARD 1 */}
             <Reveal delay={0.1}>
-              <div className={`border p-8 rounded-lg flex flex-col sm:flex-row items-start gap-6 hover:border-blue-500 transition-colors duration-300
+              {/* 🔥 FIX: Added 'h-full' to make cards equal height */}
+              <div className={`border p-8 rounded-lg flex flex-col sm:flex-row items-start gap-6 hover:border-blue-500 transition-colors duration-300 h-full
                 ${darkPreview 
                   ? 'bg-gray-900 border-gray-800' 
                   : 'bg-white border-gray-200 shadow-sm'
@@ -274,7 +275,8 @@ export default function About({ darkPreview, setDarkPreview }) {
 
             {/* CARD 2 */}
             <Reveal delay={0.2}>
-              <div className={`border p-8 rounded-lg flex flex-col sm:flex-row items-start gap-6 hover:border-blue-500 transition-colors duration-300
+              {/* 🔥 FIX: Added 'h-full' to make cards equal height */}
+              <div className={`border p-8 rounded-lg flex flex-col sm:flex-row items-start gap-6 hover:border-blue-500 transition-colors duration-300 h-full
                 ${darkPreview 
                   ? 'bg-gray-900 border-gray-800' 
                   : 'bg-white border-gray-200 shadow-sm'
@@ -297,7 +299,7 @@ export default function About({ darkPreview, setDarkPreview }) {
         </div>
       </section>
 
-      {/* ================= OPERATIONAL STANDARDS ================= */}
+      {/* ================= OPERATIONAL STANDARDS (FIXED EQUAL HEIGHT) ================= */}
       <section className={`py-24 transition-colors duration-300 ${darkPreview ? 'bg-gray-950' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -328,7 +330,8 @@ export default function About({ darkPreview, setDarkPreview }) {
               },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className={`group border p-8 rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300
+                {/* 🔥 FIX: Added 'h-full' to make cards equal height */}
+                <div className={`group border p-8 rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full
                   ${darkPreview 
                     ? 'bg-gray-900 border-gray-800 hover:border-gray-700' 
                     : 'bg-white border-gray-200'
