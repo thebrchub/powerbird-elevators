@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState } from 'react' // Removed useEffect as it was only used for dark theme
 
 import MainLayout from './layout/MainLayout'
 import Home from './pages/Home'
@@ -7,93 +7,71 @@ import About from './pages/About'
 import Services from './pages/Services'
 import Network from './pages/Projects'
 import Contact from './pages/Contact'
+import NotFound from './components/NotFound';
 import LiftIntro from './components/LiftIntro'
+import Navbar from './components/Navbar'
 
 function App() {
-  // 1. Theme State
-  const [darkPreview, setDarkPreview] = useState(false)
+  // Removed darkPreview state and useEffect
 
-  // 2. Lift Intro State
-  // We check sessionStorage so it remembers if it played already.
-  // If you want it to play on EVERY refresh, change this to: useState(false)
+  // Sync state with storage for Lift Intro
   const [isIntroDone, setIsIntroDone] = useState(() => {
-    return sessionStorage.getItem('liftPlayed') === 'true'
+    return sessionStorage.getItem('powerbird_intro_shown') === 'true'
   })
 
-  // 3. Theme Effect
-  useEffect(() => {
-    if (darkPreview) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [darkPreview])
-
-  // 4. Handler for when Lift finishes
   const handleIntroFinish = () => {
     setIsIntroDone(true)
-    sessionStorage.setItem('liftPlayed', 'true') // Save state so it doesn't replay
+    sessionStorage.setItem('powerbird_intro_shown', 'true') 
   }
 
   return (
     <BrowserRouter>
-      {/* GLOBAL LIFT INTRO
-          We render this conditionally BEFORE the MainLayout.
-          It is independent of routes now.
+      {/* Lift Intro (Unconditional Render) */}
+      <LiftIntro onFinish={handleIntroFinish} />
+      
+      {/* Navbar:
+          - showLogo={true}: Ensures logo is always mounted to catch the flying animation.
+          - Removed darkPreview prop (Defaults to light/cleaned in component).
       */}
-      {!isIntroDone && <LiftIntro onFinish={handleIntroFinish} />}
+      <Navbar showLogo={true} />
 
-      {/* Pass isIntroDone to MainLayout. 
-          This ensures the Navbar logo only appears AFTER the lift is done.
-      */}
-      <MainLayout showNavbarLogo={isIntroDone} darkPreview={darkPreview}>
+      <MainLayout showNavbarLogo={isIntroDone}>
         <Routes>
           <Route
             path="/"
             element={
               <Home
-                // Removed onIntroComplete since App handles it now
-                darkPreview={darkPreview}
-                setDarkPreview={setDarkPreview}
+                // Pass isIntroDone if Home needs to delay its own animations
+                isIntroDone={isIntroDone} 
+                // Removed darkPreview props
               />
             }
           />
           <Route
             path="/about"
             element={
-              <About
-                darkPreview={darkPreview}
-                setDarkPreview={setDarkPreview}
-              />
+              <About />
             }
           />
           <Route
             path="/services"
             element={
-              <Services
-                darkPreview={darkPreview}
-                setDarkPreview={setDarkPreview}
-              />
+              <Services />
             }
           />
-          <Route
+          {/* <Route
             path="/network"
             element={
-              <Network
-                darkPreview={darkPreview}
-                setDarkPreview={setDarkPreview}
-              />
+              <Network />
             }
-          />
+          /> */}
           <Route
             path="/contact"
             element={
-              <Contact
-                darkPreview={darkPreview}
-                setDarkPreview={setDarkPreview}
-              />
+              <Contact />
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>

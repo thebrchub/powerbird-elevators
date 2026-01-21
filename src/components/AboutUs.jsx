@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 
 export default function AboutUs({ darkPreview }) {
-const navigate = useNavigate()
+  const navigate = useNavigate()
+  
   return (
     <section 
       /* 🔥 FIX: Added 'shadow-xl' to match the depth of the Why Us section */
@@ -51,11 +52,14 @@ const navigate = useNavigate()
               Engineering the Future of <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Vertical Transportation</span>
             </h2>
+            
             <p className={`text-lg leading-relaxed mb-6 ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
               At PowerBird Elevators, we don't just install lifts; we engineer movement. 
-              As an ISO 9001:2015 certified company authorized by the Government of Karnataka, 
-              we combine precision engineering with safety-first protocols to deliver reliable 
-              vertical mobility solutions.
+              We are proud to be the <span className={`font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>First and Best Elevator Company in the entire North Canara (Uttar Kannada) region.</span>
+            </p>
+
+            <p className={`text-lg leading-relaxed mb-6 ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
+               Authorized by the Government of Karnataka, we combine precision mechanical engineering with AI-integrated control systems to deliver vertical mobility solutions that define safety and reliability.
             </p>
           </Reveal>
 
@@ -79,8 +83,8 @@ const navigate = useNavigate()
           <Reveal delay={0.3}>
             <button 
                 onClick={() => {
-                navigate('/about')
-                window.scrollTo(0, 0) // Ensures the new page starts at the top
+                  navigate('/about')
+                  window.scrollTo(0, 0) // Ensures the new page starts at the top
                 }}
                 className={`
                 group flex items-center gap-2 px-6 py-3 rounded-lg font-bold border transition-all

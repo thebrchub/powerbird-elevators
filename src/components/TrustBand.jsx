@@ -70,7 +70,7 @@ export default function TrustBand({ darkPreview }) {
                 </p>
               </div>
               <p className={`text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-b ${darkPreview ? 'from-white to-gray-300' : 'from-gray-900 to-gray-600'}`}>
-                <Counter from={0} to={10} duration={2} />+ Years
+                <Counter from={0} to={12} duration={2} />+ Years
               </p>
             </div>
 
@@ -88,7 +88,10 @@ export default function TrustBand({ darkPreview }) {
             </div>
 
             {/* 4. Emergency */}
-            <div className="group flex flex-col items-center justify-center p-6 relative overflow-hidden">
+            <a 
+              href="tel:+918762373939"
+              className="group flex flex-col items-center justify-center p-6 relative overflow-hidden cursor-pointer"
+            >
               <div className={`absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
               <div className="flex items-center space-x-2 mb-2 relative z-10">
                 <div className="relative flex h-2 w-2">
@@ -108,8 +111,7 @@ export default function TrustBand({ darkPreview }) {
               >
                 24/7 Support
               </p>
-            </div>
-
+            </a>
             {/* 5. Govt Authorized */}
             <div className="group flex flex-col items-center justify-center p-6 col-span-2 md:col-span-1 transition-colors hover:bg-white/5">
               <div className="flex items-center space-x-2 mb-2">

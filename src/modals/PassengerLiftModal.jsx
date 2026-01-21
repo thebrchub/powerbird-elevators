@@ -19,21 +19,26 @@ export default function PassengerLiftModal({ isOpen, onClose, darkPreview }) {
 
   return (
     <BaseModal isOpen={isOpen} onClose={onClose} darkPreview={darkPreview}>
-      {/* 1. 'items-start' ensures the columns align to the top, which is needed for sticky to work.
-         2. 'gap-8' and 'grid-cols-2' matches the Capsule modal exactly.
+      
+      {/* 🔥 FIX: Removed 'items-start'. 
+          This allows the grid columns to 'stretch' to the full height of the content. 
       */}
-      <div className="grid md:grid-cols-2 gap-8 items-start">
+      <div className="grid md:grid-cols-2 gap-8">
         
         {/* ================= LEFT COL: IMAGE ================= */}
-        {/* 'sticky top-0' keeps it locked in place while the right side scrolls */}
-        <div className="md:sticky md:top-0">
-            <div className="aspect-[3/4] rounded-xl overflow-hidden">
-             <img 
-               src="/lifts/1.webp" 
-               alt="Passenger Elevator" 
-               className="w-full h-full object-cover"
-             />
-            </div>
+        {/* This outer div stretches to the full height of the modal content */}
+        <div> 
+           {/* This inner div sticks to the top of the tall parent column */}
+           {/* Added 'top-6' for a bit of breathing room from the top edge */}
+           <div className="md:sticky md:top-6">
+              <div className="aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
+               <img 
+                 src="/lifts/1.webp" 
+                 alt="Passenger Elevator" 
+                 className="w-full h-full object-cover"
+               />
+              </div>
+           </div>
         </div>
 
         {/* ================= RIGHT COL: CONTENT ================= */}
@@ -100,8 +105,8 @@ export default function PassengerLiftModal({ isOpen, onClose, darkPreview }) {
                 {liftSpecs.map((spec, index) => (
                   <li key={index} className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 gap-2
                     ${darkPreview 
-                        ? index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800/30' 
-                        : index % 2 === 0 ? 'bg-white' : 'bg-gray-50' 
+                      ? index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800/30' 
+                      : index % 2 === 0 ? 'bg-white' : 'bg-gray-50' 
                      }
                   `}>
                     <span className={`flex items-center gap-2 font-medium shrink-0 ${darkPreview ? 'text-gray-300' : 'text-gray-700'}`}>

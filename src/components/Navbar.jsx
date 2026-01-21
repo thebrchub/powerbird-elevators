@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import BrandLogo from './BrandLogo'
 import DownloadQuoteModal from './DownloadQuoteModal'
 
-export default function Navbar({ showLogo, darkPreview = true }) {
+// 🔥 Removed 'darkPreview' prop since we are Light-Only now
+export default function Navbar({ showLogo }) {
   const [open, setOpen] = useState(false)
   const [quoteOpen, setQuoteOpen] = useState(false)
   
@@ -20,7 +21,7 @@ export default function Navbar({ showLogo, darkPreview = true }) {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
-    { name: 'Network', path: '/network' },
+    // { name: 'Network', path: '/network' },
     { name: 'Contact', path: '/contact' }
   ]
 
@@ -62,12 +63,10 @@ export default function Navbar({ showLogo, darkPreview = true }) {
             className="flex-shrink-0 flex items-center h-10 cursor-pointer relative z-50"
             onClick={handleLogoClick}
           >
-            {/* 🔥 FIX: Only animate on Home Page ('/'). 
-                On other pages, pass disableAnimation={true} so it stays static. */}
+            {/* Removed dark prop. Default BrandLogo handles it. */}
             {showLogo && (
               <BrandLogo 
                 size="sm" 
-                dark={darkPreview} 
                 disableAnimation={location.pathname !== '/'} 
               />
             )}
@@ -85,6 +84,7 @@ export default function Navbar({ showLogo, darkPreview = true }) {
           >
             {navLinks.map((item, index) => {
               const isActive = location.pathname === item.path
+              // Always use dark text for active/hover states in Light Mode
               const textColor = isActive 
                 ? 'text-black font-bold' 
                 : 'text-gray-800 font-medium hover:text-black'
@@ -124,28 +124,19 @@ export default function Navbar({ showLogo, darkPreview = true }) {
             <div className="hidden md:block">
               <button
                 onClick={() => setQuoteOpen(true)}
-                className={`group relative px-6 py-2.5 rounded-full text-sm font-bold overflow-hidden transition-transform active:scale-95 shadow-lg ${
-                  darkPreview 
-                    ? 'bg-white text-black hover:shadow-white/20' 
-                    : 'bg-red-600 text-white hover:shadow-red-600/30'
-                }`}
+                // 🔥 FIX: Hardcoded Red Style for Light Mode Only
+                className="group relative px-6 py-2.5 rounded-full text-sm font-bold overflow-hidden transition-transform active:scale-95 shadow-lg bg-red-600 text-white hover:shadow-red-600/30"
               >
                 <span className="relative z-10 flex items-center gap-2 group-hover:gap-3 transition-all">
                   Get a Quote <ChevronRight size={14} />
                 </span>
-                {darkPreview && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-gray-300 opacity-0 group-hover:opacity-100 transition-opacity" />
-                )}
               </button>
             </div>
 
             <button
               onClick={() => setOpen(true)}
-              className={`md:hidden p-2 rounded-full transition backdrop-blur-md ${
-                darkPreview 
-                  ? 'text-white bg-white/10 border border-white/10 hover:bg-white/20' 
-                  : 'text-black bg-gray-100 border border-gray-300 hover:bg-gray-200'
-              }`}
+              // 🔥 FIX: Light Mode Mobile Menu Button
+              className="md:hidden p-2 rounded-full transition backdrop-blur-md text-black bg-gray-100 border border-gray-300 hover:bg-gray-200"
             >
               <Menu size={24} />
             </button>
@@ -164,6 +155,7 @@ export default function Navbar({ showLogo, darkPreview = true }) {
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
             />
+            {/* Mobile Menu Sidebar - Kept dark background for contrast, can change to white if preferred */}
             <motion.aside
               className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-[#0a0a0a] border-l border-white/10 z-[70] shadow-2xl flex flex-col"
               initial={{ x: '100%' }}
