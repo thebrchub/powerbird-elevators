@@ -33,7 +33,7 @@ export default function Footer() {
       <h4 className="font-bold mt-4 mb-2">2. Use of Information</h4>
       <p>We use your information solely to respond to inquiries, provide quotations, and manage maintenance contracts. We do not sell your data to third parties.</p>
       <h4 className="font-bold mt-4 mb-2">3. Contact Us</h4>
-      <p>If you have questions about this policy, please contact us at info@powerbirdelevators.com.</p>
+      <p>If you have questions about this policy, please contact us at info@powerbirdelevator.in.</p>
     </>
   )
 
@@ -92,29 +92,30 @@ export default function Footer() {
               ))}
             </div>
           </div>
-{/* COL 2: QUICK LINKS */}
-        <div>
-          <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Company</h4>
-          <ul className="space-y-3 text-sm">
-            {[
-              { name: 'Home', path: '/' },
-              { name: 'About Us', path: '/about' },
-              { name: 'Services', path: '/services' },
-              { name: 'Network', path: '/network' }, 
-              { name: 'Contact Us', path: '/contact' }
-            ].map((item) => (
-              <li key={item.name}>
-                <a 
-                  href={item.path} 
-                  className="hover:text-blue-500 transition-colors flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                  {item.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+
+          {/* COL 2: QUICK LINKS */}
+          <div>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Company</h4>
+            <ul className="space-y-3 text-sm">
+              {[
+                { name: 'Home', path: '/' },
+                { name: 'About Us', path: '/about' },
+                { name: 'Services', path: '/services' },
+                // { name: 'Network', path: '/network' }, 
+                { name: 'Contact Us', path: '/contact' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <a 
+                    href={item.path} 
+                    className="hover:text-blue-500 transition-colors flex items-center gap-2 group"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {/* COL 3: HEADQUARTERS */}
           <div>
@@ -145,10 +146,18 @@ export default function Footer() {
                 </div>
               </li>
               <li>
-                <a href="mailto:info@powerbirdelevators.com" className="flex items-center gap-3 group hover:text-blue-400 transition-colors">
-                  <Mail className="text-blue-500 shrink-0 group-hover:text-blue-400" size={18} />
-                  <span>info@powerbirdelevators.com</span>
-                </a>
+                {/* 🔥 UPDATED: One Icon Centered + Stacked Emails */}
+                <div className="flex items-center gap-3">
+                  <Mail className="text-blue-500 shrink-0" size={18} />
+                  <div className="flex flex-col gap-1">
+                    <a href="mailto:info@powerbirdelevator.in" className="hover:text-blue-400 transition-colors">
+                      info@powerbirdelevator.in
+                    </a>
+                    <a href="mailto:powerelevator@gmail.com" className="hover:text-blue-400 transition-colors">
+                      powerelevator@gmail.com
+                    </a>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
@@ -173,8 +182,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <div className="flex items-start gap-3">
-                  <Phone className="text-blue-500 mt-1 shrink-0" size={18} />
+                <div className="flex items-center gap-3">
+                  <Phone className="text-blue-500 shrink-0" size={18} />
                   <div className="flex flex-col gap-1">
                     <a href="tel:+919019666919" className="hover:text-blue-400 transition-colors">+91 90196 66919</a>
                     <a href="tel:+918762373939" className="hover:text-blue-400 transition-colors">+91 87623 73939</a>
@@ -182,11 +191,18 @@ export default function Footer() {
                 </div>
               </li>
               <li>
-                <a href="mailto:bangalore@powerbirdelevators.com" className="flex items-center gap-3 group hover:text-blue-400 transition-colors">
-                  <Mail className="text-blue-500 shrink-0 group-hover:text-blue-400" size={18} />
-                  {/* Placeholder email */}
-                  <span>bangalore@powerbirdelevators.com</span>
-                </a>
+                {/* 🔥 UPDATED: Replaced Bangalore email with new list */}
+                <div className="flex items-center gap-3">
+                  <Mail className="text-blue-500 shrink-0" size={18} />
+                  <div className="flex flex-col gap-1">
+                    <a href="mailto:info@powerbirdelevator.in" className="hover:text-blue-400 transition-colors">
+                      info@powerbirdelevator.in
+                    </a>
+                    <a href="mailto:powerelevator@gmail.com" className="hover:text-blue-400 transition-colors">
+                      powerelevator@gmail.com
+                    </a>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
@@ -216,7 +232,6 @@ export default function Footer() {
             <div className="flex gap-6">
               <button onClick={() => openLegal('privacy')} className="hover:text-white transition-colors">Privacy Policy</button>
               <button onClick={() => openLegal('terms')} className="hover:text-white transition-colors">Terms of Service</button>
-              {/* Removed Sitemap as discussed */}
             </div>
 
           </div>
@@ -229,7 +244,7 @@ export default function Footer() {
         onClose={() => setLegalModal({ ...legalModal, isOpen: false })}
         title={legalModal.title}
         content={legalModal.content}
-        darkPreview={true} // Footer is always dark theme
+        darkPreview={true} 
       />
     </>
   )

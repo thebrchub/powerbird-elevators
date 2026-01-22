@@ -8,7 +8,6 @@ import { Star, CheckCircle2 } from 'lucide-react'
 const reviewData = {
   rating: 4.9,
   totalReviews: 400,
-  // 🔥 UPDATED: Added the client's Google Maps link
   readMoreLink: "https://share.google/ZsyyEHnuHC6ipNvJK",
   writeReviewLink: "https://share.google/ZsyyEHnuHC6ipNvJK",
 
@@ -76,18 +75,20 @@ const reviewData = {
   ]
 }
 
-export default function GoogleReviews({ darkPreview = true }) {
-  const bgColor = darkPreview ? 'bg-gray-950' : 'bg-gray-50';
-  const textColor = darkPreview ? 'text-white' : 'text-gray-900';
-  const cardBg = darkPreview ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200 shadow-sm';
-  const mutedText = darkPreview ? 'text-gray-400' : 'text-gray-500';
-  const reviewText = darkPreview ? 'text-gray-300' : 'text-gray-700';
+export default function GoogleReviews() {
+  // Light Mode Only Colors
+  const bgColor = 'bg-gray-50';
+  const textColor = 'text-gray-900';
+  const cardBg = 'bg-white border-gray-200 shadow-sm';
+  const mutedText = 'text-gray-500';
+  const reviewText = 'text-gray-700';
+  const borderColor = 'border-gray-100';
 
   // Create infinite loop array
   const infiniteReviews = [...reviewData.reviews, ...reviewData.reviews];
 
   return (
-    <section className={`py-12 ${bgColor} ${textColor} transition-colors duration-300 overflow-hidden`}>
+    <section className={`py-12 ${bgColor} ${textColor} overflow-hidden`}>
       <div className="max-w-7xl mx-auto px-6 mb-12">
 
         {/* ================= HEADER / SUMMARY ================= */}
@@ -96,7 +97,6 @@ export default function GoogleReviews({ darkPreview = true }) {
             <div className="flex items-center gap-4">
               {/* Google Icon Container */}
               <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm border border-gray-100 p-3">
-                 {/* 🔥 UPDATED: Using local image */}
                  <img 
                    src="/google/google.webp" 
                    alt="Google" 
@@ -119,7 +119,6 @@ export default function GoogleReviews({ darkPreview = true }) {
                     ))}
                   </div>
                 </div>
-                {/* 🔥 UPDATED: Text changed to 'across the Web' */}
                 <p className={`text-sm ${mutedText}`}>
                   Excellent based on <span className={`font-semibold ${textColor}`}>{reviewData.totalReviews} Reviews across the Web</span>
                 </p>
@@ -133,11 +132,7 @@ export default function GoogleReviews({ darkPreview = true }) {
                 href={reviewData.readMoreLink}
                 target="_blank"
                 rel="noreferrer"
-                className={`px-6 py-2.5 rounded-lg font-semibold text-sm transition border ${
-                  darkPreview 
-                    ? 'bg-gray-800 border-gray-700 hover:bg-gray-700 text-white' 
-                    : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'
-                }`}
+                className="px-6 py-2.5 rounded-lg font-semibold text-sm transition border bg-white border-gray-200 hover:bg-gray-50 text-gray-700"
               >
                 Read Reviews
               </a>
@@ -157,8 +152,8 @@ export default function GoogleReviews({ darkPreview = true }) {
       {/* ================= INFINITE SCROLL TRACK ================= */}
       <div className="relative w-full overflow-hidden mask-gradient">
          {/* Fade edges */}
-         <div className={`absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r ${darkPreview ? 'from-gray-950 to-transparent' : 'from-gray-50 to-transparent'}`} />
-         <div className={`absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l ${darkPreview ? 'from-gray-950 to-transparent' : 'from-gray-50 to-transparent'}`} />
+         <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-gray-50 to-transparent" />
+         <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-gray-50 to-transparent" />
 
         <motion.div 
           className="flex gap-6 w-max"
@@ -190,7 +185,6 @@ export default function GoogleReviews({ darkPreview = true }) {
                       <p className={`text-xs ${mutedText}`}>{review.date}</p>
                     </div>
                   </div>
-                  {/* 🔥 UPDATED: Local Google Icon in Card */}
                   <img
                     src="/google/google.webp"
                     alt="Google"
@@ -211,7 +205,7 @@ export default function GoogleReviews({ darkPreview = true }) {
                 </p>
 
                 {/* Verified */}
-                <div className={`pt-4 border-t flex items-center gap-1.5 text-xs text-green-600 font-medium ${darkPreview ? 'border-gray-800' : 'border-gray-100'}`}>
+                <div className={`pt-4 border-t flex items-center gap-1.5 text-xs text-green-600 font-medium ${borderColor}`}>
                   <CheckCircle2 size={14} />
                   Verified Customer
                 </div>

@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import ModalShell from '../components/ModalShell'
 import Reveal from '../components/Reveal'
+import AmcQuoteForm from '../components/AmcQuoteForm' // <--- IMPORTED THE NEW FORM
 import { 
   Wrench, 
   ArrowUpCircle, 
@@ -12,11 +14,10 @@ import {
   TrendingUp,
   Box,
   Accessibility,
-  Moon,
-  Sun
+  ArrowRight
 } from 'lucide-react'
 
-// Import all 6 Modals
+// Import all 6 Service Modals
 import PassengerLiftModal from '../modals/PassengerLiftModal'
 import CapsuleLiftModal from '../modals/CapsuleLiftModal'
 import HospitalLiftModal from '../modals/HospitalLiftModal'
@@ -26,8 +27,11 @@ import StairLiftModal from '../modals/StairLiftModal'
 
 export default function Services({ darkPreview, setDarkPreview }) {
 
-  // State to track which modal is currently open (null = none)
+  // State to track which service modal is currently open (null = none)
   const [activeModal, setActiveModal] = useState(null)
+  
+  // State for AMC Quote Modal
+  const [isAmcOpen, setAmcOpen] = useState(false)
 
   // Data for the Installation Services Grid
   const liftServices = [
@@ -78,7 +82,7 @@ export default function Services({ darkPreview, setDarkPreview }) {
   return (
     <div className={`pt-18 transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
 
-      {/* ================= HERO SECTION (FIXED BLEND + QUOTE) ================= */}
+      {/* ================= HERO SECTION ================= */}
       <section 
         className={`border-b transition-colors duration-300 overflow-hidden relative ${
           darkPreview 
@@ -107,7 +111,7 @@ export default function Services({ darkPreview, setDarkPreview }) {
                   Our <span className="text-blue-500">Elevator Services</span>
                 </h1>
                 
-                {/* 🔥 NEW: Quote with Blue Line (Non-Italic) */}
+                {/* Quote with Blue Line */}
                 <div className="mt-8 mb-6">
                   <p className={`text-xl font-bold border-l-4 border-blue-500 pl-4 leading-relaxed ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
                     "Engineering vertical transportation with precision, safety, and uncompromising quality."
@@ -124,7 +128,7 @@ export default function Services({ darkPreview, setDarkPreview }) {
             <Reveal delay={0.2}>
               <div className="relative w-full h-[300px] lg:h-[400px]">
                 <img 
-                  src="/lifts/2.webp" 
+                  src="/hero/3.webp" 
                   alt="Elevator Services" 
                   className="w-full h-full object-cover"
                 />
@@ -246,9 +250,11 @@ export default function Services({ darkPreview, setDarkPreview }) {
         </div>
       </section>
 
-      {/* ================= MODERNIZATION ================= */}
+      {/* ================= MODERNIZATION (WITH MATRIX) ================= */}
       <section className={`py-24 transition-colors duration-300 ${darkPreview ? 'bg-gray-950' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+          
+          {/* LEFT: TEXT CONTENT */}
           <div>
             <Reveal>
               <h2 className={`text-3xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
@@ -272,7 +278,7 @@ export default function Services({ darkPreview, setDarkPreview }) {
               ].map((point, i) => (
                 <Reveal key={i} delay={0.2 + i * 0.05}>
                   <div className="flex items-start gap-3">
-                    <TrendingUp size={20} className="text-green-600 mt-1" />
+                    <TrendingUp size={20} className="text-green-600 mt-1 shrink-0" />
                     <p className={darkPreview ? 'text-gray-400' : 'text-gray-700'}>
                       {point}
                     </p>
@@ -282,25 +288,82 @@ export default function Services({ darkPreview, setDarkPreview }) {
             </div>
           </div>
 
+          {/* RIGHT: FEATURE BOX (CLEANER & ALIGNED MATRIX) */}
           <Reveal delay={0.3}>
             <div 
-              className={`p-8 rounded-2xl shadow-xl border 
+              className={`p-8 rounded-2xl shadow-xl border relative overflow-hidden group
               ${darkPreview 
                 ? 'bg-gray-900 border-gray-800' 
                 : 'bg-white border-gray-100 shadow-gray-200/50'
               }`}
             >
-              <div className="text-center mb-6">
-                <RefreshCw className="w-12 h-12 text-green-600 mx-auto mb-3" />
+              {/* Decorative background glow */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+
+              {/* Header */}
+              <div className="text-center mb-8 relative z-10">
+                <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-colors
+                  ${darkPreview ? 'bg-gray-800 text-green-500' : 'bg-green-50 text-green-600'}
+                `}>
+                  <RefreshCw className="w-8 h-8" />
+                </div>
                 <h3 className={`text-xl font-bold ${darkPreview ? 'text-white' : 'text-gray-900'}`}>Technology Migration</h3>
-                <p className="text-sm text-gray-500">Performance Upgrade Matrix</p>
+                <p className="text-sm text-gray-500 uppercase tracking-wider font-medium mt-1">Performance Upgrade Matrix</p>
               </div>
+
+              {/* Grid-Based Matrix (Perfect Alignment) */}
+              <div className={`rounded-xl border p-6 ${darkPreview ? 'bg-gray-950/50 border-gray-800' : 'bg-gray-50 border-gray-100'}`}>
+                
+                {/* Table Header */}
+                <div className="grid grid-cols-[1fr_auto_1fr] gap-4 mb-4 text-xs font-bold uppercase tracking-widest text-gray-400">
+                  <div className="text-left">Legacy</div>
+                  <div className="w-6"></div> {/* Spacer for arrow */}
+                  <div className="text-right">Modern</div>
+                </div>
+
+                {/* Rows */}
+                <div className="space-y-5">
+                  {[
+                    { old: 'Induction Motor', new: 'PM Gearless Motor' },
+                    { old: 'Relay Logic', new: 'AI Microcomputer' },
+                    { old: 'High Power Usage', new: '70% Energy Saved', highlight: true }
+                  ].map((item, idx) => (
+                    <div key={idx} className="grid grid-cols-[1fr_auto_1fr] gap-4 items-center group/row">
+                      
+                      {/* Old (Left) - Faded Out */}
+                      <div className={`text-sm font-medium text-left transition-colors
+                        ${darkPreview ? 'text-gray-600 group-hover/row:text-gray-500' : 'text-gray-400 group-hover/row:text-gray-500'}`}>
+                        {item.old}
+                      </div>
+
+                      {/* Arrow (Center) */}
+                      <div className="flex justify-center w-6">
+                        <ArrowRight className="w-4 h-4 text-gray-300" /> 
+                      </div>
+
+                      {/* New (Right) - Bold */}
+                      <div className={`text-sm font-bold text-right
+                        ${item.highlight ? 'text-green-500' : (darkPreview ? 'text-white' : 'text-gray-900')}`}>
+                        {item.new}
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Badge */}
+              <div className="mt-6 flex items-center justify-center gap-2 text-green-600 bg-green-500/10 py-2 rounded-lg font-medium text-sm">
+                <Zap size={16} />
+                <span>Eco-Friendly Upgrade</span>
+              </div>
+
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ================= AMC CTA ================= */}
+      {/* ================= AMC CTA (WITH FORM) ================= */}
       <section 
         className={`border-t transition-colors duration-300 ${
           darkPreview 
@@ -318,11 +381,15 @@ export default function Services({ darkPreview, setDarkPreview }) {
           <Reveal delay={0.1}>
             <p className={`mb-10 max-w-2xl mx-auto ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
               Our service network covers over 20 cities including Bangalore, Sirsi, Hubli, and Mangalore.
+              Get a custom maintenance plan for your building today.
             </p>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <button className="bg-blue-600 text-white px-8 py-4 rounded font-bold hover:bg-blue-700 transition flex items-center justify-center gap-2 mx-auto shadow-lg shadow-blue-600/20">
+            <button 
+              onClick={() => setAmcOpen(true)}
+              className="bg-blue-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-blue-700 transition flex items-center justify-center gap-2 mx-auto shadow-lg shadow-blue-600/20"
+            >
               <Wrench size={18} />
               Request AMC Quote
             </button>
@@ -330,13 +397,25 @@ export default function Services({ darkPreview, setDarkPreview }) {
         </div>
       </section>
 
-      {/* ================= 🔥 MODALS RENDERED HERE ================= */}
+      {/* ================= SERVICE MODALS ================= */}
       <PassengerLiftModal isOpen={activeModal === 'passenger'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
       <CapsuleLiftModal isOpen={activeModal === 'capsule'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
       <HospitalLiftModal isOpen={activeModal === 'hospital'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
       <GoodsLiftModal isOpen={activeModal === 'goods'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
       <DumbwaiterModal isOpen={activeModal === 'dumbwaiter'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
       <StairLiftModal isOpen={activeModal === 'stair'} onClose={() => setActiveModal(null)} darkPreview={darkPreview} />
+
+      {/* ================= AMC REQUEST MODAL (CLEAN VERSION) ================= */}
+      <ModalShell 
+        open={isAmcOpen} 
+        onClose={() => setAmcOpen(false)} 
+        title="Get AMC Quotation"
+        darkPreview={darkPreview}
+      >
+        {/* REPLACED THE OLD FORM WITH THE NEW COMPONENT */}
+        <AmcQuoteForm />
+        
+      </ModalShell>
 
     </div>
   )
