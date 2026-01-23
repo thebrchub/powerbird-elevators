@@ -7,9 +7,11 @@ import { Star, CheckCircle2 } from 'lucide-react'
 // ==========================================
 const reviewData = {
   rating: 4.9,
-  totalReviews: 400,
-  readMoreLink: "https://share.google/ZsyyEHnuHC6ipNvJK",
-  writeReviewLink: "https://share.google/ZsyyEHnuHC6ipNvJK",
+  totalReviews: 400, // You can update this number dynamically if needed
+  // 🔥 FIX: Replaced broken link with the real Google Maps Place Link
+  readMoreLink: "https://www.google.com/maps/place/?q=place_id:ChIJGWiJT-2vvjsRLLhSwZteMYc",
+  // 🔥 FIX: Direct link to the "Write a Review" dialog
+  writeReviewLink: "https://search.google.com/local/writereview?placeid=ChIJGWiJT-2vvjsRLLhSwZteMYc",
 
   reviews: [
     {
