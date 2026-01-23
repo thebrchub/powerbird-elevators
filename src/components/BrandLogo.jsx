@@ -1,28 +1,29 @@
 import { motion } from 'framer-motion'
 
-export default function BrandLogo({ size = 'lg', disableAnimation = false }) {
+export default function BrandLogo({ size = 'lg', dark = false, disableAnimation = false }) {
   // Logic: lg = Big (Intro), sm = Small (Navbar)
   const sizeClasses = size === 'lg' ? 'h-14 md:h-16' : 'h-18 md:h-20'
 
   return (
     <motion.div
-      // 🔥 FIX: Only apply layoutId animation if disableAnimation is FALSE.
+      // 🔥 FLIGHT ENGINE: This layoutId matches between Intro and Navbar.
+      // We only disable it if explicitly told to.
       {...(!disableAnimation ? {
         layoutId: "powerbird-logo",
-        transition: { duration: 0.75, ease: [0.4, 0, 0.2, 1] } 
+        transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] } 
       } : {})}
       
-      // 🔥 NEW: Add hover zoom effect
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      // 🔥 FIX: Removed whileHover and whileTap. 
+      // This stops the zoom glitch but keeps it clickable.
       
-      className="flex items-center z-50 cursor-pointer" // Added cursor-pointer for better UX
+      className="flex items-center z-50 cursor-pointer"
     >
       <img
-        // 🔥 FIX: Removed dark check. Always use the standard logo.
-        src="/logos/logo.svg"
+        // Switches to White Logo if dark={true} (Lift), Black Logo otherwise (Navbar)
+        src={dark ? "/logos/logo_w.png" : "/logos/logo.png"}
         alt="PowerBird Elevators Logo"
-        className={`${sizeClasses} w-auto object-contain transition-transform duration-300`}
+        // Removed 'transition-transform' to ensure total stability
+        className={`${sizeClasses} w-auto object-contain`}
         draggable={false}
       />
     </motion.div>
