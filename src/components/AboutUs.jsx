@@ -25,7 +25,7 @@ export default function AboutUs() {
             
             {/* Floating Badge */}
             <div className="absolute -bottom-6 -right-6 p-8 rounded-xl border backdrop-blur-md shadow-xl bg-white/90 border-gray-100 text-gray-900">
-              <p className="text-4xl font-bold mb-1">10+</p>
+              <p className="text-4xl font-bold mb-1">12+</p>
               <p className="text-sm font-medium uppercase tracking-wider opacity-80">Years of<br/>Excellence</p>
             </div>
           </div>
