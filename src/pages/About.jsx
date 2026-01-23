@@ -49,8 +49,8 @@ export default function About({ darkPreview, setDarkPreview }) {
                 </h1>
                 
                 <div className={`mt-6 text-lg leading-relaxed space-y-6 ${darkPreview ? 'text-gray-300' : 'text-gray-600'}`}>
-                  <p>
-                    The <span className="text-blue-400 font-semibold">MPWAY</span> to Safety and Quality. 
+                  <p className="text-gray-900 font-bold tracking-widest uppercase text-sm">
+                    The <span className="text-blue-600">Way</span> to <span className="text-blue-600">Safety</span> and <span className="text-blue-600">Quality</span>
                   </p>
                   
                   <p className={`text-xl font-bold border-l-4 border-blue-500 pl-4 ${darkPreview ? 'text-white' : 'text-gray-900'}`}>

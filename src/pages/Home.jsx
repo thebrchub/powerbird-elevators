@@ -69,10 +69,10 @@ export default function Home() {
             {/* LEFT CONTENT */}
             <div>
               <Reveal>
-                <div className="flex items-center gap-2 mb-6 text-blue-600">
-                   <span className="text-sm font-bold tracking-[0.2em] uppercase">
-                     The Way to Safety and Quality
-                   </span>
+                <div className="flex items-center gap-2 mb-6 text-gray-900">
+                  <span className="text-sm font-bold tracking-[0.2em] uppercase">
+                    The <span className="text-blue-600">Way</span> to <span className="text-blue-600">Safety</span> and <span className="text-blue-600">Quality</span>
+                  </span>
                 </div>
 
                 <h1 className="text-4xl md:text-5xl font-bold leading-tight">
