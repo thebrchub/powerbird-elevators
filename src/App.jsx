@@ -1,20 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useState } from 'react' // Removed useEffect as it was only used for dark theme
+import { useState } from 'react'
 
 import MainLayout from './layout/MainLayout'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
-import Network from './pages/Projects'
 import Contact from './pages/Contact'
 import NotFound from './components/NotFound';
 import LiftIntro from './components/LiftIntro'
 import Navbar from './components/Navbar'
 
 function App() {
-  // Removed darkPreview state and useEffect
-
-  // Sync state with storage for Lift Intro
+  // 1. GLOBAL LIFT INTRO STATE
+  // We use this single state to handle the intro for the whole app session.
   const [isIntroDone, setIsIntroDone] = useState(() => {
     return sessionStorage.getItem('powerbird_intro_shown') === 'true'
   })
@@ -26,51 +24,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* Lift Intro (Unconditional Render) */}
+      {/* GLOBAL LIFT INTRO
+         - Rendered unconditionally.
+         - Handles its own visibility check inside (LiftIntro.jsx).
+         - Sits on top (z-99999).
+      */}
       <LiftIntro onFinish={handleIntroFinish} />
       
-      {/* Navbar:
-          - showLogo={true}: Ensures logo is always mounted to catch the flying animation.
-          - Removed darkPreview prop (Defaults to light/cleaned in component).
-      */}
+      {/* Navbar always shows logo now to catch the animation */}
       <Navbar showLogo={true} />
 
       <MainLayout showNavbarLogo={isIntroDone}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                // Pass isIntroDone if Home needs to delay its own animations
-                isIntroDone={isIntroDone} 
-                // Removed darkPreview props
-              />
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <About />
-            }
-          />
-          <Route
-            path="/services"
-            element={
-              <Services />
-            }
-          />
-          {/* <Route
-            path="/network"
-            element={
-              <Network />
-            }
-          /> */}
-          <Route
-            path="/contact"
-            element={
-              <Contact />
-            }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </MainLayout>

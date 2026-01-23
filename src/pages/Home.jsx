@@ -1,31 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 // Components
-import LiftIntro from '../components/LiftIntro'
-import GoogleReviews from '../components/GoogleReviews'
 import Reveal from '../components/Reveal'
 import ClientLogos from '../components/ClientLogos'
 import AboutUs from '../components/AboutUs' 
 import WhyUs from '../components/WhyUs'
 import CoreCapabilities from '../components/Core'
-import ClientFeedback from '../components/ClientFeedback'
 import TrustBand from '../components/TrustBand'
 import GetInTouchModal from '../components/GetInTouchModal'
 import ServiceGrid from '../components/ServiceGrid'
+import GoogleReviews from '../components/GoogleReviews'
+import { useState } from 'react'
 
-export default function Home({ onIntroComplete }) {
-
-  const [showIntro, setShowIntro] = useState(() => {
-    const hasPlayed = sessionStorage.getItem('liftPlayed')
-    return !hasPlayed 
-  })
-  
+export default function Home() {
   const [getInTouchOpen, setGetInTouchOpen] = useState(false)
   const navigate = useNavigate()
-
-  // Removed the dark mode body style effect since index.css handles it globally now.
 
   const handleServicesClick = () => {
     navigate('/services')
@@ -34,17 +25,6 @@ export default function Home({ onIntroComplete }) {
 
   return (
     <>
-      {/* ================= LIFT INTRO ================= */}
-      {showIntro && (
-        <LiftIntro
-          onFinish={() => {
-            sessionStorage.setItem('liftPlayed', 'true')
-            setShowIntro(false)
-            onIntroComplete && onIntroComplete()
-          }}
-        />
-      )}
-
       {/* ================= MODAL ================= */}
       <GetInTouchModal 
         open={getInTouchOpen} 
@@ -52,16 +32,10 @@ export default function Home({ onIntroComplete }) {
       />
 
       {/* ================= MAIN CONTENT ================= */}
-      <motion.div
-        className="pt-6 min-h-screen bg-gray-50 text-gray-900"
-        initial={{ opacity: showIntro ? 0 : 1 }}
-        animate={{ opacity: showIntro ? 0 : 1 }}
-        transition={{ 
-          duration: 1.0, 
-          ease: 'easeOut', 
-          delay: showIntro ? 0.5 : 0 
-        }}
-      >
+      {/* 🔥 FIX: Removed initial opacity: 0. 
+          The page now renders immediately behind the Lift Intro. 
+          This eliminates the "Black Gap" and the "Stuck Overlay" issues. */}
+      <div className="pt-6 min-h-screen bg-gray-50 text-gray-900">
 
        {/* ================= HERO SECTION ================= */}
         <section className="relative overflow-hidden bg-gray-50 text-gray-900">
@@ -73,7 +47,6 @@ export default function Home({ onIntroComplete }) {
               <div className="absolute inset-0 flex justify-around">
                 {[...Array(6)].map((_, i) => (
                   <div key={i} className="relative w-px h-full">
-                    {/* Only showing the dark lines for Light Mode */}
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-transparent opacity-100" />
                   </div>
                 ))}
@@ -85,7 +58,6 @@ export default function Home({ onIntroComplete }) {
                 animate={{ y: [0, "50%"] }} 
                 transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
               >
-                 {/* Only showing the dark grid for Light Mode */}
                  <div 
                    className="absolute inset-0 opacity-100"
                    style={{ background: 'repeating-linear-gradient(0deg, transparent 0px, transparent 100px, rgba(0,0,0,0.05) 101px)' }}
@@ -150,7 +122,6 @@ export default function Home({ onIntroComplete }) {
         </section>
 
         {/* ================= TRUST BAND ================= */}
-        {/* Removed darkPreview prop */}
         <TrustBand />
 
         {/* ================= ABOUT US ================= */}
@@ -165,7 +136,7 @@ export default function Home({ onIntroComplete }) {
         {/* ================= CORE CAPABILITIES ================= */}
         <CoreCapabilities />
 
-        {/* ================= TESTIMONIALS ================= */}
+        {/* ================= CLIENT LOGOS ================= */}
         <ClientLogos />
 
         {/* ================= SERVICE GRID ================= */}
@@ -197,7 +168,7 @@ export default function Home({ onIntroComplete }) {
           </div>
         </section>
 
-      </motion.div>
+      </div>
     </>
   )
 }
