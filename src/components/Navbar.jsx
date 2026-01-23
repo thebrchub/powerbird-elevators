@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import BrandLogo from './BrandLogo'
 import DownloadQuoteModal from './DownloadQuoteModal'
 
-// 🔥 Removed 'darkPreview' prop since we are Light-Only now
 export default function Navbar({ showLogo }) {
   const [open, setOpen] = useState(false)
   const [quoteOpen, setQuoteOpen] = useState(false)
@@ -13,6 +12,9 @@ export default function Navbar({ showLogo }) {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [hoveredIndex, setHoveredIndex] = useState(null)
+  
+  // State to disable layoutId after the intro finishes
+  const [flightLanded, setFlightLanded] = useState(false)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -21,9 +23,16 @@ export default function Navbar({ showLogo }) {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
-    // { name: 'Network', path: '/network' },
     { name: 'Contact', path: '/contact' }
   ]
+
+  // --- FLIGHT LANDING LOGIC ---
+  useEffect(() => {
+    const timer = setTimeout(() => {
+        setFlightLanded(true)
+    }, 2500)
+    return () => clearTimeout(timer)
+  }, [])
 
   // --- SMART SCROLL LOGIC ---
   useEffect(() => {
@@ -50,9 +59,11 @@ export default function Navbar({ showLogo }) {
   return (
     <>
       <header 
+        // 🔥 FIX: Added 'overflow-visible' and increased padding 'py-8' slightly 
+        // to prevent the shadow from being cut off at the bottom.
         className={`
-          fixed top-0 left-0 w-full z-40 
-          py-6 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
+          fixed top-0 left-0 w-full z-40 overflow-visible
+          py-8 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
           ${isVisible ? 'translate-y-0' : '-translate-y-full'}
         `}
       >
@@ -63,28 +74,28 @@ export default function Navbar({ showLogo }) {
             className="flex-shrink-0 flex items-center h-10 cursor-pointer relative z-50"
             onClick={handleLogoClick}
           >
-            {/* Removed dark prop. Default BrandLogo handles it. */}
             {showLogo && (
               <BrandLogo 
                 size="sm" 
-                disableAnimation={location.pathname !== '/'} 
+                disableAnimation={location.pathname !== '/' || flightLanded} 
               />
             )}
           </div>
 
           {/* DESKTOP NAV */}
           <nav 
+            // 🔥 FIX: Changed 'shadow-xl' to 'shadow-lg' (Cleaner)
+            // Changed 'shadow-black/5' to 'shadow-black/10' (More visible/premium)
             className={`
               hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
               items-center gap-1 p-1.5 rounded-full z-40 transition-all duration-300
-              bg-white/50 backdrop-blur-2xl border border-white/40 
-              shadow-xl shadow-black/5 ring-1 ring-white/40
+              bg-white/60 backdrop-blur-md border border-white/50 
+              shadow-lg shadow-black/10 ring-1 ring-white/50
             `}
             onMouseLeave={() => setHoveredIndex(null)}
           >
             {navLinks.map((item, index) => {
               const isActive = location.pathname === item.path
-              // Always use dark text for active/hover states in Light Mode
               const textColor = isActive 
                 ? 'text-black font-bold' 
                 : 'text-gray-800 font-medium hover:text-black'
@@ -124,7 +135,6 @@ export default function Navbar({ showLogo }) {
             <div className="hidden md:block">
               <button
                 onClick={() => setQuoteOpen(true)}
-                // 🔥 FIX: Hardcoded Red Style for Light Mode Only
                 className="group relative px-6 py-2.5 rounded-full text-sm font-bold overflow-hidden transition-transform active:scale-95 shadow-lg bg-red-600 text-white hover:shadow-red-600/30"
               >
                 <span className="relative z-10 flex items-center gap-2 group-hover:gap-3 transition-all">
@@ -135,7 +145,6 @@ export default function Navbar({ showLogo }) {
 
             <button
               onClick={() => setOpen(true)}
-              // 🔥 FIX: Light Mode Mobile Menu Button
               className="md:hidden p-2 rounded-full transition backdrop-blur-md text-black bg-gray-100 border border-gray-300 hover:bg-gray-200"
             >
               <Menu size={24} />
@@ -155,7 +164,6 @@ export default function Navbar({ showLogo }) {
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
             />
-            {/* Mobile Menu Sidebar - Kept dark background for contrast, can change to white if preferred */}
             <motion.aside
               className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-[#0a0a0a] border-l border-white/10 z-[70] shadow-2xl flex flex-col"
               initial={{ x: '100%' }}
