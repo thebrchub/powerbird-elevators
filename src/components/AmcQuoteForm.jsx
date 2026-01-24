@@ -18,6 +18,7 @@ export default function AmcQuoteForm() {
   // Handle Text/Select Inputs
   const handleChange = (e) => {
     const { name, value } = e.target
+    // Remove spaces from email to prevent accidental validation errors
     const nextValue = name === 'email' ? value.replace(/\s/g, '') : value
     setFormData(prev => ({ ...prev, [name]: nextValue }))
   }
@@ -157,6 +158,11 @@ export default function AmcQuoteForm() {
             type="email"
             name="email"
             inputMode="email"
+            // 🔥 FIX: Added pattern regex. 
+            // This forces the browser to accept any email format that looks like "text@text.text",
+            // which solves the issue with .tech, .io, etc.
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+            title="Please enter a valid email address (e.g., name@company.tech)"
             value={formData.email}
             onChange={handleChange}
             placeholder="name@company.com" 
@@ -252,7 +258,7 @@ export default function AmcQuoteForm() {
       </button>
 
       <p className="text-xs text-center text-gray-400 mt-4">
-         Typically responds within 24 hours.
+          Typically responds within 24 hours.
       </p>
 
     </form>
