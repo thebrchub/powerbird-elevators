@@ -18,7 +18,8 @@ export default function AmcQuoteForm() {
   // Handle Text/Select Inputs
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    const nextValue = name === 'email' ? value.replace(/\s/g, '') : value
+    setFormData(prev => ({ ...prev, [name]: nextValue }))
   }
 
   // Handle Numeric Input (Phone)
@@ -155,12 +156,12 @@ export default function AmcQuoteForm() {
           <input 
             type="email"
             name="email"
+            inputMode="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="name@company.com" 
             className={`${inputBaseClasses} pl-10`}
             required
-            pattern="[^@\\s]+@[^@\\s]+\\.[^@\\s]+"
             disabled={status === 'submitting'}
           />
         </div>
