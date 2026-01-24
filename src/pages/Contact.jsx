@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Reveal from '../components/Reveal'
+import { sendMailPorterEmail } from '../utils/mailPorter'
 import { 
   Phone, 
   Mail, 
@@ -57,10 +58,26 @@ export default function Contact({ darkPreview, setDarkPreview }) {
     }
     setStatus('submitting')
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      const messageRemarksParts = []
+      if (formData.message) messageRemarksParts.push(`Message: ${formData.message}`)
+      if (formData.specifications) messageRemarksParts.push(`Specifications: ${formData.specifications}`)
+
+      await sendMailPorterEmail({
+        name: formData.name,
+        mobile: formData.phone,
+        message: formData.message || formData.specifications || 'Project inquiry',
+        brand: 'powerbird',
+        full_name: formData.name,
+        phone_number: formData.phone,
+        email_address: formData.email,
+        requirement_type: formData.requirementType || 'General Inquiry',
+        building_type: formData.projectType || 'Not specified',
+        message_remarks: messageRemarksParts.join(' | ')
+      })
       setStatus('success')
     } catch (error) {
       console.error(error)
+      alert('We could not send your request right now. Please try again in a moment.')
       setStatus('idle')
     }
   }

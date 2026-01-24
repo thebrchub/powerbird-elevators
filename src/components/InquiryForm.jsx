@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Send, Loader2, CheckCircle2, User, Phone, Mail, MapPin, Hash } from 'lucide-react'
+import { sendMailPorterEmail } from '../utils/mailPorter'
 
 export default function QuoteDownloadForm({ submitLabel = 'Download Quotation' }) {
   const [status, setStatus] = useState('idle') // 'idle' | 'submitting' | 'success'
@@ -45,10 +46,26 @@ export default function QuoteDownloadForm({ submitLabel = 'Download Quotation' }
 
     // Simulate API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      const messageRemarksParts = []
+      if (formData.state) messageRemarksParts.push(`State: ${formData.state}`)
+      if (formData.pincode) messageRemarksParts.push(`Pincode: ${formData.pincode}`)
+
+      await sendMailPorterEmail({
+        name: formData.name,
+        mobile: formData.phone,
+        message: 'Quotation download request',
+        brand: 'powerbird',
+        full_name: formData.name,
+        phone_number: formData.phone,
+        email_address: formData.email,
+        requirement_type: 'Quotation Download',
+        building_type: 'Not specified',
+        message_remarks: messageRemarksParts.join(' | ')
+      })
       setStatus('success')
     } catch (error) {
       console.error(error)
+      alert('We could not send your request right now. Please try again in a moment.')
       setStatus('idle')
     }
   }
