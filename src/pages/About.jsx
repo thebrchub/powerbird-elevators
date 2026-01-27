@@ -323,6 +323,7 @@ export default function About({ darkPreview, setDarkPreview }) {
       </section>
 
       {/* ================= 🔥 VIDEO SECTION ================= */}
+      {/* ================= 🔥 VIDEO SECTION ================= */}
       <section className={`py-16 ${darkPreview ? 'bg-gray-950' : 'bg-white'}`}>
         <div className="max-w-4xl mx-auto px-6">
           <Reveal>
@@ -343,9 +344,12 @@ export default function About({ darkPreview, setDarkPreview }) {
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                      <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white pl-1 shadow-lg">
+                      
+                      {/* CHANGED TO BLUE-600 HERE */}
+                      <div className="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center text-white pl-1 shadow-lg">
                         <Play size={28} fill="currentColor" />
                       </div>
+
                     </div>
                   </div>
                 </div>
@@ -360,6 +364,7 @@ export default function About({ darkPreview, setDarkPreview }) {
               )}
 
             </div>
+    
             
             <div className="mt-6 text-center">
                <p className={`text-sm font-bold tracking-widest uppercase ${darkPreview ? 'text-gray-500' : 'text-gray-500'}`}>

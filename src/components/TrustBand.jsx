@@ -88,24 +88,32 @@ export default function TrustBand({ darkPreview }) {
             </div>
 
             {/* 4. Emergency */}
+            {/* 4. Emergency */}
             <a 
               href="tel:+918762373939"
               className="group flex flex-col items-center justify-center p-6 relative overflow-hidden cursor-pointer"
             >
-              <div className={`absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+              {/* Hover BG - Yellow Tint */}
+              <div className={`absolute inset-0 bg-yellow-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+              
               <div className="flex items-center space-x-2 mb-2 relative z-10">
                 <div className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                  {/* Ping Animation - Yellow */}
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-500 opacity-75"></span>
+                  {/* Solid Dot - Yellow */}
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
                 </div>
-                <p className={`text-[10px] font-bold uppercase tracking-[0.2em] text-red-500`}>
+                {/* Text Label - Darker Yellow for readability */}
+                <p className={`text-[10px] font-bold uppercase tracking-[0.2em] text-yellow-600`}>
                   Emergency
                 </p>
               </div>
+              
               <p 
                 className={`
                   text-xl md:text-2xl font-bold relative z-10 
-                  drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]
+                  /* Yellow Glow Shadow */
+                  drop-shadow-[0_0_15px_rgba(234,179,8,0.5)]
                   ${darkPreview ? 'text-white' : 'text-gray-800'}
                 `}
               >
