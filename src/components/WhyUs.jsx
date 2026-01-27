@@ -69,7 +69,8 @@ export default function WhyUs() {
             {/* Floating Badge */}
             <div className="absolute -top-8 -left-8 p-6 rounded-2xl border backdrop-blur-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] z-20 bg-white/90 border-white/50 text-gray-900">
               <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-red-600 rounded-lg text-white">
+                  {/* Changed to Yellow, added border, changed text to black for contrast */}
+                  <div className="p-2 bg-yellow-400 rounded-lg text-black border border-black/10">
                       <Users size={20} />
                   </div>
                   <p className="text-2xl font-bold">24/7</p>

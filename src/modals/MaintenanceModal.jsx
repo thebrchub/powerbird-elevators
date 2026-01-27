@@ -40,7 +40,7 @@ export default function MaintenanceModal({ isOpen, onClose, darkPreview }) {
              <div>
                <h4 className={`font-bold text-base mb-1 ${darkPreview ? 'text-white' : 'text-gray-900'}`}>License Renewal Support</h4>
                <p className={`text-sm ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>
-                 We handle the annual <strong>Govt. Form-B License renewal</strong> and safety inspections, so you don't have to worry about legal compliance.
+                 We handle the annual <strong>Govt. License renewal</strong> and safety inspections, so you don't have to worry about legal compliance.
                </p>
              </div>
           </div>

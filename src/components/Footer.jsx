@@ -150,11 +150,11 @@ export default function Footer() {
                 <div className="flex items-center gap-3">
                   <Mail className="text-blue-500 shrink-0" size={18} />
                   <div className="flex flex-col gap-1">
+                    <a href="mailto:powerbirdelevators@gmail.com" className="hover:text-blue-400 transition-colors">
+                      powerbirdelevators@gmail.com
+                    </a>
                     <a href="mailto:info@powerbirdelevator.in" className="hover:text-blue-400 transition-colors">
                       info@powerbirdelevator.in
-                    </a>
-                    <a href="mailto:powerelevator@gmail.com" className="hover:text-blue-400 transition-colors">
-                      powerelevator@gmail.com
                     </a>
                   </div>
                 </div>
@@ -195,12 +195,12 @@ export default function Footer() {
                 <div className="flex items-center gap-3">
                   <Mail className="text-blue-500 shrink-0" size={18} />
                   <div className="flex flex-col gap-1">
+                    <a href="mailto:powerbirdelevators@gmail.com" className="hover:text-blue-400 transition-colors">
+                      powerbirdelevators@gmail.com
+                    </a>
                     <a href="mailto:info@powerbirdelevator.in" className="hover:text-blue-400 transition-colors">
                       info@powerbirdelevator.in
-                    </a>
-                    <a href="mailto:powerelevator@gmail.com" className="hover:text-blue-400 transition-colors">
-                      powerelevator@gmail.com
-                    </a>
+                    </a>                    
                   </div>
                 </div>
               </li>

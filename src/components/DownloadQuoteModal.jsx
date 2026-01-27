@@ -4,7 +4,7 @@ import InquiryForm from './InquiryForm'
 export default function DownloadQuoteModal({ open, onClose }) {
   return (
     <ModalShell open={open} onClose={onClose} title="Download Quotation">
-      <InquiryForm submitLabel="Submit" />
+      <InquiryForm submitLabel="Download Quote" />
     </ModalShell>
   )
 }

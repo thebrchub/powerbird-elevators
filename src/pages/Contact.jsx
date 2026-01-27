@@ -466,8 +466,8 @@ export default function Contact({ darkPreview, setDarkPreview }) {
                     </div>
                     <div>
                       <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Email Inquiry</p>
-                      <p className="font-medium break-all">info@powerbirdelevators.com</p>
-                      <p className="text-sm text-gray-500 break-all">powerelevator@gmail.com</p>
+                      <p className="font-medium break-all">powerbirdelevators@gmail.com</p>
+                      <p className="font-medium break-all">info@powerbirdelevators.com</p>                    
                     </div>
                   </div>
 
@@ -485,23 +485,30 @@ export default function Contact({ darkPreview, setDarkPreview }) {
               </div>
             </Reveal>
 
-            {/* EMERGENCY CARD */}
-            <Reveal delay={0.4}>
-              <div className="bg-red-50 border border-red-100 rounded-xl p-6">
-                <div className="flex items-start gap-4">
-                  <AlertCircle className="text-red-600 shrink-0" size={32} />
-                  <div>
-                    <h4 className="text-lg font-bold text-red-700">Emergency Breakdown?</h4>
-                    <p className="text-sm text-red-600 mt-1 mb-3">
-                      For trapped passengers or critical failures, call our 24/7 hotline immediately.
-                    </p>
-                    <a href="tel:+918762373939" className="inline-block bg-red-600 text-white text-sm font-bold px-4 py-2 rounded hover:bg-red-700 transition">
-                      Call Emergency Line
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
+            {/* EMERGENCY CARD - Black Border, Darker Yellow BG, Dark Yellow Text */}
+<Reveal delay={0.4}>
+  <div className="bg-yellow-200 border border-black rounded-xl p-6 shadow-sm">
+    <div className="flex items-start gap-4">
+      {/* Icon - Black for high contrast warning */}
+      <AlertCircle className="text-black shrink-0" size={32} />
+      
+      <div>
+        {/* Title - Dark Yellow (Ochre) */}
+        <h4 className="text-lg font-bold text-yellow-700">Emergency Breakdown?</h4>
+        
+        {/* Text - Black/Dark Gray */}
+        <p className="text-sm text-gray-900 mt-1 mb-3 font-medium">
+          For trapped passengers or critical failures, call our 24/7 hotline immediately.
+        </p>
+        
+        {/* Button - Black Background, Yellow Text */}
+        <a href="tel:+918762373939" className="inline-block bg-black text-yellow-400 text-sm font-bold px-4 py-2 rounded hover:bg-gray-800 transition shadow-md">
+          Call Emergency Line
+        </a>
+      </div>
+    </div>
+  </div>
+</Reveal>
 
           </div>
         </div>

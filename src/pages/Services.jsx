@@ -96,16 +96,19 @@ export default function Services({ darkPreview, setDarkPreview }) {
             {/* LEFT: CONTENT */}
             <Reveal>
               <div>
-                {/* Emergency Badge */}
-                <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-red-900/20 border border-red-800 text-red-500 text-xs font-mono mb-6">
-                   <div className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
-                   </div>
-                   <span className="flex items-center gap-2 font-bold tracking-wide">
-                     <Zap size={12} /> 24/7 EMERGENCY SERVICE
-                   </span>
-                </div>
+                {/* Emergency Badge - Yellow & Black */}
+                  {/* Emergency Badge - Translucent Yellow (Matched to Card) */}
+<div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-600/20 text-yellow-700 text-xs font-mono mb-6 backdrop-blur-sm">
+    <div className="relative flex h-2 w-2">
+        {/* Ping Animation - Yellow-600 */}
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-600 opacity-75"></span>
+        {/* Solid Dot - Yellow-600 */}
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-600"></span>
+    </div>
+    <span className="flex items-center gap-2 font-bold tracking-wide">
+        <Zap size={12} className="text-yellow-600" /> 24/7 EMERGENCY SERVICE
+    </span>
+</div>
 
                 <h1 className="text-4xl md:text-5xl font-bold leading-tight">
                   Our <span className="text-blue-500">Elevator Services</span>
