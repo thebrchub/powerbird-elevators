@@ -47,7 +47,7 @@ export default function AboutUs() {
             
             {/* 🔥 UPDATED: More technical, less "slogan-y" */}
             <p className="text-lg leading-relaxed mb-6 text-gray-600">
-              PowerBird Elevators stands as the <span className="font-bold text-gray-900">First and Best Government-Authorized Elevator Company in the North Canara (Uttar Kannada) region.</span>
+              PowerBird Elevators stands as the <span className="font-bold text-gray-900">First and Most Trusted Elevator Company in the North Canara  region (Uttar Kannada).</span>
             </p>
 
             <p className="text-lg leading-relaxed mb-6 text-gray-600">

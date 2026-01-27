@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Send, Loader2, CheckCircle2, Phone, User, MapPin, Building, Activity } from 'lucide-react'
+import { Send, Loader2, CheckCircle2, Phone, User, MapPin, Building, Activity, Mail } from 'lucide-react'
+import { sendMailPorterEmail } from '../utils/mailPorter'
 
 export default function AmcQuoteForm() {
   const [status, setStatus] = useState('idle') // 'idle' | 'submitting' | 'success'
@@ -8,6 +9,7 @@ export default function AmcQuoteForm() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
     city: '',
     liftCount: '1 Lift',
     status: 'New AMC Requirement'
@@ -16,7 +18,9 @@ export default function AmcQuoteForm() {
   // Handle Text/Select Inputs
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    // Remove spaces from email to prevent accidental validation errors
+    const nextValue = name === 'email' ? value.replace(/\s/g, '') : value
+    setFormData(prev => ({ ...prev, [name]: nextValue }))
   }
 
   // Handle Numeric Input (Phone)
@@ -40,10 +44,22 @@ export default function AmcQuoteForm() {
 
     // Simulate API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      await sendMailPorterEmail({
+        name: formData.name,
+        mobile: formData.phone,
+        message: `AMC request from ${formData.city || 'unknown location'}`,
+        brand: 'powerbird',
+        contact_name: formData.name,
+        phone_number: formData.phone,
+        email_address: formData.email,
+        city_location: formData.city,
+        no_of_lifts: formData.liftCount,
+        current_status: formData.status
+      })
       setStatus('success')
     } catch (error) {
       console.error(error)
+      alert('We could not send your request right now. Please try again in a moment.')
       setStatus('idle')
     }
   }
@@ -128,6 +144,32 @@ export default function AmcQuoteForm() {
               disabled={status === 'submitting'}
             />
           </div>
+        </div>
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className={labelClasses}>Email Address</label>
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+            <Mail size={18} />
+          </div>
+          <input 
+            type="email"
+            name="email"
+            inputMode="email"
+            // 🔥 FIX: Added pattern regex. 
+            // This forces the browser to accept any email format that looks like "text@text.text",
+            // which solves the issue with .tech, .io, etc.
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+            title="Please enter a valid email address (e.g., name@company.tech)"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="name@company.com" 
+            className={`${inputBaseClasses} pl-10`}
+            required
+            disabled={status === 'submitting'}
+          />
         </div>
       </div>
 
@@ -216,7 +258,7 @@ export default function AmcQuoteForm() {
       </button>
 
       <p className="text-xs text-center text-gray-400 mt-4">
-         Typically responds within 24 hours.
+          Typically responds within 24 hours.
       </p>
 
     </form>

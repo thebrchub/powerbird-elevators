@@ -93,7 +93,7 @@ export default function Home() {
                 <div className="mt-8 flex gap-4">
                   <button 
                     onClick={() => setGetInTouchOpen(true)}
-                    className="bg-red-600 px-6 py-3 rounded-md font-semibold text-white hover:bg-red-700 transition shadow-lg shadow-red-600/20"
+                    className="bg-blue-600 px-6 py-3 rounded-md font-semibold text-white hover:bg-blue-700 transition shadow-lg shadow-blue-600/20"
                   >
                     Get in Touch
                   </button>
@@ -160,7 +160,7 @@ export default function Home() {
             <Reveal delay={0.2}>
               <button 
                 onClick={() => setGetInTouchOpen(true)}
-                className="mt-10 bg-red-600 text-white px-8 py-4 rounded font-bold hover:bg-red-700 transition shadow-lg shadow-red-600/20"
+                className="mt-10 bg-blue-600 text-white px-8 py-4 rounded font-bold hover:bg-blue-800 transition shadow-lg shadow-red-600/20"
               >
                 Request Consultation
               </button>

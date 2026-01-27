@@ -54,7 +54,7 @@ export default function About({ darkPreview, setDarkPreview }) {
                   </p>
                   
                   <p className={`text-xl font-bold border-l-4 border-blue-500 pl-4 ${darkPreview ? 'text-white' : 'text-gray-900'}`}>
-                    "We are the First and Best Elevator Company in the entire North Canara (Uttar Kannada) Region."
+                    "We are the First and Best Elevator Company in the entire North Canara Region (Uttar Kannada)."
                   </p>
 
                   <p>

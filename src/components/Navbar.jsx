@@ -59,8 +59,6 @@ export default function Navbar({ showLogo }) {
   return (
     <>
       <header 
-        // 🔥 FIX: Added 'overflow-visible' and increased padding 'py-8' slightly 
-        // to prevent the shadow from being cut off at the bottom.
         className={`
           fixed top-0 left-0 w-full z-40 overflow-visible
           py-8 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
@@ -84,8 +82,6 @@ export default function Navbar({ showLogo }) {
 
           {/* DESKTOP NAV */}
           <nav 
-            // 🔥 FIX: Changed 'shadow-xl' to 'shadow-lg' (Cleaner)
-            // Changed 'shadow-black/5' to 'shadow-black/10' (More visible/premium)
             className={`
               hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
               items-center gap-1 p-1.5 rounded-full z-40 transition-all duration-300
@@ -122,7 +118,8 @@ export default function Navbar({ showLogo }) {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-600 rounded-full box-content border-2 border-white/20"
+                      // CHANGED DOT COLOR TO BLUE
+                      className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full box-content border-2 border-white/20"
                     />
                   )}
                 </Link>
@@ -135,7 +132,8 @@ export default function Navbar({ showLogo }) {
             <div className="hidden md:block">
               <button
                 onClick={() => setQuoteOpen(true)}
-                className="group relative px-6 py-2.5 rounded-full text-sm font-bold overflow-hidden transition-transform active:scale-95 shadow-lg bg-red-600 text-white hover:shadow-red-600/30"
+                // CHANGED BUTTON COLOR TO BLUE
+                className="group relative px-6 py-2.5 rounded-full text-sm font-bold overflow-hidden transition-transform active:scale-95 shadow-lg bg-blue-600 text-white hover:shadow-blue-600/30"
               >
                 <span className="relative z-10 flex items-center gap-2 group-hover:gap-3 transition-all">
                   Get a Quote <ChevronRight size={14} />
@@ -196,13 +194,14 @@ export default function Navbar({ showLogo }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                   onClick={() => { setOpen(false); setQuoteOpen(true) }}
-                  className="mt-6 w-full bg-red-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg shadow-red-900/20 active:scale-95 transition-transform"
+                  // CHANGED MOBILE MENU BUTTON TO BLUE
+                  className="mt-6 w-full bg-blue-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg shadow-blue-900/20 active:scale-95 transition-transform"
                 >
                   Get a Quote
                 </motion.button>
               </nav>
               <div className="mt-auto px-6 py-8 border-t border-white/5 text-center">
-                 <p className="text-xs text-gray-600 uppercase tracking-wider">PowerBird Elevators © {new Date().getFullYear()}</p>
+                  <p className="text-xs text-gray-600 uppercase tracking-wider">PowerBird Elevators © {new Date().getFullYear()}</p>
               </div>
             </motion.aside>
           </>
