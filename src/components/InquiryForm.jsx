@@ -212,7 +212,7 @@ export default function QuoteDownloadForm({ submitLabel = 'Download Quotation' }
         disabled={status === 'submitting'}
         className={`w-full py-4 rounded-lg font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20 transition-all duration-300 transform active:scale-[0.98]
           ${status === 'submitting'
-            ? 'bg-red-400 cursor-not-allowed opacity-80' 
+            ? 'bg-blue-400 cursor-not-allowed opacity-80' 
             : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white hover:shadow-xl'
           }`}
       >
