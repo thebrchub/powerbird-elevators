@@ -96,8 +96,8 @@ export default function LiftIntro({ onFinish }) {
             {/* Header */}
             <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-zinc-800 to-zinc-900 z-40 flex items-center justify-center border-b-4 border-black shadow-lg">
               <div className="bg-black px-8 py-2 rounded-md border border-zinc-700 shadow-[inset_0_0_10px_rgba(0,0,0,0.8)]">
-                <p className="text-red-600 font-mono text-4xl font-bold tracking-widest drop-shadow-[0_0_5px_rgba(220,38,38,0.8)]">
-                  0{floor} <span className="text-xl align-top text-red-500">▲</span>
+                <p className="text-blue-600 font-mono text-4xl font-bold tracking-widest drop-shadow-[0_0_5px_rgba(220,38,38,0.8)]">
+                  0{floor} <span className="text-xl align-top text-blue-500">▲</span>
                 </p>
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function LiftIntro({ onFinish }) {
                  <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[8px] border-b-zinc-400"></div>
               </div>
               <div className="w-9 h-9 rounded-full border border-zinc-500 bg-zinc-800 shadow-[0_0_15px_rgba(239,68,68,0.5)] flex items-center justify-center animate-pulse">
-                 <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[8px] border-b-red-600 rotate-180"></div>
+                 <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[8px] border-b-blue-600 rotate-180"></div>
               </div>
               <div className="w-1.5 h-1.5 rounded-full bg-zinc-600 shadow-[inset_0_1px_1px_rgba(255,255,255,0.5)]" />
             </div>

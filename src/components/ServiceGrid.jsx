@@ -6,8 +6,8 @@ export default function ServiceGrid({ darkPreview }) {
   // Data from Brochure Page 20 (Service Locations)
   const allCities = [
     "Sirsi", "Kumta", "Bhatkal", "Honnavar", "Karwar",
-    "Haveri", "Hubli", "Dharwad", "Belgaum",
-    "Ballari", "Hospet", "Davangere",
+    "Haveri", "Hubli", "Dharwad", "Belagavi",
+    "Ballari", "Hosapete", "Davangere",
     "Bangalore", "Shimoga", "Mangalore", "Udupi"
   ];
 
@@ -108,7 +108,7 @@ export default function ServiceGrid({ darkPreview }) {
               {[
                 { x: 160, y: 320, name: "Sirsi (HQ)", main: true },
                 { x: 450, y: 620, name: "Bengaluru", main: true },
-                { x: 150, y: 80, name: "Belgaum" },
+                { x: 150, y: 80, name: "Belagavi" },
                 { x: 220, y: 200, name: "Hubli" },
                 { x: 480, y: 250, name: "Ballari" },
                 { x: 80, y: 290, name: "Karwar" },

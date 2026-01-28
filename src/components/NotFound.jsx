@@ -14,7 +14,7 @@ export default function NotFound({ darkPreview }) {
         {/* Icon */}
         <div className="mb-8 flex flex-col items-center">
           <div className={`p-4 rounded-full mb-4 animate-bounce ${
-            darkPreview ? 'bg-red-900/20 text-red-500' : 'bg-red-100 text-red-500'
+            darkPreview ? 'bg-blue-900/20 text-blue-500' : 'bg-blue-100 text-blue-500'
           }`}>
             <AlertTriangle size={48} />
           </div>

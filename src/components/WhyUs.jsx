@@ -6,7 +6,7 @@ export default function WhyUs() {
   const featuresSmall = [
     { icon: <ShieldCheck size={18} />, text: "ISO 9001:2015 Quality Standards" },
     { icon: <Zap size={18} />, text: "Integrated VVVF Drive Technology" },
-    { icon: <Clock size={18} />, text: "SLA-Backed Project Delivery" },
+    { icon: <Clock size={18} />, text: "SLA-Backed Project Delivery Assurance" },
     { icon: <Award size={18} />, text: "Govt. Authorized License Holder" },
   ]
 
@@ -22,7 +22,7 @@ export default function WhyUs() {
             <div className="flex items-center gap-2 mb-4">
                 <span className="h-px w-8 bg-blue-600"></span>
                 <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
-                  Technical Advantage
+                  Technical Excellence
                 </span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">

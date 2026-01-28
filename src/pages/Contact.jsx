@@ -209,7 +209,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
                       {/* Personal Details */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <label className={`text-sm font-semibold ${darkPreview ? 'text-gray-300' : 'text-gray-700'}`}>Full Name <span className="text-red-500">*</span></label>
+                          <label className={`text-sm font-semibold ${darkPreview ? 'text-gray-300' : 'text-gray-700'}`}>Full Name <span className="text-blue-500">*</span></label>
                           <div className="relative">
                             <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                               <User size={18} />
@@ -228,7 +228,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
                         </div>
 
                         <div className="space-y-2">
-                          <label className={`text-sm font-semibold ${darkPreview ? 'text-gray-300' : 'text-gray-700'}`}>Phone Number <span className="text-red-500">*</span></label>
+                          <label className={`text-sm font-semibold ${darkPreview ? 'text-gray-300' : 'text-gray-700'}`}>Phone Number <span className="text-blue-500">*</span></label>
                           <div className="flex rounded-lg shadow-sm">
                             <span className={`inline-flex items-center px-3 text-sm border border-r-0 rounded-l-lg font-medium select-none
                               ${darkPreview ? 'bg-gray-800 border-gray-700 text-gray-400' : 'bg-gray-100 border-gray-200 text-gray-500'}`}>
@@ -467,7 +467,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
                     <div>
                       <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Email Inquiry</p>
                       <p className="font-medium break-all">powerbirdelevators@gmail.com</p>
-                      <p className="font-medium break-all">info@powerbirdelevators.com</p>                    
+                      <p className="font-medium break-all">info@powerbirdelevators.in</p>                    
                     </div>
                   </div>
 

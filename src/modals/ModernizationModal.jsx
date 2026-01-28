@@ -46,7 +46,7 @@ export default function ModernizationModal({ isOpen, onClose, darkPreview }) {
             </div>
 
             <div className={`p-5 rounded-xl border text-center ${darkPreview ? 'bg-gray-800/50 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
-              <ArrowUpCircle className="w-8 h-8 text-red-500 mx-auto mb-3" />
+              <ArrowUpCircle className="w-8 h-8 text-blue-500 mx-auto mb-3" />
               <h4 className="font-bold mb-2">Safety</h4>
               <p className="text-xs text-gray-500">Add ARD, Overload sensors, and Infra-red door curtains.</p>
             </div>
