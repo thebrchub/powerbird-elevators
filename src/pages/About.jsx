@@ -271,7 +271,7 @@ export default function About({ darkPreview, setDarkPreview }) {
                 title: 'Advanced Safety',
                 desc: 'Equipped with Automatic Rescue Devices (ARD) and Multi-beam door sensors (10mm-1580mm range) to ensure passenger safety at all times.',
                 icon: <ShieldCheck size={32} />,
-                color: 'text-red-600'
+                color: 'text-blue-600'
               },
               {
                 title: '70% Energy Saving',

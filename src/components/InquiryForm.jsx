@@ -71,7 +71,7 @@ export default function QuoteDownloadForm({ submitLabel = 'Download Quotation' }
   }
 
   // Common Input Styles
-  const inputBaseClasses = "w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 block p-3 transition-all duration-200 ease-in-out focus:bg-white outline-none"
+  const inputBaseClasses = "w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block p-3 transition-all duration-200 ease-in-out focus:bg-white outline-none"
   const labelClasses = "block mb-1.5 text-sm font-medium text-gray-700"
 
   // 🟢 SUCCESS VIEW
