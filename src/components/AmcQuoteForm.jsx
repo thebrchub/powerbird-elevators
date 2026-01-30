@@ -48,7 +48,7 @@ export default function AmcQuoteForm() {
         name: formData.name,
         mobile: formData.phone,
         message: `AMC request from ${formData.city || 'unknown location'}`,
-        service_name: 'AMC Quote Request',
+        services: 'AMC Quote Request',
         brand: 'powerbird',
         contact_name: formData.name,
         phone_number: formData.phone,
