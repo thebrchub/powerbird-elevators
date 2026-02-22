@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 // Components
+import SEO from '../components/SEO' // 🔥 IMPORTED SEO COMPONENT
 import Reveal from '../components/Reveal'
 import ClientLogos from '../components/ClientLogos'
 import AboutUs from '../components/AboutUs' 
@@ -12,7 +13,6 @@ import TrustBand from '../components/TrustBand'
 import GetInTouchModal from '../components/GetInTouchModal'
 import ServiceGrid from '../components/ServiceGrid'
 import GoogleReviews from '../components/GoogleReviews'
-import { useState } from 'react'
 
 export default function Home() {
   const [getInTouchOpen, setGetInTouchOpen] = useState(false)
@@ -23,8 +23,53 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  // 🔥 THE LOCAL SEO SCHEMA (With your exact coordinates)
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Powerbird Elevators",
+    "image": "https://powerbirdelevators.com/logos/logo.png",
+    "@id": "https://powerbirdelevators.com",
+    "url": "https://powerbirdelevators.com",
+    "telephone": "+919876543210", 
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ganesh Nagar Rd, near new KSRTC",
+      "addressLocality": "Sirsi",
+      "addressRegion": "Karnataka",
+      "postalCode": "581402",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 14.623485847826691, // 🔥 Updated Exact Latitude
+      "longitude": 74.82292946965913  // 🔥 Updated Exact Longitude
+    },
+    "areaServed": [
+      "Uttara Kannada",
+      "Sirsi",
+      "Karwar",
+      "Hubli",
+      "Dharwad",
+      "Karnataka"
+    ],
+    "sameAs": [
+      "https://www.facebook.com/powerbirdelevators",
+      "https://www.instagram.com/powerbirdelevators"
+    ]
+  }
+
   return (
     <>
+      {/* ================= SEO INJECTION ================= */}
+      <SEO 
+        title="Powerbird Elevators | First & Best Elevator Company in Uttara Kannada"
+        description="Top-rated elevator manufacturers and lift maintenance services in Sirsi, Karwar, Hubli, and across Uttara Kannada. We specialize in residential, commercial, and hospital lifts with 24x7 AMC support."
+        keywords="best elevator company in uttara kannada, top lift services in sirsi, lift manufacturers sirsi, elevator maintenance karwar, powerbird elevators, home lifts karnataka, hospital lifts, commercial elevators hubli, lift amc services, passenger lifts, lift installation sirsi, best lifts in karnataka"
+        url="https://powerbirdelevators.com"
+        schema={localBusinessSchema}
+      />
+
       {/* ================= MODAL ================= */}
       <GetInTouchModal 
         open={getInTouchOpen} 
@@ -32,9 +77,6 @@ export default function Home() {
       />
 
       {/* ================= MAIN CONTENT ================= */}
-      {/* 🔥 FIX: Removed initial opacity: 0. 
-          The page now renders immediately behind the Lift Intro. 
-          This eliminates the "Black Gap" and the "Stuck Overlay" issues. */}
       <div className="pt-6 min-h-screen bg-gray-50 text-gray-900">
 
        {/* ================= HERO SECTION ================= */}

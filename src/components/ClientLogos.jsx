@@ -1,42 +1,47 @@
 import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 import Reveal from '../components/Reveal'
 
 // Array length 20
-const logos = Array.from({ length: 20 }, (_, i) => `/logos/${i + 1}.webp`)
+const logoUrls = Array.from({ length: 20 }, (_, i) => `/logos/${i + 1}.webp`)
 
-// 1. Optimized Container - Faster Stagger
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      // Reduced from 0.1 to 0.05 so the wave flows faster (less waiting)
+      // Smooth wave effect
       staggerChildren: 0.05, 
       delayChildren: 0.1,
     },
   },
 }
 
-// 2. Optimized Item - Premium Easing & Hardware Acceleration
 const itemVariants = {
   hidden: { 
     opacity: 0, 
     y: 20, 
-    scale: 0.95 // subtle scale makes it feel more organic
   },
   visible: { 
     opacity: 1, 
     y: 0, 
-    scale: 1,
     transition: { 
-      duration: 0.6, 
-      // This custom bezier is "The Smoothness Secret" (similar to Apple's UI)
-      ease: [0.25, 0.46, 0.45, 0.94] 
+      duration: 0.5, 
+      ease: "easeOut" 
     } 
   },
 }
 
 export default function ClientLogos({ darkPreview = false }) {
+  
+  // 1. Force Browser to cache images immediately on Mount
+  useEffect(() => {
+    logoUrls.forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
+
   return (
     <section
       className={`py-20 ${
@@ -65,15 +70,16 @@ export default function ClientLogos({ darkPreview = false }) {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }} // Trigger slightly earlier
+          // 🔥 FIX 1: Trigger animation EARLIER (margin: 200px)
+          // This starts the fade-in before the user even finishes scrolling to it, eliminating the "Empty Space".
+          viewport={{ once: true, margin: "200px" }} 
         >
-          {logos.map((src, index) => (
+          {logoUrls.map((src, index) => (
             <motion.div 
               key={index} 
               variants={itemVariants}
-              // 'will-change-transform' forces the browser to use the GPU
-              style={{ willChange: "transform, opacity" }} 
-              className={`group flex items-center justify-center p-4 rounded-xl transition-colors duration-300 w-full h-40
+              className={`
+                group flex items-center justify-center p-4 rounded-xl transition-colors duration-300 w-full h-40
                 ${darkPreview ? 'hover:bg-gray-900' : 'hover:bg-gray-50'}
               `}
             >
@@ -81,9 +87,11 @@ export default function ClientLogos({ darkPreview = false }) {
                 src={src}
                 alt={`Client ${index + 1}`}
                 draggable={false}
-                loading="lazy"
-                // Added decoding="async" to prevent main thread blocking
-                decoding="async" 
+                // 🔥 FIX 2: loading="eager" + decoding="sync"
+                // This forces the browser to decode the image BEFORE painting the frame.
+                // This kills the "Jerk/Pop" effect completely.
+                loading="eager"
+                decoding="sync"
                 className={`
                   max-h-28 w-auto object-contain transition-transform duration-500 ease-out cursor-pointer
                   hover:scale-110 drop-shadow-sm

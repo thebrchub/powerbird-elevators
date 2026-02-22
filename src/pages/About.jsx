@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Reveal from '../components/Reveal'
 import SectorsAndGallery from '../components/SectorsAndGallery'
+import SEO from '../components/SEO'
 import { 
   Building2, 
   FileText, 
@@ -29,6 +30,13 @@ export default function About({ darkPreview, setDarkPreview }) {
 
   return (
     <div className={`pt-18 min-h-screen transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
+
+      <SEO 
+        title="About Powerbird Elevators | Top Lift Company in Sirsi"
+        description="Learn about Powerbird Elevators, Uttara Kannada's leading vertical mobility experts. We are committed to safety, engineering excellence, and 24/7 customer support."
+        keywords="about powerbird elevators, elevator company history, lift manufacturers sirsi, vertical mobility experts karnataka"
+        url="https://powerbirdelevators.com/about"
+      />
 
       {/* ================= HERO SECTION (FIXED BLEND) ================= */}
       <section 
