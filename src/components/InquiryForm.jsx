@@ -54,6 +54,7 @@ export default function QuoteDownloadForm({ submitLabel = 'Download Quotation' }
         name: formData.name,
         mobile: formData.phone,
         message: 'Quotation download request',
+        services: 'Quotation Download',
         brand: 'powerbird',
         full_name: formData.name,
         phone_number: formData.phone,

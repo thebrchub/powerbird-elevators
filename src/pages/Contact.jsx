@@ -66,6 +66,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
         name: formData.name,
         mobile: formData.phone,
         message: formData.message || formData.specifications || 'Project inquiry',
+        services: 'Project Inquiry',
         brand: 'powerbird',
         full_name: formData.name,
         phone_number: formData.phone,
