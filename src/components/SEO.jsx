@@ -4,7 +4,7 @@ export default function SEO({
   title, 
   description, 
   keywords, 
-  url = "https://powerbirdelevators.com", 
+  url = "https://powerbirdelevators.in", 
   schema 
 }) {
   return (

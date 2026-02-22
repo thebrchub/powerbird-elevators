@@ -92,7 +92,7 @@ export default function ModalShell({ open, onClose, title, children, darkPreview
               
               <button 
                 onClick={onClose}
-                className={`p-2 rounded-full transition-colors
+                className={`p-2 rounded-full cursor-pointer transition-colors
                   ${darkPreview 
                     ? 'bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white' 
                     : 'bg-gray-100 text-gray-500 hover:bg-blue-100 hover:text-blue-600'

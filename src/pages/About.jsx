@@ -35,7 +35,7 @@ export default function About({ darkPreview, setDarkPreview }) {
         title="About Powerbird Elevators | Top Lift Company in Sirsi"
         description="Learn about Powerbird Elevators, Uttara Kannada's leading vertical mobility experts. We are committed to safety, engineering excellence, and 24/7 customer support."
         keywords="about powerbird elevators, elevator company history, lift manufacturers sirsi, vertical mobility experts karnataka"
-        url="https://powerbirdelevators.com/about"
+        url="https://powerbirdelevators.in/about"
       />
 
       {/* ================= HERO SECTION (FIXED BLEND) ================= */}

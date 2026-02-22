@@ -87,7 +87,7 @@ export default function Services({ darkPreview, setDarkPreview }) {
         title="Elevator Installation & AMC Services in Karnataka | Powerbird"
         description="Comprehensive lift services including Passenger, Hospital, and Goods lift installations. We offer 24/7 emergency support and AMC modernization in Hubli, Sirsi, and Karwar."
         keywords="elevator installation karnataka, lift amc services hubli, passenger lift manufacturers, hospital lift installation, elevator modernization, dumbwaiter lifts, lift maintenance sirsi"
-        url="https://powerbirdelevators.com/services"
+        url="https://powerbirdelevators.in/services"
       />
 
       {/* ================= HERO SECTION ================= */}
