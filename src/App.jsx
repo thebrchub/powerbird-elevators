@@ -9,6 +9,7 @@ import Contact from './pages/Contact'
 import NotFound from './components/NotFound';
 import LiftIntro from './components/LiftIntro'
 import Navbar from './components/Navbar'
+import FloatingContact from './components/FloatingContact'
 
 function App() {
   // 1. GLOBAL LIFT INTRO STATE
@@ -41,8 +42,10 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
+          
         </Routes>
       </MainLayout>
+      <FloatingContact />
     </BrowserRouter>
   )
 }

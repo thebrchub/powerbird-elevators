@@ -133,7 +133,7 @@ export default function Navbar({ showLogo }) {
               <button
                 onClick={() => setQuoteOpen(true)}
                 // CHANGED BUTTON COLOR TO BLUE
-                className="group relative px-6 py-2.5 rounded-full text-sm font-bold overflow-hidden transition-transform active:scale-95 shadow-lg bg-blue-600 text-white hover:shadow-blue-600/30"
+                className="group relative px-6 py-2.5 rounded-full text-sm font-bold overflow-hidden cursor-pointer transition-transform active:scale-95 shadow-lg bg-blue-600 text-white hover:shadow-blue-600/30"
               >
                 <span className="relative z-10 flex items-center gap-2 group-hover:gap-3 transition-all">
                   Get a Quote <ChevronRight size={14} />

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import ModalShell from '../components/ModalShell'
 import Reveal from '../components/Reveal'
+import SEO from '../components/SEO'
 import AmcQuoteForm from '../components/AmcQuoteForm' // <--- IMPORTED THE NEW FORM
 import { 
   Wrench, 
@@ -81,6 +82,13 @@ export default function Services({ darkPreview, setDarkPreview }) {
 
   return (
     <div className={`pt-18 transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
+
+      <SEO 
+        title="Elevator Installation & AMC Services in Karnataka | Powerbird"
+        description="Comprehensive lift services including Passenger, Hospital, and Goods lift installations. We offer 24/7 emergency support and AMC modernization in Hubli, Sirsi, and Karwar."
+        keywords="elevator installation karnataka, lift amc services hubli, passenger lift manufacturers, hospital lift installation, elevator modernization, dumbwaiter lifts, lift maintenance sirsi"
+        url="https://powerbirdelevators.in/services"
+      />
 
       {/* ================= HERO SECTION ================= */}
       <section 

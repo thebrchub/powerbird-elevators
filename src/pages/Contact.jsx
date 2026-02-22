@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Reveal from '../components/Reveal'
+import SEO from '../components/SEO'
 import { sendMailPorterEmail } from '../utils/mailPorter'
 import { 
   Phone, 
@@ -66,6 +67,7 @@ export default function Contact({ darkPreview, setDarkPreview }) {
         name: formData.name,
         mobile: formData.phone,
         message: formData.message || formData.specifications || 'Project inquiry',
+        services: 'Project Inquiry',
         brand: 'powerbird',
         full_name: formData.name,
         phone_number: formData.phone,
@@ -90,6 +92,12 @@ export default function Contact({ darkPreview, setDarkPreview }) {
   return (
     <div className={`pt-18 min-h-screen transition-colors duration-300 ${darkPreview ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
 
+    <SEO 
+      title="Contact Powerbird Elevators | Lift Quotes & 24/7 Support"
+      description="Get in touch with Powerbird Elevators for new lift installations, modernization, or AMC quotes. Serving Uttara Kannada, Hubli, and Mangalore."
+      keywords="contact powerbird elevators, lift quote sirsi, elevator amc inquiry, emergency lift repair karnataka"
+      url="https://powerbirdelevators.in/contact"
+    />
       {/* ================= HERO SECTION ================= */}
       <section 
         className={`border-b transition-colors duration-300 overflow-hidden relative ${
