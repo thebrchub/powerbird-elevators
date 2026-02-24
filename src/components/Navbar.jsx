@@ -51,6 +51,20 @@ export default function Navbar({ showLogo }) {
     return () => window.removeEventListener('scroll', controlNavbar)
   }, [lastScrollY, open])
 
+  // 🔥 NEW FIX: LOCK BODY SCROLL WHEN MOBILE MENU IS OPEN
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    
+    // Cleanup function to ensure it unlocks if the component unmounts
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [open])
+
   const handleLogoClick = () => {
     navigate('/')
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -118,7 +132,6 @@ export default function Navbar({ showLogo }) {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      // CHANGED DOT COLOR TO BLUE
                       className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full box-content border-2 border-white/20"
                     />
                   )}
@@ -132,7 +145,6 @@ export default function Navbar({ showLogo }) {
             <div className="hidden md:block">
               <button
                 onClick={() => setQuoteOpen(true)}
-                // CHANGED BUTTON COLOR TO BLUE
                 className="group relative px-6 py-2.5 rounded-full text-sm font-bold overflow-hidden cursor-pointer transition-transform active:scale-95 shadow-lg bg-blue-600 text-white hover:shadow-blue-600/30"
               >
                 <span className="relative z-10 flex items-center gap-2 group-hover:gap-3 transition-all">
@@ -194,7 +206,6 @@ export default function Navbar({ showLogo }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                   onClick={() => { setOpen(false); setQuoteOpen(true) }}
-                  // CHANGED MOBILE MENU BUTTON TO BLUE
                   className="mt-6 w-full bg-blue-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg shadow-blue-900/20 active:scale-95 transition-transform"
                 >
                   Get a Quote
