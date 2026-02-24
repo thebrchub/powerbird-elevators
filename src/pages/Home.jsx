@@ -94,7 +94,7 @@ export default function Home() {
       />
 
       {/* ================= MAIN CONTENT ================= */}
-      <div className="pt-6 min-h-screen bg-gray-50 text-gray-900">
+      <div className="pt-12 min-h-screen bg-gray-50 text-gray-900">
 
        {/* ================= HERO SECTION ================= */}
         <section className="relative overflow-hidden bg-gray-50 text-gray-900">

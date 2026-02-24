@@ -58,22 +58,30 @@ export default function InstallationModal({ isOpen, onClose, darkPreview }) {
           </h3>
           
           <div className="space-y-8 relative">
-            {/* Vertical Line for Roadmap */}
-            <div className={`absolute left-4 top-2 bottom-4 w-0.5 ${darkPreview ? 'bg-gray-800' : 'bg-gray-200'}`}></div>
+            {/* 🔥 REMOVED THE GLOBAL VERTICAL LINE HERE */}
 
             {steps.map((step, i) => (
               <div key={i} className="flex gap-4 relative">
-                {/* Number Badge */}
-                <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold text-sm border-2 
-                  ${darkPreview 
-                    ? 'bg-gray-900 border-blue-900 text-blue-400' 
-                    : 'bg-white border-blue-100 text-blue-600 shadow-sm'
-                  }`}>
-                  {i + 1}
+                
+                {/* Number Badge & Connecting Line Container */}
+                <div className="relative flex flex-col items-center">
+                  {/* Number Badge */}
+                  <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold text-sm border-2 
+                    ${darkPreview 
+                      ? 'bg-gray-900 border-blue-900 text-blue-400' 
+                      : 'bg-white border-blue-100 text-blue-600 shadow-sm'
+                    }`}>
+                    {i + 1}
+                  </div>
+                  
+                  {/* 🔥 NEW FIX: INDIVIDUAL CONNECTING LINE (Hidden on the last step) */}
+                  {i !== steps.length - 1 && (
+                    <div className={`absolute top-8 bottom-[-2rem] w-0.5 ${darkPreview ? 'bg-gray-800' : 'bg-gray-200'}`}></div>
+                  )}
                 </div>
                 
-                {/* Text */}
-                <div>
+                {/* Text Content */}
+                <div className="pb-2"> {/* Added slight padding bottom for spacing */}
                   <h4 className={`font-bold text-base ${darkPreview ? 'text-white' : 'text-gray-900'}`}>{step.title}</h4>
                   <p className={`text-sm mt-1 ${darkPreview ? 'text-gray-400' : 'text-gray-600'}`}>{step.desc}</p>
                 </div>
