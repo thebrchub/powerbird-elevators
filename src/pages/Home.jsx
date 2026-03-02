@@ -30,9 +30,9 @@ export default function Home() {
       {
         "@type": "LocalBusiness",
         "name": "Powerbird Elevators",
-        "image": "https://powerbirdelevators.in/logos/logo.png",
-        "@id": "https://powerbirdelevators.in/#localbusiness",
-        "url": "https://powerbirdelevators.in",
+        "image": "https://www.powerbirdelevators.in/logos/logo.png",
+        "@id": "https://www.powerbirdelevators.in/#localbusiness",
+        "url": "https://www.powerbirdelevators.in",
         "telephone": "+919876543210", 
         "address": {
           "@type": "PostalAddress",
@@ -63,13 +63,14 @@ export default function Home() {
       // 🔥 THIS IS WHAT ENCOURAGES SITELINKS 🔥
       {
         "@type": "WebSite",
-        "@id": "https://powerbirdelevators.in/#website",
-        "url": "https://powerbirdelevators.in",
+        "@id": "https://www.powerbirdelevators.in/#website",
+        "url": "https://www.powerbirdelevators.in",
         "name": "Powerbird Elevators",
+        "alternateName": "Powerbird",
         "description": "Best Elevator Company in Uttara Kannada",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://powerbirdelevators.in/search?q={search_term_string}",
+          "target": "https://www.powerbirdelevators.in/search?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
       }
@@ -83,7 +84,7 @@ export default function Home() {
         title="Powerbird Elevators | First & Best Elevator Company in Uttara Kannada"
         description="Top-rated elevator manufacturers and lift maintenance services in Sirsi, Karwar, Hubli, and across Uttara Kannada. We specialize in residential, commercial, and hospital lifts with 24x7 AMC support."
         keywords="best elevator company in uttara kannada, top lift services in sirsi, lift manufacturers sirsi, elevator maintenance karwar, powerbird elevators, home lifts karnataka, hospital lifts, commercial elevators hubli, lift amc services, passenger lifts, lift installation sirsi, best lifts in karnataka, power, powerbirds, karnataka elevators, sirsi lifts, karwar elevators, hubli lifts, karnataka lift company, elevator service karnataka, lift repair sirsi, elevator modernization hubli, karnataka, Lifts, elevators, lift installation, lift maintenance, elevator company, residential lifts, commercial elevators, hospital lifts, dumbwaiter lifts, lift modernization, AMC services, emergency lift repair"
-        url="https://powerbirdelevators.in"
+        url="https://www.powerbirdelevators.in"
         schema={schemaMarkup} // 🔥 Added the combined schema here
       />
 
